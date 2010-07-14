@@ -8,6 +8,14 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path ext-dir)
 
+
+;; ELPA
+(setq package-user-dir (concat dotfiles-dir "elpa"))
+(load "package")
+(package-initialize)
+
+(require 'elpa-config)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; My various configuration files

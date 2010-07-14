@@ -1,5 +1,3 @@
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; This code stolen from http://github.com/bbatsov/emacs.d/blob/master/init.el
@@ -19,3 +17,4 @@
 (require 'ido-config)
 (require 'smart-tab-config)
 (require 'autopair-config)
+(require 'color-theme-config)

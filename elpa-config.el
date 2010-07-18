@@ -5,7 +5,7 @@
 ;;
 ;; Part of the Emacs Starter Kit
 
-(defvar starter-kit-packages (list ;;'highlight-parentheses
+(defvar starter-kit-packages (list 'highlight-parentheses
 				   ;;'javascript
 				   ;;'js2-mode               ;; Don't know which JS mode I want yet
 			      'clojure-mode

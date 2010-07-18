@@ -26,4 +26,4 @@
 ;; (require 'smart-tab-config)
 ;; (require 'autopair-config)
 (require 'color-theme-config)
-;; (require 'highlight-parens-config)
+(require 'highlight-parens-config)

@@ -25,5 +25,5 @@
 (require 'ido-config)
 ;; (require 'smart-tab-config)
 ;; (require 'autopair-config)
-;; (require 'color-theme-config)
+(require 'color-theme-config)
 ;; (require 'highlight-parens-config)

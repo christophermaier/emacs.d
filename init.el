@@ -24,7 +24,7 @@
 
 (require 'ido-config)
 ;; (require 'smart-tab-config)
-;; (require 'autopair-config)
+(require 'autopair-config)
 (require 'color-theme-config)
 (require 'highlight-parens-config)
 (require 'clojure-config)

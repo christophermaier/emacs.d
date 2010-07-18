@@ -28,3 +28,4 @@
 (require 'color-theme-config)
 (require 'highlight-parens-config)
 (require 'clojure-config)
+(require 'emacs-lisp-config)

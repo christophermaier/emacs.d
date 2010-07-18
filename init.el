@@ -27,3 +27,4 @@
 ;; (require 'autopair-config)
 (require 'color-theme-config)
 (require 'highlight-parens-config)
+(require 'clojure-config)

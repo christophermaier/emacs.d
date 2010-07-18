@@ -23,7 +23,9 @@
 (require 'miscellaneous-config)
 
 (require 'ido-config)
-(require 'smart-tab-config)
+;; (require 'smart-tab-config)
 (require 'autopair-config)
 (require 'color-theme-config)
 (require 'highlight-parens-config)
+(require 'clojure-config)
+(require 'emacs-lisp-config)

@@ -19,4 +19,10 @@
 ;; End all files with a newline
 (setq require-final-newline t)
 
+;; FINALLY... not having this was driving me insane
+(global-set-key "\C-a" 'beginning-of-line-text)
+
+
+
+
 (provide 'miscellaneous-config)

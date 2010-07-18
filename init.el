@@ -22,7 +22,7 @@
 
 (require 'miscellaneous-config)
 
-;; (require 'ido-config)
+(require 'ido-config)
 ;; (require 'smart-tab-config)
 ;; (require 'autopair-config)
 ;; (require 'color-theme-config)

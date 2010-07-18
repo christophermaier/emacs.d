@@ -20,7 +20,7 @@
 
 ;; My various configuration files
 
-;; (require 'miscellaneous-config)
+(require 'miscellaneous-config)
 
 ;; (require 'ido-config)
 ;; (require 'smart-tab-config)

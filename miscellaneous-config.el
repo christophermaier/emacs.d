@@ -23,6 +23,8 @@
 (global-set-key "\C-a" 'beginning-of-line-text)
 
 
+(require 'bar-cursor)
+(bar-cursor-mode 1)
 
 
 (provide 'miscellaneous-config)

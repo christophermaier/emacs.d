@@ -31,3 +31,4 @@
 (require 'clojure-config)
 (require 'emacs-lisp-config)
 (require 'javascript-config)
+(require 'markdown-config)

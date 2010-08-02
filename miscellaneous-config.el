@@ -9,6 +9,7 @@
 (setq inhibit-startup-screen t)
 
 ;; I want to see line and column numbers
+(global-linum-mode 1) 
 (setq line-number-mode t)
 (setq column-number-mode t)
 

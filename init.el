@@ -29,3 +29,4 @@
 (require 'highlight-parens-config)
 (require 'clojure-config)
 (require 'emacs-lisp-config)
+(require 'javascript-config)

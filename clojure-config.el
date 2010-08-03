@@ -13,4 +13,9 @@
 	  (lambda ()
 	    (paredit-mode +1)))
 
+;;; Fix indentation for Lazytest functions (as per http://github.com/stuartsierra/lazytest)
+(eval-after-load 'clojure-mode
+  '(define-clojure-indent (describe 'defun) (it 'defun)))
+
+
 (provide 'clojure-config)

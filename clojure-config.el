@@ -15,7 +15,11 @@
 
 ;;; Fix indentation for Lazytest functions (as per http://github.com/stuartsierra/lazytest)
 (eval-after-load 'clojure-mode
-  '(define-clojure-indent (describe 'defun) (it 'defun)))
+  '(define-clojure-indent 
+     (describe 'defun)
+     (it 'defun)
+     (defmulti 'defun)
+     (defmethod 'defun)))
 
 
 (provide 'clojure-config)

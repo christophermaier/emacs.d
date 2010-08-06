@@ -12,4 +12,7 @@
 (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;;; I want to treat files named "README" should be treated as Markdown files
+(add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
+
 (provide 'markdown-config)

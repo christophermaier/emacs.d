@@ -32,3 +32,4 @@
 (require 'javascript-config)
 (require 'markdown-config)
 (require 'whitespace-config)
+(require 'magit-config)

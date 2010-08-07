@@ -32,3 +32,4 @@
 (require 'emacs-lisp-config)
 (require 'javascript-config)
 (require 'markdown-config)
+(require 'whitespace-config)

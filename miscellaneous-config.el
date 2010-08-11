@@ -71,5 +71,8 @@
 (require 'bar-cursor)
 (bar-cursor-mode 1)
 
+;;; Tabs = bad
+(setq-default indent-tabs-mode nil)
+(setq tab-width 4)
 
 (provide 'miscellaneous-config)

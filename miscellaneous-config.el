@@ -29,9 +29,6 @@
 ;; End all files with a newline
 (setq require-final-newline t)
 
-;; FINALLY... not having this was driving me insane
-(global-set-key "\C-a" 'beginning-of-line-text)
-
 ;; backups and autosaves go to temp folder
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))

@@ -1,3 +1,3 @@
-(global-set-key [f4] 'magit-status)
+(global-set-key [f7] 'magit-status)
 
 (provide 'magit-config)

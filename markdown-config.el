@@ -15,4 +15,8 @@
 ;;; I want to treat files named "README" should be treated as Markdown files
 (add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
 
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (visual-line-mode +1)))
+
 (provide 'markdown-config)

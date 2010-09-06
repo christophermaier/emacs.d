@@ -22,9 +22,20 @@
      (defmulti 'defun)
      (defmethod 'defun)))
 
-
 (require 'swank-clojure-extra)
+;; For some reason it's not finding lein on my path...
 (setq swank-clojure-lein-swank-command "/Users/maier/bin/lein")
+
+;; Stolen from http://github.com/vu3rdd/swank-clojure-extra
+(eval-after-load "slime"
+  '(progn
+     (require 'swank-clojure-extra)
+     (add-to-list 'slime-lisp-implementations `(clojure ,(swank-clojure-cmd)
+							:init swank-clojure-init)
+		  t)
+     (add-hook 'slime-indentation-update-hooks 'swank-clojure-update-indentation)
+     (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
+     (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)))
 
 (add-hook 'clojure-mode-hook
   '(lambda ()

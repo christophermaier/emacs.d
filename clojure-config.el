@@ -22,6 +22,10 @@
      (defmulti 'defun)
      (defmethod 'defun)))
 
+
+(require 'swank-clojure-extra)
+(setq swank-clojure-lein-swank-command "/Users/maier/bin/lein")
+
 (add-hook 'clojure-mode-hook
   '(lambda ()
      ;; Fix whitespace errors, save, and compile instead of just saving
@@ -31,6 +35,6 @@
                                                         (save-buffer)
                                                         (slime-compile-and-load-file)))
      ;; Handy key for hooking up to swank
-     (define-key clojure-mode-map [f8] 'slime-connect)))
+     (define-key clojure-mode-map [f8] 'swank-clojure-lein-swank)))
 
 (provide 'clojure-config)

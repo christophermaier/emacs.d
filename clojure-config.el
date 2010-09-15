@@ -37,6 +37,9 @@
      (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
      (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)))
 
+(eval-after-load 'slime
+  '(setq slime-protocol-version 'ignore))
+
 (add-hook 'clojure-mode-hook
   '(lambda ()
      ;; Fix whitespace errors, save, and compile instead of just saving

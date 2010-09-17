@@ -31,8 +31,8 @@
   '(progn
      (require 'swank-clojure-extra)
      (add-to-list 'slime-lisp-implementations `(clojure ,(swank-clojure-cmd)
-							:init swank-clojure-init)
-		  t)
+                                                        :init swank-clojure-init)
+                  t)
      (add-hook 'slime-indentation-update-hooks 'swank-clojure-update-indentation)
      (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
      (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)))
@@ -40,15 +40,11 @@
 (eval-after-load 'slime
   '(setq slime-protocol-version 'ignore))
 
-(add-hook 'clojure-mode-hook
-  '(lambda ()
-     ;; Fix whitespace errors, save, and compile instead of just saving
-     (define-key clojure-mode-map [remap save-buffer] (lambda ()
-                                                        (interactive)
-                                                        (whitespace-cleanup)
-                                                        (save-buffer)
-                                                        (slime-compile-and-load-file)))
-     ;; Handy key for hooking up to swank
-     (define-key clojure-mode-map [f8] 'swank-clojure-lein-swank)))
+(defun clojure-hook-setup ()
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+  (add-hook 'after-save-hook 'slime-compile-and-load-file nil t)
+  (define-key clojure-mode-map [f8] 'swank-clojure-lein-swank))
+
+(add-hook 'clojure-mode-hook 'clojure-hook-setup)
 
 (provide 'clojure-config)

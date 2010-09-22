@@ -1,0 +1,8 @@
+My Emacs configuration, cobbled together from across the internet.
+
+There are submodules in the tree now, so if you are cloning, you'll need to run
+
+     git submodule init
+     git submodule update
+
+for it to work.

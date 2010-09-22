@@ -1,0 +1,3 @@
+[submodule "ext/durendal"]
+	path = ext/durendal
+	url = http://github.com/technomancy/durendal.git

@@ -31,4 +31,7 @@
 (durendal-enable)
 (define-key clojure-mode-map [f8] 'durendal-jack-in)
 
+(global-set-key "\C-cs" 'slime-selector)
+
+
 (provide 'clojure-config)

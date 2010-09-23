@@ -7,6 +7,7 @@
 
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path ext-dir)
+(add-to-list 'load-path (concat dotfiles-dir "ext/durendal"))
 
 
 ;; ELPA

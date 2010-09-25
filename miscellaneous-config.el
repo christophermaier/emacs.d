@@ -16,15 +16,7 @@
 
 ;; Sets the Option key to act as a Meta key (on a Mac)
 ;; ESC still acts as a Meta key, though
-;;(setq mac-option-modifier 'meta)
-
-;; Actually, I think I'm going to try using the Command key as Meta instead
-;; This is from http://www.emacswiki.org/emacs/MetaKeyProblems
-(setq mac-option-key-is-meta nil)
-(setq mac-command-key-is-meta t)
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
-
+(setq mac-option-modifier 'meta)
 
 ;; End all files with a newline
 (setq require-final-newline t)

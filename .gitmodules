@@ -4,3 +4,6 @@
 [submodule "ext/epresent"]
 	path = ext/epresent
 	url = http://github.com/technomancy/epresent.git
+[submodule "ext/org-mode"]
+	path = ext/org-mode
+	url = git://repo.or.cz/org-mode.git

@@ -22,7 +22,7 @@
 ;; My various configuration files
 
 (require 'miscellaneous-config)
-
+(require 'org-config)
 (require 'ido-config)
 (require 'smart-tab-config)
 (require 'autopair-config)

@@ -11,6 +11,15 @@
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (setq org-mobile-inbox-for-pull (concat org-directory "/from-inbox.org"))
 (setq org-enforce-todo-dependencies t)
+
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "APPT(a)" "|" "DONE(d)" "CANCELLED(c)" "DEFERRED(d)")))
+
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
+
+(setq org-log-done 'time)
+
 ;; Any time I save an org file, I want it pushed out
 (defun my-org-mode-hook ()
   (add-hook 'after-save-hook 'org-mobile-push nil t))

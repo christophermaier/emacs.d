@@ -13,12 +13,12 @@
 (setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "APPT(a)" "|" "DONE(d)" "CANCELLED(c)" "DEFERRED(d)")))
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "APPT(a)" "|" "DONE(d)" "CANCELLED(c)" "DEFERRED(f)")))
 
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 
-(setq org-log-done 'time)
+(setq org-log-done 'note)
 
 ;; Any time I save an org file, I want it pushed out
 (defun my-org-mode-hook ()

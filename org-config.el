@@ -20,16 +20,16 @@
 
 (setq org-log-done 'note)
 
-;; Any time I save an org file, I want it pushed out
 (defun my-org-mode-hook ()
-  (add-hook 'after-save-hook 'org-mobile-push nil t))
+  (progn
+    (visual-line-mode +1)))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key (kbd "<f9>") 'org-mobile-pull)
-
+(global-set-key (kbd "<f9>") 'org-mobile-push)
+(global-set-key (kbd "S-<f9>") 'org-mobile-pull)
 
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)

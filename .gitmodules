@@ -1,3 +1,6 @@
 [submodule "ext/durendal"]
 	path = ext/durendal
 	url = http://github.com/technomancy/durendal.git
+[submodule "ext/epresent"]
+	path = ext/epresent
+	url = http://github.com/technomancy/epresent.git

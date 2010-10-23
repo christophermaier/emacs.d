@@ -34,7 +34,7 @@
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/inbox.org" "Tasks")
+      '(("t" "Todo" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
          "* TODO %?\n %i\n %a")))
 
 (provide 'org-config)

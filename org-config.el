@@ -1,10 +1,17 @@
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-
 (setq load-path (cons "~/.emacs.d/ext/org-mode/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/ext/org-mode/contrib/lisp" load-path))
 (require 'org)
-(require 'org-mobile)
 
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+;; Habit mode is incredible
+(add-to-list 'org-modules 'org-habit)
+
+;; Calculate statistics for everything in the subtree
+(setq org-hierarchical-todo-statistics nil)
+
+;; Configure for MobileOrg
+(require 'org-mobile)
 (setq org-directory "~/Dropbox/org")
 (setq org-agenda-files '("~/Dropbox/org"))
 (setq org-mobile-files '("~/Dropbox/org"))
@@ -13,17 +20,31 @@
 (setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "APPT(a)" "|" "DONE(d)" "CANCELLED(c)" "DEFERRED(f)")))
+      '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/!)" "APPT(a)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(f@)")))
 
+;; Agenda Tweaks
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 
-(setq org-log-done 'note)
+(setq org-agenda-include-diary nil)
 
+(setq org-log-done 'note)
+(setq org-log-into-drawer t)
+
+
+;; Set up hooks
 (defun my-org-mode-hook ()
   (progn
     (visual-line-mode +1)))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
+
+;; Stole this next bit from the INFO pages
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)

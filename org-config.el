@@ -31,7 +31,6 @@
 (setq org-log-done 'note)
 (setq org-log-into-drawer t)
 
-
 ;; Set up hooks
 (defun my-org-mode-hook ()
   (progn
@@ -55,7 +54,17 @@
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
-         "* TODO %?\n %i\n %a")))
+      '(("g" "Groceries" entry
+         (file+headline "~/Dropbox/org/shopping.org" "Groceries")
+         "* TODO %? %^G\n")
+        ("s" "General Shopping" entry
+         (file+headline "~/Dropbox/org/shopping.org" "Other")
+         "* TODO %? %^G\n")
+        ("e" "Miscellaneous Code Changes for ENCODE project" entry
+         (file+headline "~/Dropbox/org/encode.org" "Code Changes")
+         "* TODO %? :programming:\n")
+        ("t" "General TODO" entry
+         (file+headline "" "Tasks")
+         "* TODO %? %^G\n SCHEDULED: %^t\n %i\n")))
 
 (provide 'org-config)

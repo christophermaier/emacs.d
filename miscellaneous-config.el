@@ -23,8 +23,12 @@
 (setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
 
+;; Before setting Command to Meta, it was Super; a lot of the standard Mac shortcuts were thus bound to
+;; super key chords (e.g. Command-C for copy was s-c)
+;; By setting the Option key to Super, I can still use those standard shortcuts if I want, but have
+;; the Meta key (which I use way more often) in a more convenient place on the keyboard
+(setq mac-option-modifier 'super)
 
 ;; End all files with a newline
 (setq require-final-newline t)

@@ -44,7 +44,6 @@
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
@@ -54,17 +53,31 @@
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("g" "Groceries" entry
+      '(("s" "Shopping")
+        ("sg" "Groceries" entry
          (file+headline "~/Dropbox/org/shopping.org" "Groceries")
          "* TODO %? %^G\n")
-        ("s" "General Shopping" entry
+        ("ss" "General Shopping" entry
          (file+headline "~/Dropbox/org/shopping.org" "Other Things To Buy")
          "* TODO %? %^G\n")
-        ("e" "Miscellaneous Code Changes for ENCODE project" entry
-         (file+headline "~/Dropbox/org/encode.org" "Code Changes")
-         "* TODO %? :programming:\n")
+
         ("t" "General TODO" entry
          (file+headline "" "Tasks")
-         "* TODO %? %^G\n SCHEDULED: %^t\n %i\n")))
+         "* TODO %? %^G\n SCHEDULED: %^t\n %i\n")
+
+        ("w" "Work Templates")
+        ("we" "Miscellaneous Code Changes for ENCODE project" entry
+         (file+headline "~/Dropbox/org/encode.org" "Code Changes")
+         "* TODO %? :programming:\n")
+
+        ("x" "Templates for Expenses")
+        ("xg" "Log a Gift Expense" table-line
+         (file+headline "~/Dropbox/org/financial.org" "Reconcile Gift Expenses From Last Month")
+         "|%t|%?||"
+         :table-line-pos "II-1")
+        ("xi" "Log an Infrequent Expense" table-line
+         (file+headline "~/Dropbox/org/financial.org" "Reconcile Irregular Expenses From Last Month")
+         "|%t|%?||"
+         :table-line-pos "II-1")))
 
 (provide 'org-config)

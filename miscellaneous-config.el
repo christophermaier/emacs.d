@@ -33,6 +33,9 @@
 ;; End all files with a newline
 (setq require-final-newline t)
 
+;; Don't pollute init.el with GUI-made customizations
+(setq custom-file (concat user-emacs-directory "custom.el"))
+
 ;; backups and autosaves go to temp folder
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))

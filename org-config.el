@@ -58,7 +58,7 @@
          (file+headline "~/Dropbox/org/shopping.org" "Groceries")
          "* TODO %? %^G\n")
         ("s" "General Shopping" entry
-         (file+headline "~/Dropbox/org/shopping.org" "Other")
+         (file+headline "~/Dropbox/org/shopping.org" "Other Things To Buy")
          "* TODO %? %^G\n")
         ("e" "Miscellaneous Code Changes for ENCODE project" entry
          (file+headline "~/Dropbox/org/encode.org" "Code Changes")

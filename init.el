@@ -1,20 +1,12 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; This code stolen from http://github.com/bbatsov/emacs.d/blob/master/init.el
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
-(setq ext-dir (concat dotfiles-dir "ext/"))
-
-(add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path ext-dir)
-(add-to-list 'load-path (concat dotfiles-dir "ext/durendal"))
-
+;; Load up all my config files and libraries
+;; This requires Emacs 23 because of user-emacs-directory
+(let ((default-directory user-emacs-directory))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; ELPA
-(setq package-user-dir (concat dotfiles-dir "elpa"))
 (load "package")
 (package-initialize)
-
 (require 'elpa-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

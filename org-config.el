@@ -37,6 +37,17 @@
     (visual-line-mode +1)))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+;; Save clock history
+(setq org-clock-persist t)
+(org-clock-persistence-insinuate)
+
+;; YES! Use Ido!
+(setq org-completion-use-ido t)
+(setq org-outline-path-complete-in-steps nil)
+
+(setq org-hide-leading-stars t)
+
+
 ;; Stole this next bit from the INFO pages
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -79,5 +90,14 @@
          (file+headline "~/Dropbox/org/financial.org" "Reconcile Irregular Expenses From Last Month")
          "|%t|%?||"
          :table-line-pos "II-1")))
+
+(setq org-agenda-custom-commands 
+      '(("w" "Things I'm Waiting On" todo "WAITING")
+        ("e" "Errands" tags-todo "errands|shopping")
+        ("s" "Scheduled for Today" agenda ""
+         (
+          (org-agenda-entry-types '(:scheduled))
+          (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))))
+
 
 (provide 'org-config)

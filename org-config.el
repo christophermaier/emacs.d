@@ -66,7 +66,15 @@
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("s" "Shopping")
+      '(("o" "Organization and Planning")
+        ("oe" "Emacs Setup and Tweaking" entry
+         (file+headline "~/Dropbox/org/programming.org" "Emacs Configuration")
+         "* TODO %?")
+        ("oo" "Org-Mode Setup and Tweaking" entry
+         (file+headline "~/Dropbox/org/programming.org" "Org-Mode Configuration")
+         "* TODO %?")
+
+        ("s" "Shopping")
         ("sg" "Groceries" entry
          (file+headline "~/Dropbox/org/shopping.org" "Groceries")
          "* TODO %? %^G\n")

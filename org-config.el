@@ -60,6 +60,8 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "<f9>") 'org-mobile-push)
 (global-set-key (kbd "S-<f9>") 'org-mobile-pull)
+(global-set-key (kbd "<f11>") 'org-agenda-clock-in)
+(global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (global-set-key "\C-cc" 'org-capture)

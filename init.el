@@ -28,3 +28,7 @@
 (require 'epresent-config)
 (require 'htmlize-config)
 (require 'graphviz-config)
+
+
+;; This should always be last
+(require 'custom-config)

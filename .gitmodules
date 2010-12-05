@@ -7,3 +7,6 @@
 [submodule "ext/org-mode"]
 	path = ext/org-mode
 	url = git://repo.or.cz/org-mode.git
+[submodule "ext/graphviz-dot-mode"]
+	path = ext/graphviz-dot-mode
+	url = git://github.com/emacsmirror/graphviz-dot-mode.git

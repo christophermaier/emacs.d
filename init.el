@@ -27,3 +27,4 @@
 (require 'haskell-config)
 (require 'epresent-config)
 (require 'htmlize-config)
+(require 'graphviz-config)

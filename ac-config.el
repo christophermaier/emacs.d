@@ -2,4 +2,6 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ext/auto-complete/dict")
 (ac-config-default)
 
+(setq ac-dwim t)
+
 (provide 'ac-config)

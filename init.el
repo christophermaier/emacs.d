@@ -13,6 +13,7 @@
 
 
 (require 'ac-config)
+(require 'yasnippet-config)
 (require 'miscellaneous-config)
 (require 'org-config)
 (require 'ido-config)

@@ -13,3 +13,6 @@
 [submodule "ext/clojure-refactoring"]
 	path = ext/clojure-refactoring
 	url = https://github.com/tcrayford/clojure-refactoring.git
+[submodule "ext/auto-complete"]
+	path = ext/auto-complete
+	url = http://github.com/m2ym/auto-complete.git

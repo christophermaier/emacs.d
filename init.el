@@ -11,10 +11,12 @@
 
 ;; My various configuration files
 
+
+(require 'ac-config)
 (require 'miscellaneous-config)
 (require 'org-config)
 (require 'ido-config)
-(require 'smart-tab-config)
+;;(require 'smart-tab-config)
 (require 'autopair-config)
 (require 'color-theme-config)
 (require 'highlight-parens-config)

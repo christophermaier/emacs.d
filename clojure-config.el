@@ -5,14 +5,6 @@
       (lambda ()
         (paredit-mode +1)))
 
-;; Paredit would be sweet to have in the REPL, too
-;; Strictly speaking, this could probably go somewhere other than a Clojure
-;; configuration file, but I currently don't do any REPL work in anything
-;; but Clojure, so here it stays
-(add-hook 'slime-repl-mode-hook
-      (lambda ()
-        (paredit-mode +1)))
-
 ;;; Fix indentation for Lazytest functions (as per http://github.com/stuartsierra/lazytest)
 (eval-after-load 'clojure-mode
   '(define-clojure-indent
@@ -26,6 +18,14 @@
   (add-hook 'before-save-hook 'whitespace-cleanup nil t))
 
 (add-hook 'clojure-mode-hook 'clojure-hook-setup)
+
+
+;; Durendal seems to refer to 'curly' paredit functions, but I only have
+;; 'brace' functions... this is kind of weird, yeah?
+;; At any rate, aliasing the names appears to let braces work in the REPL
+;; again.
+(defalias 'paredit-open-curly 'paredit-open-brace)
+(defalias 'paredit-close-curly 'paredit-close-brace)
 
 (require 'durendal)
 (durendal-enable)

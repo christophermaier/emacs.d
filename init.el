@@ -22,6 +22,7 @@
 (require 'color-theme-config)
 (require 'highlight-parens-config)
 (require 'clojure-config)
+(require 'slime-config)
 (require 'emacs-lisp-config)
 (require 'javascript-config)
 (require 'markdown-config)

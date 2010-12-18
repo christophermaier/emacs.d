@@ -40,13 +40,27 @@
     (visual-line-mode +1)))
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+(add-hook 'org-mode-hook
+          (let ((original-command (lookup-key org-mode-map [tab])))
+            `(lambda ()
+               (setq yas/fallback-behavior
+                     '(apply ,original-command))
+               (local-set-key [tab] 'yas/expand))))
+
+
+
 ;; Save clock history
 (setq org-clock-persist t)
 (org-clock-persistence-insinuate)
 
 ;; YES! Use Ido!
 (setq org-completion-use-ido t)
-(setq org-outline-path-complete-in-steps nil)
+(setq org-outline-path-complete-in-steps t)
+
+;; Allow refiling a task to a new top-level item in a file
+(setq org-refile-use-outline-path 'file)
+
+(setq org-refile-allow-creating-parent-nodes 'confirm)
 
 (setq org-hide-leading-stars t)
 

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Monthly Expense Table
+# group: financial
+# key: exp
+# expand-env ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+| Date  | Expense | Cost |
+|-------+---------+------|
+|       |         |      |
+|-------+---------+------|
+| TOTAL |         | 0.00 |
+ #+TBLFM: @3\$3=vsum(@I..@II);%.2f

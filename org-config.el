@@ -125,7 +125,8 @@
          (
           (org-agenda-entry-types '(:scheduled))
           (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))))
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 5))
+                           (nil . (:maxlevel . 5))))
 
-(setq org-refile-targets '((org-agenda-files . (:level . 1))))
 
 (provide 'org-config)

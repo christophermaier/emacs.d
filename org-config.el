@@ -25,9 +25,16 @@
 (setq org-clock-out-remove-zero-time-clocks t)
 (setq org-deadline-warning-days 3)
 
+;; Don't want to do logging and processing when all I want to do is cycle a state
+(setq org-treat-S-cursor-todo-selection-as-state-change nil)
+
+(setq org-use-fast-todo-selection t)
+
+
 ;; Agenda Tweaks
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 
 (setq org-agenda-include-diary nil)
 
@@ -77,6 +84,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "<f9>") 'org-mobile-push)
 (global-set-key (kbd "S-<f9>") 'org-mobile-pull)
+(global-set-key (kbd "<f10>") 'org-agenda)
 (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
 (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 
@@ -100,8 +108,8 @@
          "* TODO %? %^G\n")
 
         ("t" "General TODO" entry
-         (file+headline "" "Tasks")
-         "* TODO %? %^G\n SCHEDULED: %^t\n %i\n")
+         (file org-default-notes-file)
+         "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)
 
         ("w" "Work Templates")
         ("we" "Miscellaneous Code Changes for ENCODE project" entry
@@ -118,13 +126,33 @@
          "|%t|%?||"
          :table-line-pos "II-1")))
 
-(setq org-agenda-custom-commands 
-      '(("w" "Things I'm Waiting On" todo "WAITING")
+(setq org-agenda-custom-commands
+      '(("p" . "Priorities")
+        ("pa" "A items" tags-todo "+PRIORITY=\"A\"")
+        ("pb" "B items" tags-todo "+PRIORITY=\"B\"")
+        ("pc" "C items" tags-todo "+PRIORITY=\"C\"")
+
+        ("w" "Things I'm Waiting On" todo "WAITING")
+
         ("e" "Errands" tags-todo "errands|shopping")
+
+        ("r" "Refile" tags "+REFILE")
+
         ("s" "Scheduled for Today" agenda ""
-         (
-          (org-agenda-entry-types '(:scheduled))
-          (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))))
+         ((org-agenda-entry-types '(:scheduled))
+          (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))
+
+        ("f" "Financial Work" agenda ""
+         ((org-agenda-files '("~/Dropbox/org/financial.org"))))
+        ("W" . "Work Projects")
+        ("We" "ENCODE Project" agenda ""
+         ((org-agenda-files '("~/Dropbox/org/encode.org"))
+          (org-agenda-sorting-strategy '(priority-down effort-down))))
+        ("Wv" "Vannevar Project" agenda ""
+         ((org-agenda-files '("~/Dropbox/org/vannevar.org"))))
+        ("Wg" "Graph DB Project" agenda ""
+         ((org-agenda-files '("~/Dropbox/org/graph.org"))))))
+
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5))
                            (nil . (:maxlevel . 5))))
 

@@ -91,4 +91,8 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 
+
+;; Start up eshell with a simple keystroke
+(global-set-key "\C-xt" 'eshell)
+
 (provide 'miscellaneous-config)

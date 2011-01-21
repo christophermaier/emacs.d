@@ -197,5 +197,15 @@
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5))
                            (nil . (:maxlevel . 5))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Babel Config
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((clojure . t)
+                               (sh . t)
+                               (dot . t)))
+
+(setq org-src-fontify-natively t)
 
 (provide 'org-config)

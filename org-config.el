@@ -82,27 +82,35 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-cc" 'org-capture)
+
 (global-set-key (kbd "<f9>") 'org-mobile-push)
 (global-set-key (kbd "S-<f9>") 'org-mobile-pull)
+
 (global-set-key (kbd "<f10>") 'org-agenda)
 (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
 (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 
+
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(global-set-key "\C-cc" 'org-capture)
+
 (setq org-capture-templates
       '(("o" "Organization and Planning")
+
         ("oe" "Emacs Setup and Tweaking" entry
          (file+headline "~/Dropbox/org/programming.org" "Emacs Configuration")
          "* TODO %?")
+
         ("oo" "Org-Mode Setup and Tweaking" entry
          (file+headline "~/Dropbox/org/programming.org" "Org-Mode Configuration")
          "* TODO %?")
 
         ("s" "Shopping")
+
         ("sg" "Groceries" entry
          (file+headline "~/Dropbox/org/shopping.org" "Groceries")
          "* TODO %? %^G\n")
+
         ("ss" "General Shopping" entry
          (file+headline "~/Dropbox/org/shopping.org" "Other Things To Buy")
          "* TODO %? %^G\n")
@@ -112,15 +120,18 @@
          "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)
 
         ("w" "Work Templates")
+
         ("we" "Miscellaneous Code Changes for ENCODE project" entry
          (file+headline "~/Dropbox/org/encode.org" "Code Changes")
          "* TODO %? :programming:\n")
 
         ("x" "Templates for Expenses")
+
         ("xg" "Log a Gift Expense" table-line
          (file+headline "~/Dropbox/org/financial.org" "Reconcile Gift Expenses From Last Month")
          "|%t|%?||"
          :table-line-pos "II-1")
+
         ("xi" "Log an Infrequent Expense" table-line
          (file+headline "~/Dropbox/org/financial.org" "Reconcile Irregular Expenses From Last Month")
          "|%t|%?||"
@@ -128,22 +139,52 @@
 
 (setq org-agenda-custom-commands
       '(("p" . "Priorities")
-        ("pa" "A items" tags-todo "+PRIORITY=\"A\"")
-        ("pb" "B items" tags-todo "+PRIORITY=\"B\"")
-        ("pc" "C items" tags-todo "+PRIORITY=\"C\"")
-
+        ("pa" "A items" tags-todo "+PRIORITY=\"A\""
+         ((org-agenda-todo-ignore-scheduled 'future)
+          (org-agenda-tags-todo-honor-ignore-options t)))
+        ("pb" "B items" tags-todo "+PRIORITY=\"B\""
+         ((org-agenda-todo-ignore-scheduled 'future)
+          (org-agenda-tags-todo-honor-ignore-options t)))
+        ("pc" "C items" tags-todo "+PRIORITY=\"C\""
+         ((org-agenda-todo-ignore-scheduled 'future)
+          (org-agenda-tags-todo-honor-ignore-options t)))
         ("w" "Things I'm Waiting On" todo "WAITING")
 
-        ("e" "Errands" tags-todo "errands|shopping")
+        ("e" "Errands" tags-todo "errands|shopping"
+         ((org-agenda-todo-ignore-scheduled 'future)
+          (org-agenda-tags-todo-honor-ignore-options t)))
+
+        ("h" "Home Stuff" agenda ""
+         ((org-agenda-overriding-header "Home Stuff")
+          (org-agenda-todo-ignore-scheduled 'future)
+          (org-agenda-files '("~/Dropbox/org/maint.org"
+                              "~/Dropbox/org/clean.org"
+                              "~/Dropbox/org/moving.org"))))
+
+        ("z" "Personal Projects"
+         ((agenda ""))
+         ((org-agenda-overriding-header "Personal Projects")
+          (org-agenda-files '("~/Dropbox/org/programming.org"
+                              "~/Dropbox/org/exercise.org"
+                              "~/Dropbox/org/daily.org"
+                              "~/Dropbox/org/read.org"
+                              "~/Dropbox/org/write.org"))))
+
+        ("b" "Business Ventures" agenda ""
+         ((org-agenda-overriding-header "Startup Ventures")
+          (org-agenda-files '("~/Dropbox/org/peppy_business.org"
+                              "~/Dropbox/org/pedalsteal.org"))))
 
         ("r" "Refile" tags "+REFILE")
 
         ("s" "Scheduled for Today" agenda ""
          ((org-agenda-entry-types '(:scheduled))
+          ;;
           (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))
 
         ("f" "Financial Work" agenda ""
          ((org-agenda-files '("~/Dropbox/org/financial.org"))))
+
         ("W" . "Work Projects")
         ("We" "ENCODE Project" agenda ""
          ((org-agenda-files '("~/Dropbox/org/encode.org"))

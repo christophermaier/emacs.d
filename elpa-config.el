@@ -5,10 +5,15 @@
 ;;
 ;; Part of the Emacs Starter Kit
 
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (defvar starter-kit-packages (list 'highlight-parentheses
                                    'javascript
                                    'js2-mode               ;; Don't know which JS mode I want yet
                                    'clojure-mode
+                                   'clojure-test-mode
                                    'slime
                                    'slime-repl
                                    'paredit

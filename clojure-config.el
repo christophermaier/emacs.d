@@ -20,6 +20,9 @@
 (add-hook 'clojure-mode-hook 'clojure-hook-setup)
 
 
+(add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+
+
 ;; Durendal seems to refer to 'curly' paredit functions, but I only have
 ;; 'brace' functions... this is kind of weird, yeah?
 ;; At any rate, aliasing the names appears to let braces work in the REPL

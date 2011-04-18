@@ -98,11 +98,11 @@
       '(("o" "Organization and Planning")
 
         ("oe" "Emacs Setup and Tweaking" entry
-         (file+headline "~/Dropbox/org/programming.org" "Emacs Configuration")
+         (file+headline "~/Dropbox/org/personal.org" "Emacs Configuration")
          "* TODO %?")
 
         ("oo" "Org-Mode Setup and Tweaking" entry
-         (file+headline "~/Dropbox/org/programming.org" "Org-Mode Configuration")
+         (file+headline "~/Dropbox/org/personal.org" "Org-Mode Configuration")
          "* TODO %?")
 
         ("s" "Shopping")
@@ -121,8 +121,16 @@
 
         ("w" "Work Templates")
 
-        ("we" "Miscellaneous Code Changes for ENCODE project" entry
-         (file+headline "~/Dropbox/org/encode.org" "Code Changes")
+        ("wd" "PeppyDB" entry
+         (file+headline "~/Dropbox/org/work.org" "PeppyDB")
+         "* TODO %? :programming:\n")
+
+        ("wp" "Peppy" entry
+         (file+headline "~/Dropbox/org/work.org" "Peppy")
+         "* TODO %? :programming:\n")
+
+        ("wg" "Glutton" entry
+         (file+headline "~/Dropbox/org/work.org" "Glutton")
          "* TODO %? :programming:\n")
 
         ("x" "Templates for Expenses")
@@ -164,35 +172,31 @@
         ("z" "Personal Projects"
          ((agenda ""))
          ((org-agenda-overriding-header "Personal Projects")
-          (org-agenda-files '("~/Dropbox/org/programming.org"
+          (org-agenda-files '("~/Dropbox/org/personal.org"
                               "~/Dropbox/org/exercise.org"
                               "~/Dropbox/org/daily.org"
-                              "~/Dropbox/org/read.org"
-                              "~/Dropbox/org/write.org"))))
+                              "~/Dropbox/org/read.org"))))
 
         ("b" "Business Ventures" agenda ""
          ((org-agenda-overriding-header "Startup Ventures")
-          (org-agenda-files '("~/Dropbox/org/peppy_business.org"
+          (org-agenda-files '("~/Dropbox/org/peppyresearch.org"
                               "~/Dropbox/org/pedalsteal.org"))))
 
         ("r" "Refile" tags "+REFILE")
 
         ("s" "Scheduled for Today" agenda ""
          ((org-agenda-entry-types '(:scheduled))
-          ;;
           (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))
 
         ("f" "Financial Work" agenda ""
          ((org-agenda-files '("~/Dropbox/org/financial.org"))))
 
         ("W" . "Work Projects")
-        ("We" "ENCODE Project" agenda ""
-         ((org-agenda-files '("~/Dropbox/org/encode.org"))
+        ("We" "Work" agenda ""
+         ((org-agenda-files '("~/Dropbox/org/work.org"))
           (org-agenda-sorting-strategy '(priority-down effort-down))))
         ("Wv" "Vannevar Project" agenda ""
-         ((org-agenda-files '("~/Dropbox/org/vannevar.org"))))
-        ("Wg" "Graph DB Project" agenda ""
-         ((org-agenda-files '("~/Dropbox/org/graph.org"))))))
+         ((org-agenda-files '("~/Dropbox/org/vannevar.org"))))))
 
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5))
                            (nil . (:maxlevel . 5))))

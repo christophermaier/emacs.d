@@ -10,4 +10,5 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#3f3f3f" :foreground "#dcdccc" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Anonymous Pro"))))
+ '(hl-line ((t (:background "#5f5f5f"))))
  '(org-hide ((t (:foreground "#3f3f3f")))))

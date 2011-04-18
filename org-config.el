@@ -1,5 +1,3 @@
-(setq load-path (cons "~/.emacs.d/ext/org-mode/lisp" load-path))
-(setq load-path (cons "~/.emacs.d/ext/org-mode/contrib/lisp" load-path))
 (require 'org)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))

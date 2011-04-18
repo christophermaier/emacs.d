@@ -99,4 +99,14 @@
 ;; Make Vagrant files behave like Ruby
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
+
+;; Display full path in title bar
+;; Stolen from http://eden.rutgers.edu/~mangesh/emacs.html... thanks, Google!
+(setq-default
+ frame-title-format
+ (list '((buffer-file-name " %f" (dired-directory
+	 			  dired-directory
+				  (revert-buffer-function " %b"
+				  ("%b - Dir:  " default-directory)))))))
+
 (provide 'miscellaneous-config)

@@ -6,18 +6,24 @@
 ;; Part of the Emacs Starter Kit
 
 (require 'package)
+
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-(defvar starter-kit-packages (list 'highlight-parentheses
-                                   'javascript
-                                   'js2-mode               ;; Don't know which JS mode I want yet
-                                   'clojure-mode
-                                   'clojure-test-mode
-                                   'slime
-                                   'slime-repl
-                                   'paredit
-                                   'magit)
+(defvar starter-kit-packages  '(durendal
+                                rainbow-mode
+                                hl-line+
+                                org
+                                elein
+                                slime
+                                slime-repl
+                                paredit
+                                clojure-mode
+                                clojure-test-mode
+                                magit
+                                javascript-mode
+                                js2-mode
+                                highlight-parentheses)
   "Libraries that should be installed by default.")
 
 (defun starter-kit-elpa-install ()

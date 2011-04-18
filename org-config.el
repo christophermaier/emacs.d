@@ -210,6 +210,4 @@
 
 (setq org-src-fontify-natively t)
 
-(require 'org-exp-blocks)
-
 (provide 'org-config)

@@ -95,4 +95,8 @@
 ;; Start up eshell with a simple keystroke
 (global-set-key "\C-xt" 'eshell)
 
+
+;; Make Vagrant files behave like Ruby
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+
 (provide 'miscellaneous-config)

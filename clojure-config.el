@@ -22,19 +22,15 @@
 
 (add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
 
-
-;; Durendal seems to refer to 'curly' paredit functions, but I only have
-;; 'brace' functions... this is kind of weird, yeah?
-;; At any rate, aliasing the names appears to let braces work in the REPL
-;; again.
-(defalias 'paredit-open-curly 'paredit-open-brace)
-(defalias 'paredit-close-curly 'paredit-close-brace)
-
 (require 'durendal)
 (durendal-enable)
-(define-key clojure-mode-map [f8] 'durendal-jack-in)
 
 (global-set-key "\C-cs" 'slime-selector)
+
+(require 'elein)
+(define-key clojure-mode-map [f8] 'elein-swank)
+(define-key clojure-mode-map [S-f8] 'elein-kill-swank)
+(define-key clojure-mode-map [M-f8] 'elein-reswank)
 
 (require 'clojure-refactoring-mode)
 

@@ -10,6 +10,9 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
+(add-to-list 'package-archives
+             '("ELPA" . "http://tromey.com/elpa/"))
+
 (defvar starter-kit-packages  '(durendal
                                 rainbow-mode
                                 hl-line+
@@ -23,7 +26,8 @@
                                 magit
                                 javascript-mode
                                 js2-mode
-                                highlight-parentheses)
+                                highlight-parentheses
+                                smex)
   "Libraries that should be installed by default.")
 
 (defun starter-kit-elpa-install ()

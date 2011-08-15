@@ -29,6 +29,9 @@
 (require 'whitespace-config)
 (require 'magit-config)
 (require 'haskell-config)
+(require 'erlang-config)
+
+
 (require 'epresent-config)
 (require 'htmlize-config)
 (require 'graphviz-config)

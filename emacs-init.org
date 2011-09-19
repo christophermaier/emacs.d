@@ -393,20 +393,52 @@ Finally, wrap lines!
 * Languages
 ** Lisps
 *** Paredit
+    Structural editing of Lisp code is absolutely mandatory!
 #+begin_src emacs-lisp
   (require 'paredit)
 #+end_src
 *** Emacs Lisp
-It's nice to have Paredit in Emacs Lisp, no?
+    It's nice to have Paredit in Emacs Lisp, no?
 #+begin_src emacs-lisp
   (add-hook 'emacs-lisp-mode-hook
             'enable-paredit-mode)
-
 #+end_src
 *** Clojure
-    #+begin_src emacs-lisp
-    (starter-kit-load "clojure")
-    #+end_src
+**** All The Modes
+#+begin_src emacs-lisp
+  (require 'clojure-mode)
+  (require 'clojure-test-mode)
+  (require 'clojurescript-mode)
+#+end_src
+**** Durendal
+#+begin_src emacs-lisp
+  (require 'durendal)
+  (add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
+  (add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
+  (add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
+;;  (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
+#+end_src
+**** Paredit
+     Can't code Clojure without it.
+#+begin_src emacs-lisp
+  (add-hook 'clojure-mode-hook
+            'enable-paredit-mode)
+#+end_src
+**** Elein
+     Emacs + Leiningen = Love.
+#+begin_src emacs-lisp
+  (require 'elein)
+
+  (define-key clojure-mode-map [f8] 'elein-swank)
+  (define-key clojure-mode-map [S-f8] 'elein-kill-swank)
+  (define-key clojure-mode-map [M-f8] 'elein-reswank)
+#+end_src
+**** SLIME
+     Make it pretty
+#+begin_src emacs-lisp :tangle no
+  (add-hook 'slime-repl-mode-hook
+            'clojure-mode-font-lock-setup)
+#+end_src
 * Org Mode
 #+begin_src emacs-lisp
   (setq org-directory "~/Dropbox/org")

@@ -15,10 +15,7 @@
 (add-hook 'clojure-mode-hook 'clojure-hook-setup)
 
 
-(add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
 
-(require 'durendal)
-(durendal-enable)
 
 (global-set-key "\C-cs" 'slime-selector)
 

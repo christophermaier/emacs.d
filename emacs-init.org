@@ -267,10 +267,17 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
   (setq-default save-place t)
 #+end_src
 ** SMEX
-   See [[http://www.emacswiki.org/emacs/Smex]].
+   See [[http://www.emacswiki.org/emacs/Smex]].  Or just look at [[https://github.com/nonsequitur/smex][the code]] (the Github README file has lots of nice tips, too).
 #+begin_src emacs-lisp
   (require 'smex)
+#+end_src
 
+   Don't pollute the home directory with Smex spoor.  Note that this _must_ be done before initializing Smex.
+#+begin_src emacs-lisp
+  (setq smex-save-file (concat user-emacs-directory "smex-items"))
+#+end_src
+
+#+begin_src emacs-lisp
   (smex-initialize)
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)

@@ -8,3 +8,6 @@ saveplace
 *.html
 *.tex
 *.pdf
+
+# Don't need to keep SMEX listing around
+smex-items

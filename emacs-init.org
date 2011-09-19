@@ -44,6 +44,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
           'clojurescript-mode
           'durendal
           'elein
+          'magit
           'paredit
           'slime
           'slime-repl
@@ -226,6 +227,11 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
      (ido-mode t)
      (setq ido-enable-flex-matching t)
    #+end_src
+** Magit
+   Magit is a nice Git integration.  See [[http://philjackson.github.com/magit/]] for more.
+#+begin_src emacs-lisp
+  (global-set-key [f7] 'magit-status)
+#+end_src
 ** SavePlace
    See [[http://www.emacswiki.org/emacs/SavePlace]].  The configuration below was taken from [[http://emacs-fu.blogspot.com/2009/05/remembering-your-position-in-file.html][this Emacs-Fu blog post]].
 #+begin_src emacs-lisp
@@ -284,7 +290,6 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 - Muse
 - Ruby
 - Org
-- Magit
 - JavaScript
 - XML / HTML
 - Common Lisp

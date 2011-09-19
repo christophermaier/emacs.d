@@ -66,6 +66,8 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       haskell-mode
       highlight-parentheses
       htmlize
+      javascript
+      js2-mode
       magit
       muse
       nxml-mode
@@ -466,6 +468,18 @@ Finally, wrap lines!
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+#+end_src
+** Javascript
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+  (autoload 'js2-mode "js2-mode" "Start JS2 Mode" t)
+
+  (defun js2-custom-setup ()
+    (setq autopair-dont-activate t))
+
+  (add-hook 'js2-mode-hook 'js2-custom-setup)
 #+end_src
 ** Lisps
 *** Paredit

@@ -4,3 +4,6 @@
 [submodule "ext/scel"]
 	path = ext/scel
 	url = https://github.com/qdot/scel.git
+[submodule "ext/align-cljlet"]
+	path = ext/align-cljlet
+	url = git://github.com/gstamp/align-cljlet.git

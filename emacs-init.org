@@ -572,6 +572,14 @@ Finally, wrap lines!
 
   (add-hook 'clojure-mode-hook 'clojure-hook-setup)
 #+end_src
+
+     [[https://github.com/gstamp/align-cljlet][align-cljlet]] is a neat little package that allows you to neatly align entries in Clojure bindings and literal hashes.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat external-code-dir "align-cljlet"))
+  (require 'align-cljlet)
+
+  (define-key clojure-mode-map (kbd "C-c C-c a") 'align-cljlet)
+#+end_src
 ** Ruby
    Make [[http://vagrantup.com/][Vagrant]] files behave like Ruby:
 #+begin_src emacs-lisp

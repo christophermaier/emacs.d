@@ -337,6 +337,36 @@ Since the default colors for highlight-parentheses-mode are kind of terrible, an
   (global-set-key [f6] 'whitespace-cleanup)
 #+end_src
 
+** Markdown
+You'll need to have the =markdown= Perl script installed somewhere on your path.  Mine's at =/usr/bin/markdown=.  It also needs to be named =markdown=, since that's what =markdown-mode= looks for by default; that's configurable, though.
+
+Download markdown at http://daringfireball.net/projects/markdown/
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat user-emacs-directory "ext/markdown"))
+  (require 'markdown-mode)
+#+end_src
+
+There's a bunch of different extensions people use for Markdown docs; register them all.
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+#+end_src
+
+I also want to treat files named "README" as Markdown files (useful for GitHub projects).
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
+#+end_src
+
+Finally, wrap lines!
+#+begin_src emacs-lisp
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (visual-line-mode +1)))
+#+end_src
+
+
 ** Yasnippet
    :PROPERTIES:
    :tangle:   yes

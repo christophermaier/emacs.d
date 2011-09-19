@@ -64,7 +64,9 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       elein
       haskell-mode
       highlight-parentheses
+      htmlize
       magit
+      muse
       paredit
       rspec-mode
       ruby-mode
@@ -769,7 +771,6 @@ Calculate statistics for everything in the subtree
 #+end_src
 * Stuff To Load
 - EShell
-- Muse
 - JavaScript
 - XML / HTML
 - Common Lisp

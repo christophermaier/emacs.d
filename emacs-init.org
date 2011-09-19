@@ -43,6 +43,8 @@ List the ELPA archive repositories to scan.  Install a few packages by default
           'clojure-mode
           'clojure-test-mode
           'clojurescript-mode
+          'color-theme
+          'color-theme-zenburn
           'durendal
           'elein
           'highlight-parentheses
@@ -50,8 +52,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
           'paredit
           'slime
           'slime-repl
-          'smex
-          'color-theme)
+          'smex)
     "Libraries that should be installed by default.")
 
   (unless package-archive-contents
@@ -115,7 +116,6 @@ This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24
            file))))
   #+end_src
 
-
 * Default Configurations
 
   A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is:
@@ -123,7 +123,16 @@ This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24
 #+begin_example
 C-c C-x p <RET> tangle <RET> no <RET>
 #+end_example
+** Colors
+#+begin_src emacs-lisp
+  (require 'color-theme)
+#+end_src
 
+Currently, I favor the =zenburn= color theme.
+#+begin_src emacs-lisp
+  (require 'color-theme-zenburn)
+  (color-theme-zenburn)
+#+end_src
 ** Miscellaneous Configurations
    These are small tweaks that are globally useful, and not big or complex enough to warrant their own section.
 
@@ -366,7 +375,6 @@ Finally, wrap lines!
               (visual-line-mode +1)))
 #+end_src
 
-
 ** Yasnippet
    :PROPERTIES:
    :tangle:   yes
@@ -399,4 +407,3 @@ Finally, wrap lines!
 - Common Lisp
 - SLIME
 - Durendal
-- Colors

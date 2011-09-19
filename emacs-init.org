@@ -476,6 +476,14 @@ Finally, wrap lines!
   (add-hook 'slime-repl-mode-hook
             'clojure-mode-font-lock-setup)
 #+end_src
+**** Miscellaneous
+     This cleans up any whitespace problems before saving a Clojure file.
+#+begin_src emacs-lisp
+  (defun clojure-hook-setup ()
+    (add-hook 'before-save-hook 'whitespace-cleanup nil t))
+
+  (add-hook 'clojure-mode-hook 'clojure-hook-setup)
+#+end_src
 * Org Mode
 #+begin_src emacs-lisp
   (setq org-directory "~/Dropbox/org")

@@ -1,7 +1,7 @@
 #+TITLE: Literate Emacs Configuration
 #+AUTHOR: Christopher Maier
 #+EMAIL: christopher.maier@gmail.com
-#+OPTIONS: toc:2 num:nil ^:nil
+#+OPTIONS: toc:3 num:nil ^:nil
 
 # table of contents down to level 2
 # no section numbers
@@ -291,22 +291,19 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 
    Autopair doesn't seem to work properly in a few modes, so we'll disable it in those situations.
 
-   NOTE: These are carried over from my old configuration, and are not enabled at the moment.
-
-   Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic:
+    Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic.  This fix worked pre-Emacs 24.
 #+begin_src emacs-lisp :tangle no
   (add-hook 'sldb-mode-hook
             #'(lambda ()
                 (setq autopair-dont-activate t)))
 #+end_src
 
-   Graphviz mode seems weird, too:
-#+begin_src emacs-lisp :tangle no
-  (add-hook 'graphviz-dot-mode-hook
-            #'(lambda ()
-                (setq autopair-dont-activate t)))
+   For Emacs 24, however, this is the way to go.
+#+begin_src emacs-lisp
+  (set-default 'autopair-dont-activate
+               #'(lambda ()
+                   (eq major-mode 'sldb-mode)))
 #+end_src
-
 ** Rainbow Parentheses
    Rainbow parentheses are nice to have, and not just when coding Lisp.  I use =highlight-parentheses-mode= for this.
 

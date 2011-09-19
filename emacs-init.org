@@ -67,6 +67,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       htmlize
       magit
       muse
+      nxml-mode
       paredit
       rspec-mode
       ruby-mode

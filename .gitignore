@@ -14,3 +14,8 @@ emacs-init.el
 
 # Don't need to keep SMEX listing around
 smex-items
+
+url
+
+# Autocomplete data doesn't need to be saved
+ac-comphist.dat

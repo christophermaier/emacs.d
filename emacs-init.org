@@ -39,19 +39,22 @@
   (if window-system (set-exec-path-from-shell-PATH))
 #+end_src
 
-* Initialization
-  :PROPERTIES:
-  :CUSTOM_ID: initialization
-  :END:
-
-List the ELPA archive repositories to scan.  Install a few packages by default
+* ELPA
+  List the ELPA repositories to scan.
 #+begin_src emacs-lisp
   (setq package-archives
         '(("original"  . "http://tromey.com/elpa/")
           ("gnu"       . "http://elpa.gnu.org/packages/")
           ("marmalade" . "http://marmalade-repo.org/packages/")))
-  (package-initialize)
+#+end_src
 
+  Load and activate ELPA packages.
+#+begin_src emacs-lisp
+  (package-initialize)
+#+end_src
+
+  Here is a list of packages in want installed.  If they're not already here, install them now.
+#+begin_src emacs-lisp
   (defvar my-elpa-packages
     '(auto-complete
       autopair
@@ -812,5 +815,3 @@ Calculate statistics for everything in the subtree
 - JavaScript
 - XML / HTML
 - Common Lisp
-- SLIME
-- Durendal

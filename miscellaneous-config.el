@@ -21,8 +21,5 @@
 
 
 
-(require 'bar-cursor)
-(bar-cursor-mode 1)
-
 
 (provide 'miscellaneous-config)

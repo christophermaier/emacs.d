@@ -1,12 +1,3 @@
-[submodule "ext/epresent"]
-	path = ext/epresent
-	url = http://github.com/technomancy/epresent.git
-[submodule "ext/graphviz-dot-mode"]
-	path = ext/graphviz-dot-mode
-	url = git://github.com/emacsmirror/graphviz-dot-mode.git
-[submodule "ext/clojure-refactoring"]
-	path = ext/clojure-refactoring
-	url = https://github.com/tcrayford/clojure-refactoring.git
 [submodule "ext/ac-slime"]
 	path = ext/ac-slime
 	url = git://github.com/purcell/ac-slime.git

@@ -60,6 +60,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       clojurescript-mode
       color-theme
       color-theme-zenburn
+      css-mode
       durendal
       elein
       haskell-mode
@@ -69,6 +70,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       muse
       nxml-mode
       paredit
+      rainbow-mode
       rspec-mode
       ruby-mode
       ruby-test-mode

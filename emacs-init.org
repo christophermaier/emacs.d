@@ -412,11 +412,15 @@ Since the default colors for highlight-parentheses-mode are kind of terrible, an
   (setq tab-width 4)
 #+end_src
 ** Whitespace
+   Easily toggle whitespace display.
 #+begin_src emacs-lisp
   (global-set-key [f5] 'whitespace-mode)
-  (global-set-key [f6] 'whitespace-cleanup)
 #+end_src
 
+   Clean up whitespace before saving all files.
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'whitespace-cleanup)
+#+end_src
 ** Markdown
 You'll need to have the =markdown= Perl script installed somewhere on your path.  Mine's at =/usr/bin/markdown=.  It also needs to be named =markdown=, since that's what =markdown-mode= looks for by default; that's configurable, though.
 
@@ -562,17 +566,6 @@ Finally, wrap lines!
             'clojure-mode-font-lock-setup)
 #+end_src
 **** Miscellaneous
-     :PROPERTIES:
-     :tangle:   no
-     :END:
-     This cleans up any whitespace problems before saving a Clojure file.
-#+begin_src emacs-lisp
-  (defun clojure-hook-setup ()
-    (add-hook 'before-save-hook 'whitespace-cleanup nil t))
-
-  (add-hook 'clojure-mode-hook 'clojure-hook-setup)
-#+end_src
-
      [[https://github.com/gstamp/align-cljlet][align-cljlet]] is a neat little package that allows you to neatly align entries in Clojure bindings and literal hashes.
 #+begin_src emacs-lisp
   (add-to-list 'load-path (concat external-code-dir "align-cljlet"))

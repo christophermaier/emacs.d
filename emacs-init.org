@@ -39,7 +39,15 @@ List the ELPA archive repositories to scan.  Install a few packages by default
   (package-initialize)
 
   (defvar my-elpa-packages
-    (list 'smex
+    (list 'clojure-mode
+          'clojure-test-mode
+          'clojurescript-mode
+          'durendal
+          'elein
+          'paredit
+          'slime
+          'slime-repl
+          'smex
           'color-theme)
     "Libraries that should be installed by default.")
     
@@ -264,13 +272,14 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
   (mapc 'yas/load-directory yas/root-directory)
 #+end_src
 
+* Clojure
+  #+begin_src emacs-lisp
+  (starter-kit-load "clojure")
+  #+end_src
 * Stuff To Load
 - EShell
 - SuperCollider
 - Haskell
-- Clojure
-- Clojure Test Mode
-- CloureScript
 - Erlang
 - Muse
 - Ruby
@@ -278,9 +287,7 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 - Magit
 - JavaScript
 - XML / HTML
-- Paredit
 - Common Lisp
 - SLIME
-- Elein
 - Durendal
 - Colors

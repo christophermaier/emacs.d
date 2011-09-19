@@ -1,0 +1,47 @@
+#+TITLE: Literate Clojure Configuration
+#+AUTHOR: Christopher Maier
+#+EMAIL: christopher.maier@gmail.com
+
+
+* All The Modes
+  #+begin_src emacs-lisp
+    (require 'clojure-mode)
+    (require 'clojure-test-mode)
+    (require 'clojurescript-mode)
+  #+end_src
+
+* Durendal
+  :PROPERTIES:
+  :tangle:   no
+  :END:
+
+  Disabled for the time being.
+#+begin_src emacs-lisp
+  (require 'durendal)
+  (durendal-enable)
+#+end_src
+
+* Paredit
+  #+begin_src emacs-lisp
+    (require 'paredit)
+  #+end_src
+
+  Can't code Clojure without it.
+#+begin_src emacs-lisp
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (enable-paredit-mode)))
+#+end_src
+  
+* Elein
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+  Emacs + Leiningen = Love.
+#+begin_src emacs-lisp
+  (require 'elein)
+  
+  (define-key clojure-mode-map [f8] 'elein-swank)
+  (define-key clojure-mode-map [S-f8] 'elein-kill-swank)
+  (define-key clojure-mode-map [M-f8] 'elein-reswank)
+#+end_src

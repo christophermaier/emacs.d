@@ -1,10 +1,5 @@
 ;; Just how I want things for editing Clojure code
 
-;; Let's turn on Paredit by default, shall we?
-(add-hook 'clojure-mode-hook
-      (lambda ()
-        (paredit-mode +1)))
-
 ;;; Fix indentation for Lazytest functions (as per http://github.com/stuartsierra/lazytest)
 (eval-after-load 'clojure-mode
   '(define-clojure-indent
@@ -26,11 +21,6 @@
 (durendal-enable)
 
 (global-set-key "\C-cs" 'slime-selector)
-
-(require 'elein)
-(define-key clojure-mode-map [f8] 'elein-swank)
-(define-key clojure-mode-map [S-f8] 'elein-kill-swank)
-(define-key clojure-mode-map [M-f8] 'elein-reswank)
 
 (require 'clojure-refactoring-mode)
 

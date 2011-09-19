@@ -39,7 +39,8 @@ List the ELPA archive repositories to scan.  Install a few packages by default
   (package-initialize)
 
   (defvar my-elpa-packages
-    (list 'clojure-mode
+    (list 'autopair
+          'clojure-mode
           'clojure-test-mode
           'clojurescript-mode
           'durendal
@@ -261,6 +262,40 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
    I'd like to be able to fire up an EShell with a simple keystroke:
 #+begin_src emacs-lisp
   (global-set-key "\C-xt" 'eshell)
+#+end_src
+
+** Autopair
+   :PROPERTIES:
+   :tangle:   yes
+   :END:
+   Who has time to manually type closing parentheses?  See [[http://code.google.com/p/autopair/]] for more.
+
+   #+begin_src emacs-lisp
+     (require 'autopair)
+   #+end_src
+
+   It's safe to enable =autopair= globally, because it defers to =paredit-mode= when the latter is enabled; see http://www.emacswiki.org/emacs/AutoPairs#toc4
+
+#+begin_src emacs-lisp
+  (autopair-global-mode)
+#+end_src
+
+   Autopair doesn't seem to work properly in a few modes, so we'll disable it in those situations.
+
+   NOTE: These are carried over from my old configuration, and are not enabled at the moment.
+
+   Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic:
+#+begin_src emacs-lisp :tangle no
+  (add-hook 'sldb-mode-hook
+            #'(lambda ()
+                (setq autopair-dont-activate t)))
+#+end_src
+
+   Graphviz mode seems weird, too:
+#+begin_src emacs-lisp :tangle no
+  (add-hook 'graphviz-dot-mode-hook
+            #'(lambda ()
+                (setq autopair-dont-activate t)))
 #+end_src
 
 ** Rainbow Parentheses

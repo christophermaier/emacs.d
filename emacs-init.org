@@ -39,7 +39,8 @@ List the ELPA archive repositories to scan.  Install a few packages by default
   (package-initialize)
 
   (defvar my-elpa-packages
-    '(autopair
+    '(auto-complete
+      autopair
       clojure-mode
       clojure-test-mode
       clojurescript-mode
@@ -61,6 +62,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
   (dolist (package my-elpa-packages)
     (unless (package-installed-p package)
       (package-install package)))
+
 #+end_src
 
 This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24-starter-kit][Emacs 24 Starter Kit]].
@@ -123,6 +125,20 @@ This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24
 #+begin_example
 C-c C-x p <RET> tangle <RET> no <RET>
 #+end_example
+** AutoComplete
+   See [[http://cx4a.org/software/auto-complete/][the documentation]] and [[https://github.com/m2ym/auto-complete][the code]].
+#+begin_src emacs-lisp
+  (require 'auto-complete-config)
+#+end_src
+   I'm not sure the best way to wire up the auto-complete dictionaries with an ELPA install.  For now, I'll just hard-code the path to the package files in my ELPA directory.
+#+begin_src emacs-lisp
+  (add-to-list 'ac-dictionary-directories
+               (concat package-user-dir "/auto-complete-1.4.20110207/dict"))
+#+end_src
+   Now, turn it on.
+#+begin_src emacs-lisp
+  (ac-config-default)
+#+end_src
 ** Colors
 #+begin_src emacs-lisp
   (require 'color-theme)
@@ -203,7 +219,7 @@ Currently, I favor the =zenburn= color theme.
                                     (revert-buffer-function " %b"
                                     ("%b - Dir:  " default-directory)))))))
 #+end_src
-
+:
 ** Mac OS X Modifier Keys
 Most people on Mac OS X seem to set their Option key to act as Meta, like so:
 

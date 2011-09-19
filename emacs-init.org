@@ -403,13 +403,15 @@ Finally, wrap lines!
    See [[http://code.google.com/p/yasnippet/]].  We have to download the distribution ourselves, because only the =yasnippet-bundle= package is available in ELPA.  We need to use the =yasnippet= package, however, if we want to add our own snippets.
 
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat user-emacs-directory "ext/yasnippet-0.6.1c"))
+  (setq yasnippet-source-dir (concat external-code-dir "/yasnippet-0.6.1c/"))
+  (add-to-list 'load-path yasnippet-source-dir)
 
   (require 'yasnippet)
   (yas/initialize)
   (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
-                                 (concat user-emacs-directory "ext/yasnippet-0.6.1c/snippets"))) ; default snippets
+                                 (concat yasnippet-source-dir "snippets"))) ; default snippets
   (mapc 'yas/load-directory yas/root-directory)
+
 #+end_src
 * Languages
 ** Lisps

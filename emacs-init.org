@@ -140,6 +140,11 @@ C-c C-x p <RET> tangle <RET> no <RET>
 #+begin_src emacs-lisp
   (ac-config-default)
 #+end_src
+
+#+begin_src emacs-lisp
+  (setq ac-dwim t)
+#+end_src
+
 ** Colors
 #+begin_src emacs-lisp
   (require 'color-theme)

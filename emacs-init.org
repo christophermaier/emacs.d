@@ -39,20 +39,20 @@ List the ELPA archive repositories to scan.  Install a few packages by default
   (package-initialize)
 
   (defvar my-elpa-packages
-    (list 'autopair
-          'clojure-mode
-          'clojure-test-mode
-          'clojurescript-mode
-          'color-theme
-          'color-theme-zenburn
-          'durendal
-          'elein
-          'highlight-parentheses
-          'magit
-          'paredit
-          'slime
-          'slime-repl
-          'smex)
+    '(autopair
+      clojure-mode
+      clojure-test-mode
+      clojurescript-mode
+      color-theme
+      color-theme-zenburn
+      durendal
+      elein
+      highlight-parentheses
+      magit
+      paredit
+      slime
+      slime-repl
+      smex)
     "Libraries that should be installed by default.")
 
   (unless package-archive-contents

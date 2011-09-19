@@ -44,6 +44,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
           'clojurescript-mode
           'durendal
           'elein
+          'highlight-parentheses
           'magit
           'paredit
           'slime
@@ -260,6 +261,33 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
    I'd like to be able to fire up an EShell with a simple keystroke:
 #+begin_src emacs-lisp
   (global-set-key "\C-xt" 'eshell)
+#+end_src
+
+** Rainbow Parentheses
+   Rainbow parentheses are nice to have, and not just when coding Lisp.  I use =highlight-parentheses-mode= for this.
+
+   Apparently highlight-parentheses-mode doesn't provide a way to programmatically activate it (you need to do it manually with =M-x highlight-parentheses-mode=) This is a pain, so we'll provide such a way, and go ahead and activate it globally.
+
+Stolen from [[http://nflath.com/2010/02/emacs-minor-modes-mic-paren-pager-dired-isearch-whichfunc-winpoint-and-highlight-parentheses/][here]].
+
+#+begin_src emacs-lisp
+  (defun turn-on-highlight-parentheses-mode ()
+    (highlight-parentheses-mode t))
+  (define-global-minor-mode global-highlight-parentheses-mode
+    highlight-parentheses-mode
+    turn-on-highlight-parentheses-mode)
+
+  (global-highlight-parentheses-mode)
+#+end_src
+
+Since the default colors for highlight-parentheses-mode are kind of terrible, and I'd prefer
+"rainbow parens", we'll override the colors.  Stolen from [[http://stackoverflow.com/questions/2413047/how-do-i-get-rainbow-parentheses-in-emacs/2413472#2413472][this StackOverflow post]].
+
+#+begin_src emacs-lisp
+  (setq hl-paren-colors
+        '("orange1" "yellow1" "greenyellow" "green1"
+          "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+
 #+end_src
 
 ** Tabs

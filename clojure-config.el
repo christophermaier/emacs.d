@@ -5,18 +5,12 @@
   '(define-clojure-indent
      (describe 'defun)
      (it 'defun)
-     (given 'defun)
-     (defmulti 'defun)
-     (defmethod 'defun)))
+     (given 'defun)))
 
 (defun clojure-hook-setup ()
   (add-hook 'before-save-hook 'whitespace-cleanup nil t))
 
 (add-hook 'clojure-mode-hook 'clojure-hook-setup)
-
-
-
-
 
 (require 'clojure-refactoring-mode)
 

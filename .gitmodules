@@ -10,3 +10,6 @@
 [submodule "ext/ac-slime"]
 	path = ext/ac-slime
 	url = git://github.com/purcell/ac-slime.git
+[submodule "ext/scel"]
+	path = ext/scel
+	url = https://github.com/qdot/scel.git

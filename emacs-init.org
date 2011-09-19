@@ -15,6 +15,7 @@
     (add-to-list 'load-path user-emacs-directory)
     ;;(setq autoload-file (concat starter-kit-dir "loaddefs.el"))
     (setq package-user-dir (concat user-emacs-directory "elpa"))
+    (setq external-code-dir (concat user-emacs-directory "ext"))
     ;; (setq custom-file (concat user-emacs-directory "custom.el"))
   #+end_src
 
@@ -421,6 +422,16 @@ Finally, wrap lines!
 #+begin_src emacs-lisp
   (global-set-key "\C-cs" 'slime-selector)
 #+end_src
+**** AutoComplete in SLIME
+     Steve Purcell made [[https://github.com/purcell/ac-slime][this snazzy add-on]] for AutoComplete to use SLIME symbols.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat external-code-dir "/ac-slime"))
+
+  (require 'ac-slime)
+  (add-hook 'slime-mode-hook 'set-up-slime-ac)
+  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+#+end_src
+
 *** Emacs Lisp
     It's nice to have Paredit in Emacs Lisp, no?
 #+begin_src emacs-lisp

@@ -1,7 +1,7 @@
 #+TITLE: Literate Emacs Configuration
 #+AUTHOR: Christopher Maier
 #+EMAIL: christopher.maier@gmail.com
-#+OPTIONS: toc:2 num:nil ^:nil 
+#+OPTIONS: toc:2 num:nil ^:nil
 
 # table of contents down to level 2
 # no section numbers
@@ -19,7 +19,7 @@
   #+end_src
 
 - Universally-used Packages
-  
+
   These are going to be used all the time, so they should be loaded at startup
   #+begin_src emacs-lisp
     (require 'cl)                           ; Common Lisp extensions
@@ -51,10 +51,10 @@ List the ELPA archive repositories to scan.  Install a few packages by default
           'smex
           'color-theme)
     "Libraries that should be installed by default.")
-    
+
   (unless package-archive-contents
     (package-refresh-contents))
-  
+
   (dolist (package my-elpa-packages)
     (unless (package-installed-p package)
       (package-install package)))
@@ -115,8 +115,8 @@ This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24
 
 
 * Default Configurations
-  
-  A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is: 
+
+  A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is:
 
 #+begin_example
 C-c C-x p <RET> tangle <RET> no <RET>
@@ -132,7 +132,7 @@ C-c C-x p <RET> tangle <RET> no <RET>
 
    Make =C-n= add a newline at the end of a buffer.
 #+begin_src emacs-lisp
-  (setq next-line-add-newlines t)  
+  (setq next-line-add-newlines t)
 #+end_src
 
    Automatically making all script files with "shebang" lines executable is handy.
@@ -150,7 +150,7 @@ C-c C-x p <RET> tangle <RET> no <RET>
    I want to see line and column numbers.
 
 #+begin_src emacs-lisp
-  (global-linum-mode 1) 
+  (global-linum-mode 1)
   (setq line-number-mode t)
   (setq column-number-mode t)
   (setq size-indication-mode t)
@@ -256,10 +256,22 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 
 ** EShell: The Emacs Shell
    Make sure to checkout this [[http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/][excellent post]] at the [[http://www.masteringemacs.org][Mastering Emacs blog]] on EShell.
-   
+
    I'd like to be able to fire up an EShell with a simple keystroke:
 #+begin_src emacs-lisp
   (global-set-key "\C-xt" 'eshell)
+#+end_src
+
+** Tabs
+   I hate tabs.
+#+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
+  (setq tab-width 4)
+#+end_src
+** Whitespace
+#+begin_src emacs-lisp
+  (global-set-key [f5] 'whitespace-mode)
+  (global-set-key [f6] 'whitespace-cleanup)
 #+end_src
 
 ** Yasnippet
@@ -267,17 +279,16 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
    :tangle:   yes
    :END:
    See [[http://code.google.com/p/yasnippet/]].  We have to download the distribution ourselves, because only the =yasnippet-bundle= package is available in ELPA.  We need to use the =yasnippet= package, however, if we want to add our own snippets.
-   
+
 #+begin_src emacs-lisp
   (add-to-list 'load-path (concat user-emacs-directory "ext/yasnippet-0.6.1c"))
-  
+
   (require 'yasnippet)
   (yas/initialize)
   (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
                                  (concat user-emacs-directory "ext/yasnippet-0.6.1c/snippets"))) ; default snippets
   (mapc 'yas/load-directory yas/root-directory)
 #+end_src
-
 * Clojure
   #+begin_src emacs-lisp
   (starter-kit-load "clojure")

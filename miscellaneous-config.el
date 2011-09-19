@@ -47,11 +47,6 @@
 (require 'bar-cursor)
 (bar-cursor-mode 1)
 
-;;; Tabs = bad
-(setq-default indent-tabs-mode nil)
-(setq tab-width 4)
-
-
 ;; Make Vagrant files behave like Ruby
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 

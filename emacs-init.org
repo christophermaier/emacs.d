@@ -49,6 +49,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       color-theme-zenburn
       durendal
       elein
+      haskell-mode
       highlight-parentheses
       magit
       paredit
@@ -425,6 +426,11 @@ Finally, wrap lines!
 
 #+end_src
 * Languages
+** Haskell
+#+begin_src emacs-lisp
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+#+end_src
 ** Lisps
 *** Paredit
     Structural editing of Lisp code is absolutely mandatory!
@@ -713,7 +719,6 @@ Calculate statistics for everything in the subtree
 * Stuff To Load
 - EShell
 - SuperCollider
-- Haskell
 - Erlang
 - Muse
 - JavaScript

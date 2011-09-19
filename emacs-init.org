@@ -65,6 +65,7 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       elein
       haskell-mode
       highlight-parentheses
+      hl-line+
       htmlize
       javascript
       js2-mode
@@ -182,6 +183,20 @@ Currently, I favor the =zenburn= color theme.
   (require 'color-theme-zenburn)
   (color-theme-zenburn)
 #+end_src
+** Highline
+   Highlight the current line; set a custom face, so we can recognize from the normal marking (selection).
+#+begin_src emacs-lisp
+(defface hi-line '((t (:background "#e8f2fe")))
+  "Face to use for `hl-line-face'." :group 'hl-line)
+(setq hl-line-face 'hl-line)
+#+end_src
+
+   Turn on line highlighting in all modes by default
+#+begin_src emacs-lisp
+  (global-hl-line-mode t)
+#+end_src
+
+
 ** Miscellaneous Configurations
    These are small tweaks that are globally useful, and not big or complex enough to warrant their own section.
 

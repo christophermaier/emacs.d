@@ -19,12 +19,6 @@
   (when buffer-file-name (save-buffer)))
 
 
-;; highlight the current line; set a custom face, so we can
-;; recognize from the normal marking (selection)
-(defface hi-line '((t (:background "#e8f2fe")))
-  "Face to use for `hl-line-face'." :group 'hl-line)
-(setq hl-line-face 'hl-line)
-(global-hl-line-mode t) ; turn it on for all modes by default
 
 
 (require 'bar-cursor)

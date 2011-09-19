@@ -1,41 +1,14 @@
-;; Load up all my config files and libraries
-;; This requires Emacs 23 because of user-emacs-directory
-(let ((default-directory user-emacs-directory))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
+;; Emacs 24 init.el
+;; Based on http://github.com/eschulte/emacs24-starter-kit
 
-;; ELPA
-(load "package")
-(package-initialize)
-(require 'elpa-config)
+;; I'm experimenting with keeping my Emacs configuration in literate Org files.
+;; This bootstraps the whole thing.
+;;
+;; NOTE: The name of the Org files is important!  When a file gets tangled,
+;; it gets the same base name as the Org file.  Thus, tangling Emacs Lisp from
+;; a file `init.org` would generate `init.el`, obliterating this file in the
+;; process!
 
-;; My various configuration files
-
-
-(require 'ac-config)
-(require 'yasnippet-config)
-(require 'miscellaneous-config)
-(require 'org-config)
-(require 'ido-config)
-;;(require 'smart-tab-config)
-;;(require 'autopair-config)
-(require 'color-theme-config)
-(require 'highlight-parens-config)
-(require 'clojure-config)
-(require 'slime-config)
-(require 'emacs-lisp-config)
-(require 'javascript-config)
-(require 'markdown-config)
-(require 'whitespace-config)
-(require 'magit-config)
-(require 'haskell-config)
-(require 'erlang-config)
-
-
-(require 'epresent-config)
-(require 'htmlize-config)
-(require 'graphviz-config)
-
-
-;; This should always be last
-(require 'custom-config)
+(org-babel-load-file
+ (expand-file-name "emacs-init.org"
+		   user-emacs-directory))

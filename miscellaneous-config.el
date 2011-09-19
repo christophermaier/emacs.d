@@ -20,46 +20,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Disable startup screen
-(setq inhibit-startup-screen t)
-
-;; I want to see line and column numbers
-(global-linum-mode 1) 
-(setq line-number-mode t)
-(setq column-number-mode t)
-(setq size-indication-mode t)
-
-;; Sets the Option key to act as a Meta key (on a Mac)
-;; ESC still acts as a Meta key, though
-;;(setq mac-option-modifier 'meta)
-
-;; Actually, I think I'm going to try using the Command key as Meta instead
-;; This is from http://www.emacswiki.org/emacs/MetaKeyProblems
-(setq mac-option-key-is-meta nil)
-(setq mac-command-key-is-meta t)
-(setq mac-command-modifier 'meta)
-
-;; Before setting Command to Meta, it was Super; a lot of the standard Mac shortcuts were thus bound to
-;; super key chords (e.g. Command-C for copy was s-c)
-;; By setting the Option key to Super, I can still use those standard shortcuts if I want, but have
-;; the Meta key (which I use way more often) in a more convenient place on the keyboard
-(setq mac-option-modifier 'super)
-
-;; End all files with a newline
-(setq require-final-newline t)
-
-;; backups and autosaves go to temp folder
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-
-(fset 'yes-or-no-p 'y-or-n-p)  		; enable y/n answers to yes/no
-
-;; revert buffers automatically when underlying files are changed externally
-(global-auto-revert-mode t)
-
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
 (defadvice switch-to-buffer (before save-buffer-now activate)
@@ -92,33 +52,7 @@
 (setq tab-width 4)
 
 
-;; Start up eshell with a simple keystroke
-(global-set-key "\C-xt" 'eshell)
-
-
 ;; Make Vagrant files behave like Ruby
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
-
-
-;; Display full path in title bar
-;; Stolen from http://eden.rutgers.edu/~mangesh/emacs.html... thanks, Google!
-(setq-default
- frame-title-format
- (list '((buffer-file-name " %f" (dired-directory
-	 			  dired-directory
-				  (revert-buffer-function " %b"
-				  ("%b - Dir:  " default-directory)))))))
-
-
-
-;; SMEX
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; old M-x
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
 
 (provide 'miscellaneous-config)

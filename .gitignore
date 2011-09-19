@@ -2,3 +2,9 @@
 *~
 
 elpa/*
+saveplace
+
+# Byproducts of literate processing
+*.html
+*.tex
+*.pdf

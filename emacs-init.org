@@ -1,0 +1,232 @@
+#+TITLE: Literate Emacs Configuration
+#+AUTHOR: Christopher Maier
+#+EMAIL: christopher.maier@gmail.com
+#+OPTIONS: toc:2 num:nil ^:nil 
+
+# table of contents down to level 2
+# no section numbers
+# don't use TeX syntax for sub and superscripts.
+# See http://orgmode.org/manual/Export-options.html
+
+* Basics
+- Load path etc.
+  #+srcname: load-paths
+  #+begin_src emacs-lisp
+    (add-to-list 'load-path user-emacs-directory)
+    ;;(setq autoload-file (concat starter-kit-dir "loaddefs.el"))
+    (setq package-user-dir (concat user-emacs-directory "elpa"))
+    ;; (setq custom-file (concat user-emacs-directory "custom.el"))
+  #+end_src
+
+- Universally-used Packages
+  
+  These are going to be used all the time, so they should be loaded at startup
+  #+begin_src emacs-lisp
+    (require 'cl)                           ; Common Lisp extensions
+    (require 'ffap)                         ; Find file at point
+  #+end_src
+* Initialization
+  :PROPERTIES:
+  :CUSTOM_ID: initialization
+  :END:
+
+List the ELPA archive repositories to scan.  Install a few packages by default
+#+begin_src emacs-lisp
+  (setq package-archives
+        '(("original"  . "http://tromey.com/elpa/")
+          ("gnu"       . "http://elpa.gnu.org/packages/")
+          ("marmalade" . "http://marmalade-repo.org/packages/")))
+  (package-initialize)
+
+  (defvar my-elpa-packages
+    (list 'smex
+          'color-theme)
+    "Libraries that should be installed by default.")
+    
+  (unless package-archive-contents
+    (package-refresh-contents))
+  
+  (dolist (package my-elpa-packages)
+    (unless (package-installed-p package)
+      (package-install package)))
+#+end_src
+
+* Default Configurations
+  
+  A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is: 
+
+#+begin_example
+C-c C-x p <RET> tangle <RET> no <RET>
+#+end_example
+
+** Miscellaneous Configurations
+   These are small tweaks that are globally useful, and not big or complex enough to warrant their own section.
+
+   There's no good reason to keep the startup screen.
+#+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+#+end_src
+
+   Make =C-n= add a newline at the end of a buffer.
+#+begin_src emacs-lisp
+  (setq next-line-add-newlines t)  
+#+end_src
+
+   Automatically making all script files with "shebang" lines executable is handy.
+#+begin_src emacs-lisp
+  (add-hook 'after-save-hook
+            'executable-make-buffer-file-executable-if-script-p)
+#+end_src
+
+   Whenever you delete a file, send it to the system Trash instead.  Note that this configuration currently assumes a Mac OS X system (but that's all I currently use, so no big deal yet).
+#+begin_src emacs-lisp
+  (setq delete-by-moving-to-trash t)
+  (setq trash-directory "~/.Trash")
+#+end_src
+
+   I want to see line and column numbers.
+
+#+begin_src emacs-lisp
+  (global-linum-mode 1) 
+  (setq line-number-mode t)
+  (setq column-number-mode t)
+  (setq size-indication-mode t)
+#+end_src
+
+   End all files with a newline:
+
+#+begin_src emacs-lisp
+  (setq require-final-newline t)
+#+end_src
+
+   It's much easier to type =y= or =n= instead of =yes= or =no= to answer questions.
+
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+   This reverts buffers automatically when the underlying files are changed by another process.  This is particularly handy when you use Git, for example; whenever you switch branches, your code buffers are kept in sync.
+
+#+begin_src emacs-lisp
+  (global-auto-revert-mode t)
+#+end_src
+
+   Send backups and autosaves to the temp folder instead of polluting the current directory.
+
+#+begin_src emacs-lisp
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
+#+end_src
+
+   Display full path in title bar.  Stolen from http://eden.rutgers.edu/~mangesh/emacs.html... thanks, Google!
+
+#+begin_src emacs-lisp
+  (setq-default frame-title-format
+   (list '((buffer-file-name " %f" (dired-directory
+                                    dired-directory
+                                    (revert-buffer-function " %b"
+                                    ("%b - Dir:  " default-directory)))))))
+#+end_src
+
+** Mac OS X Modifier Keys
+Most people on Mac OS X seem to set their Option key to act as Meta, like so:
+
+#+begin_src emacs-lisp :tangle no
+  (setq mac-option-modifier 'meta)
+#+end_src
+
+(Note that the =ESC= key always acts as Meta).
+
+At the expense of messing up my Apple muscle memory, however, I prefer using the Command key for Meta instead; it's just physically easier to get to.
+
+Currently I only use the [[http://www.emacsformacosx.com][GNU Emacs for Mac OS X]] stand-alone application.  This configuration is probably not complete for Terminal usage.
+
+Be sure to see [[http://www.emacswiki.org/emacs/MetaKeyProblems]] for more details on this.
+#+begin_src emacs-lisp
+  (setq mac-option-key-is-meta nil)
+  (setq mac-command-key-is-meta t)
+  (setq mac-command-modifier 'meta)
+#+end_src
+
+In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Command being mapped to the Super modifier key.  Thus, =yank= is bound to =s-v=, =save-buffer= to =s-s=, =isearch-forward= to =s-f=, and so on.  By setting the Option key to Super, I can still use those standard shortcuts if I want (just shift my thumb over one key), but have the Meta key (which I use way more often) in a more convenient place on the keyboard.
+
+#+begin_src emacs-lisp
+  (setq mac-option-modifier 'super)
+#+end_src
+
+** Ido Mode
+   Ido ("interactive do") is awesome.  Use it.
+
+   #+begin_src emacs-lisp
+     (require 'ido)
+     (ido-mode t)
+     (setq ido-enable-flex-matching t)
+   #+end_src
+** SavePlace
+   See [[http://www.emacswiki.org/emacs/SavePlace]].  The configuration below was taken from [[http://emacs-fu.blogspot.com/2009/05/remembering-your-position-in-file.html][this Emacs-Fu blog post]].
+#+begin_src emacs-lisp
+  (require 'saveplace)
+  (setq save-place-file (concat user-emacs-directory "saveplace"))
+  (setq-default save-place t)
+#+end_src
+** SMEX
+   See [[http://www.emacswiki.org/emacs/Smex]].
+#+begin_src emacs-lisp
+  (require 'smex)
+
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+#+end_src
+
+   In case you still want the old =M-x= command around, we can rebind it:
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+#+end_src
+
+** EShell: The Emacs Shell
+   Make sure to checkout this [[http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/][excellent post]] at the [[http://www.masteringemacs.org][Mastering Emacs blog]] on EShell.
+   
+   I'd like to be able to fire up an EShell with a simple keystroke:
+#+begin_src emacs-lisp
+  (global-set-key "\C-xt" 'eshell)
+#+end_src
+
+** Yasnippet
+   :PROPERTIES:
+   :tangle:   yes
+   :END:
+   See [[http://code.google.com/p/yasnippet/]].  We have to download the distribution ourselves, because only the =yasnippet-bundle= package is available in ELPA.  We need to use the =yasnippet= package, however, if we want to add our own snippets.
+   
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat user-emacs-directory "ext/yasnippet-0.6.1c"))
+  
+  (require 'yasnippet)
+  (yas/initialize)
+  (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
+                                 (concat user-emacs-directory "ext/yasnippet-0.6.1c/snippets"))) ; default snippets
+  (mapc 'yas/load-directory yas/root-directory)
+#+end_src
+
+* Stuff To Load
+- EShell
+- SuperCollider
+- Haskell
+- Clojure
+- Clojure Test Mode
+- CloureScript
+- Erlang
+- Muse
+- Ruby
+- Org
+- Magit
+- JavaScript
+- XML / HTML
+- Paredit
+- Common Lisp
+- SLIME
+- Elein
+- Durendal
+- Colors

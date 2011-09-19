@@ -52,6 +52,12 @@ List the ELPA archive repositories to scan.  Install a few packages by default
       highlight-parentheses
       magit
       paredit
+      rspec-mode
+      ruby-mode
+      ruby-test-mode
+      ruby-electric
+      ruby-compilation
+      rvm
       slime
       slime-repl
       smex)
@@ -489,6 +495,11 @@ Finally, wrap lines!
 
   (add-hook 'clojure-mode-hook 'clojure-hook-setup)
 #+end_src
+** Ruby
+   Make [[http://vagrantup.com/][Vagrant]] files behave like Ruby:
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+#+end_src
 * Org Mode
 #+begin_src emacs-lisp
   (setq org-directory "~/Dropbox/org")
@@ -705,7 +716,6 @@ Calculate statistics for everything in the subtree
 - Haskell
 - Erlang
 - Muse
-- Ruby
 - JavaScript
 - XML / HTML
 - Common Lisp

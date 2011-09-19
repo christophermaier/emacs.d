@@ -390,10 +390,23 @@ Finally, wrap lines!
                                  (concat user-emacs-directory "ext/yasnippet-0.6.1c/snippets"))) ; default snippets
   (mapc 'yas/load-directory yas/root-directory)
 #+end_src
-* Clojure
-  #+begin_src emacs-lisp
-  (starter-kit-load "clojure")
-  #+end_src
+* Languages
+** Lisps
+*** Paredit
+#+begin_src emacs-lisp
+  (require 'paredit)
+#+end_src
+*** Emacs Lisp
+It's nice to have Paredit in Emacs Lisp, no?
+#+begin_src emacs-lisp
+  (add-hook 'emacs-lisp-mode-hook
+            'enable-paredit-mode)
+
+#+end_src
+*** Clojure
+    #+begin_src emacs-lisp
+    (starter-kit-load "clojure")
+    #+end_src
 * Org Mode
 #+begin_src emacs-lisp
   (setq org-directory "~/Dropbox/org")

@@ -394,6 +394,10 @@ Finally, wrap lines!
 #+begin_src emacs-lisp
   (require 'paredit)
 #+end_src
+*** SLIME
+#+begin_src emacs-lisp
+  (global-set-key "\C-cs" 'slime-selector)
+#+end_src
 *** Emacs Lisp
     It's nice to have Paredit in Emacs Lisp, no?
 #+begin_src emacs-lisp

@@ -17,7 +17,6 @@
 
 
 
-(global-set-key "\C-cs" 'slime-selector)
 
 (require 'clojure-refactoring-mode)
 

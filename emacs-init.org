@@ -426,6 +426,24 @@ Finally, wrap lines!
 
 #+end_src
 * Languages
+** Erlang
+   On OS X, I install Erlang from source; a vanilla install goes here by default:
+#+begin_src emacs-lisp
+  (setq erlang-root-dir "/usr/local/lib/erlang")
+#+end_src
+
+   The current version is:
+#+begin_src emacs-lisp
+  (setq erlang-version "2.6.6.4")
+#+end_src
+
+   The rest of this configuration is taken from [[http://www.erlang.org/doc/apps/tools/erlang_mode_chapter.html][the Erlang documentation]].
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat erlang-root-dir "/lib/tools-" erlang-version "/emacs"))
+  (add-to-list 'exec-path (concat erlang-root-dir "/bin"))
+
+  (require 'erlang-start)
+#+end_src
 ** Haskell
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -719,7 +737,6 @@ Calculate statistics for everything in the subtree
 * Stuff To Load
 - EShell
 - SuperCollider
-- Erlang
 - Muse
 - JavaScript
 - XML / HTML

@@ -9,5 +9,8 @@ saveplace
 *.tex
 *.pdf
 
+# Generated ELisp files
+emacs-init.el
+
 # Don't need to keep SMEX listing around
 smex-items

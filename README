@@ -1,8 +1,10 @@
 My Emacs configuration, cobbled together from across the internet.
 
+It is written in literate programming style, using Org mode.  It works with the latest GNU Emacs for Mac OS X nightlies; it has not been tested on other versions, and will probably break.
+
 There are submodules in the tree now, so if you are cloning, you'll need to run
 
-     git submodule init
-     git submodule update
+    git submodule init
+    git submodule update
 
-for it to work.
+for it to work properly.

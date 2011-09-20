@@ -303,6 +303,20 @@ Currently, I favor the =zenburn= color theme.
   (if (fboundp 'menu-bar-mode)
       (menu-bar-mode -1))
 #+end_src
+
+** Smooth Scrolling
+   See [[http://www.emacswiki.org/emacs/SmoothScrolling]] or download the [[http://adamspiers.org/computing/elisp/smooth-scrolling.el][file]].
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (concat external-code-dir "smooth-scrolling"))
+
+  (require 'smooth-scrolling)
+
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  (setq scroll-step 1) ;; keyboard scroll one line at a time
+#+end_src
 ** Mac OS X Modifier Keys
 Most people on Mac OS X seem to set their Option key to act as Meta, like so:
 

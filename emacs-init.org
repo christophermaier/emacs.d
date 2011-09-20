@@ -84,7 +84,8 @@
       rvm
       slime
       slime-repl
-      smex)
+      smex
+      undo-tree)
     "Libraries that should be installed by default.")
 
   (unless package-archive-contents
@@ -317,6 +318,15 @@ Currently, I favor the =zenburn= color theme.
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
   (setq scroll-step 1) ;; keyboard scroll one line at a time
 #+end_src
+
+   * Undo Tree
+     See [[http://www.emacswiki.org/emacs/UndoTree]]
+#+begin_src emacs-lisp
+  (require 'undo-tree)
+  (global-undo-tree-mode)
+#+end_src
+
+
 ** Mac OS X Modifier Keys
 Most people on Mac OS X seem to set their Option key to act as Meta, like so:
 

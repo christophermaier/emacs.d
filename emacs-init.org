@@ -444,8 +444,7 @@ Currently, I favor the =zenburn= color theme.
    Finally, wrap lines!
 #+begin_src emacs-lisp
   (add-hook 'markdown-mode-hook
-            (lambda ()
-              (visual-line-mode +1)))
+            'turn-on-visual-line-mode)
 #+end_src
 
 ** Yasnippet
@@ -698,11 +697,7 @@ Currently, I favor the =zenburn= color theme.
 ** Hooks
    Use line wrap in Org mode buffers.
 #+begin_src emacs-lisp
-  (defun my-org-mode-hook ()
-    (progn
-      (visual-line-mode +1)))
-
-  (add-hook 'org-mode-hook 'my-org-mode-hook)
+  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 #+end_src
 
    Make Yasnippet template expansion work with the =tab= key in Org mode buffers.

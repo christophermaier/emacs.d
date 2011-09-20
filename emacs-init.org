@@ -16,7 +16,6 @@
     ;;(setq autoload-file (concat starter-kit-dir "loaddefs.el"))
     (setq package-user-dir (concat user-emacs-directory "elpa"))
     (setq external-code-dir (concat user-emacs-directory "ext/"))
-    ;; (setq custom-file (concat user-emacs-directory "custom.el"))
   #+end_src
 
 - Universally-used Packages

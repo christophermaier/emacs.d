@@ -14,9 +14,25 @@
   #+begin_src emacs-lisp
     (add-to-list 'load-path user-emacs-directory)
     ;;(setq autoload-file (concat starter-kit-dir "loaddefs.el"))
-    (setq package-user-dir (concat user-emacs-directory "elpa"))
-    (setq external-code-dir (concat user-emacs-directory "ext/"))
   #+end_src
+
+  Here are some functions that will make it easier to add the appropriate packages to the load path.
+#+begin_src emacs-lisp
+  (defun elpa-path (resource)
+    "Create a path to `resource` in the ELPA archive.
+    No leading slash, please."
+    (concat package-user-dir "/" resource))
+
+  (defun vendor-path (resource)
+    "Create a path to `resource` in the external code directory.
+    No leading slash, please."
+    (concat user-emacs-directory "ext/" resource))
+
+  (defun load-vendor-package (package)
+    "Adds the external vendor package to the load path.  All package paths should be relative to the \"ext\" directory.
+    No leading slash, please."
+    (add-to-list 'load-path (vendor-path package)))
+#+end_src
 
 - Universally-used Packages
 
@@ -110,7 +126,7 @@ C-c C-x p <RET> tangle <RET> no <RET>
    I'm not sure the best way to wire up the auto-complete dictionaries with an ELPA install.  For now, I'll just hard-code the path to the package files in my ELPA directory.
 #+begin_src emacs-lisp
   (add-to-list 'ac-dictionary-directories
-               (concat package-user-dir "/auto-complete-1.4.20110207/dict"))
+               (elpa-path "auto-complete-1.4.20110207/dict"))
 #+end_src
    Now, turn it on.
 #+begin_src emacs-lisp
@@ -258,7 +274,7 @@ Currently, I favor the =zenburn= color theme.
    See [[http://www.emacswiki.org/emacs/SmoothScrolling]] or download the [[http://adamspiers.org/computing/elisp/smooth-scrolling.el][file]].
 
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat external-code-dir "smooth-scrolling"))
+  (load-vendor-package "smooth-scrolling")
 
   (require 'smooth-scrolling)
 
@@ -461,7 +477,7 @@ Finally, wrap lines!
    See [[http://code.google.com/p/yasnippet/]].  We have to download the distribution ourselves, because only the =yasnippet-bundle= package is available in ELPA.  We need to use the =yasnippet= package, however, if we want to add our own snippets.
 
 #+begin_src emacs-lisp
-  (setq yasnippet-source-dir (concat external-code-dir "yasnippet-0.6.1c/"))
+  (setq yasnippet-source-dir (vendor-path "yasnippet-0.6.1c/"))
   (add-to-list 'load-path yasnippet-source-dir)
 
   (require 'yasnippet)
@@ -520,13 +536,12 @@ Finally, wrap lines!
 **** AutoComplete in SLIME
      Steve Purcell made [[https://github.com/purcell/ac-slime][this snazzy add-on]] for AutoComplete to use SLIME symbols.
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat external-code-dir "ac-slime"))
+  (load-vendor-package "ac-slime")
 
   (require 'ac-slime)
   (add-hook 'slime-mode-hook 'set-up-slime-ac)
   (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 #+end_src
-
 *** Emacs Lisp
     It's nice to have Paredit in Emacs Lisp, no?
 #+begin_src emacs-lisp
@@ -572,7 +587,7 @@ Finally, wrap lines!
 **** Miscellaneous
      [[https://github.com/gstamp/align-cljlet][align-cljlet]] is a neat little package that allows you to neatly align entries in Clojure bindings and literal hashes.
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat external-code-dir "align-cljlet"))
+  (load-vendor-package "align-cljlet")
   (require 'align-cljlet)
 
   (define-key clojure-mode-map (kbd "C-c C-c a") 'align-cljlet)
@@ -587,7 +602,7 @@ Finally, wrap lines!
 
    This requires Kyle Machulis' [[https://github.com/qdot/scel][scel]] library.  Currently I'm on his [[https://github.com/qdot/scel/tree/qdot-stuff/][qdot-stuff]] branch, which incorporates Sam Aaron's fixes, as well as a few others.  See [[http://sam.aaron.name/2010/02/09/hooking-supercollider-up-to-emacs-on-os-x.html][Sam Aaron's tutorial]] for how to set all this up on a Mac.
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat external-code-dir "scel/el"))
+  (load-vendor-package "scel/el")
 
   (require 'sclang)
    (custom-set-variables

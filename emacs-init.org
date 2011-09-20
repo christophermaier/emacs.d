@@ -53,7 +53,6 @@
       (setq exec-path (split-string path-from-shell path-separator))))
   (if window-system (set-exec-path-from-shell-PATH))
 #+end_src
-
 * ELPA
   List the ELPA repositories to scan.
 #+begin_src emacs-lisp
@@ -68,7 +67,7 @@
   (package-initialize)
 #+end_src
 
-  Here is a list of packages in want installed.  If they're not already here, install them now.
+  Here is a list of packages to install.  If they're not already here, install them now.
 #+begin_src emacs-lisp
   (defvar my-elpa-packages
     '(auto-complete
@@ -136,7 +135,6 @@ C-c C-x p <RET> tangle <RET> no <RET>
 #+begin_src emacs-lisp
   (setq ac-dwim t)
 #+end_src
-
 ** Colors
 #+begin_src emacs-lisp
   (require 'color-theme)
@@ -159,7 +157,6 @@ Currently, I favor the =zenburn= color theme.
 #+begin_src emacs-lisp
   (global-hl-line-mode t)
 #+end_src
-
 ** Miscellaneous Configurations
    These are small tweaks that are globally useful, and not big or complex enough to warrant their own section.
 
@@ -186,7 +183,6 @@ Currently, I favor the =zenburn= color theme.
 #+end_src
 
    I want to see line and column numbers.
-
 #+begin_src emacs-lisp
   (global-linum-mode 1)
   (setq line-number-mode t)
@@ -194,26 +190,22 @@ Currently, I favor the =zenburn= color theme.
   (setq size-indication-mode t)
 #+end_src
 
-   End all files with a newline:
-
+   End all files with a newline.
 #+begin_src emacs-lisp
   (setq require-final-newline t)
 #+end_src
 
    It's much easier to type =y= or =n= instead of =yes= or =no= to answer questions.
-
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
    This reverts buffers automatically when the underlying files are changed by another process.  This is particularly handy when you use Git, for example; whenever you switch branches, your code buffers are kept in sync.
-
 #+begin_src emacs-lisp
   (global-auto-revert-mode t)
 #+end_src
 
    Send backups and autosaves to the temp folder instead of polluting the current directory.
-
 #+begin_src emacs-lisp
   (setq backup-directory-alist
         `((".*" . ,temporary-file-directory)))
@@ -222,7 +214,6 @@ Currently, I favor the =zenburn= color theme.
 #+end_src
 
    Display full path in title bar.  Stolen from http://eden.rutgers.edu/~mangesh/emacs.html... thanks, Google!
-
 #+begin_src emacs-lisp
   (setq-default frame-title-format
    (list '((buffer-file-name " %f" (dired-directory
@@ -284,42 +275,37 @@ Currently, I favor the =zenburn= color theme.
   (setq scroll-step 1) ;; keyboard scroll one line at a time
 #+end_src
 
-   * Undo Tree
+** Undo Tree
      See [[http://www.emacswiki.org/emacs/UndoTree]]
 #+begin_src emacs-lisp
   (require 'undo-tree)
   (global-undo-tree-mode)
 #+end_src
-
 ** Mac OS X Modifier Keys
-Most people on Mac OS X seem to set their Option key to act as Meta, like so:
-
+   Most people on Mac OS X seem to set their Option key to act as Meta, like so:
 #+begin_src emacs-lisp :tangle no
   (setq mac-option-modifier 'meta)
 #+end_src
 
-(Note that the =ESC= key always acts as Meta).
+   (Note that the =ESC= key always acts as Meta).
 
-At the expense of messing up my Apple muscle memory, however, I prefer using the Command key for Meta instead; it's just physically easier to get to.
+   At the expense of messing up my Apple muscle memory, however, I prefer using the Command key for Meta instead; it's just physically easier to get to.
 
-Currently I only use the [[http://www.emacsformacosx.com][GNU Emacs for Mac OS X]] stand-alone application.  This configuration is probably not complete for Terminal usage.
+   Currently I only use the [[http://www.emacsformacosx.com][GNU Emacs for Mac OS X]] stand-alone application.  This configuration is probably not complete for Terminal usage.
 
-Be sure to see [[http://www.emacswiki.org/emacs/MetaKeyProblems]] for more details on this.
+   Be sure to see [[http://www.emacswiki.org/emacs/MetaKeyProblems]] for more details on this.
 #+begin_src emacs-lisp
   (setq mac-option-key-is-meta nil)
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
 #+end_src
 
-In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Command being mapped to the Super modifier key.  Thus, =yank= is bound to =s-v=, =save-buffer= to =s-s=, =isearch-forward= to =s-f=, and so on.  By setting the Option key to Super, I can still use those standard shortcuts if I want (just shift my thumb over one key), but have the Meta key (which I use way more often) in a more convenient place on the keyboard.
-
+   In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Command being mapped to the Super modifier key.  Thus, =yank= is bound to =s-v=, =save-buffer= to =s-s=, =isearch-forward= to =s-f=, and so on.  By setting the Option key to Super, I can still use those standard shortcuts if I want (just shift my thumb over one key), but have the Meta key (which I use way more often) in a more convenient place on the keyboard.
 #+begin_src emacs-lisp
   (setq mac-option-modifier 'super)
 #+end_src
-
 ** Ido Mode
    Ido ("interactive do") is awesome.  Use it.
-
    #+begin_src emacs-lisp
      (require 'ido)
      (ido-mode t)
@@ -358,7 +344,6 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 #+end_src
-
 ** EShell: The Emacs Shell
    Make sure to checkout this [[http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/][excellent post]] at the [[http://www.masteringemacs.org][Mastering Emacs blog]] on EShell.
 
@@ -366,26 +351,23 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 #+begin_src emacs-lisp
   (global-set-key "\C-xt" 'eshell)
 #+end_src
-
 ** Autopair
    :PROPERTIES:
    :tangle:   yes
    :END:
    Who has time to manually type closing parentheses?  See [[http://code.google.com/p/autopair/]] for more.
-
    #+begin_src emacs-lisp
      (require 'autopair)
    #+end_src
 
    It's safe to enable =autopair= globally, because it defers to =paredit-mode= when the latter is enabled; see http://www.emacswiki.org/emacs/AutoPairs#toc4
-
 #+begin_src emacs-lisp
   (autopair-global-mode)
 #+end_src
 
    Autopair doesn't seem to work properly in a few modes, so we'll disable it in those situations.
 
-    Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic.  This fix worked pre-Emacs 24.
+   Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic.  This fix worked pre-Emacs 24.
 #+begin_src emacs-lisp :tangle no
   (add-hook 'sldb-mode-hook
             #'(lambda ()
@@ -403,7 +385,7 @@ In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Comm
 
    Apparently highlight-parentheses-mode doesn't provide a way to programmatically activate it (you need to do it manually with =M-x highlight-parentheses-mode=) This is a pain, so we'll provide such a way, and go ahead and activate it globally.
 
-Stolen from [[http://nflath.com/2010/02/emacs-minor-modes-mic-paren-pager-dired-isearch-whichfunc-winpoint-and-highlight-parentheses/][here]].
+   Stolen from [[http://nflath.com/2010/02/emacs-minor-modes-mic-paren-pager-dired-isearch-whichfunc-winpoint-and-highlight-parentheses/][here]].
 
 #+begin_src emacs-lisp
   (defun turn-on-highlight-parentheses-mode ()
@@ -415,16 +397,12 @@ Stolen from [[http://nflath.com/2010/02/emacs-minor-modes-mic-paren-pager-dired-
   (global-highlight-parentheses-mode)
 #+end_src
 
-Since the default colors for highlight-parentheses-mode are kind of terrible, and I'd prefer
-"rainbow parens", we'll override the colors.  Stolen from [[http://stackoverflow.com/questions/2413047/how-do-i-get-rainbow-parentheses-in-emacs/2413472#2413472][this StackOverflow post]].
-
+   Since the default colors for highlight-parentheses-mode are kind of terrible, and I'd prefer "rainbow parens", we'll override the colors.  Stolen from [[http://stackoverflow.com/questions/2413047/how-do-i-get-rainbow-parentheses-in-emacs/2413472#2413472][this StackOverflow post]].
 #+begin_src emacs-lisp
   (setq hl-paren-colors
         '("orange1" "yellow1" "greenyellow" "green1"
           "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
-
 #+end_src
-
 ** Tabs
    I hate tabs.
 #+begin_src emacs-lisp
@@ -442,28 +420,28 @@ Since the default colors for highlight-parentheses-mode are kind of terrible, an
   (add-hook 'before-save-hook 'whitespace-cleanup)
 #+end_src
 ** Markdown
-You'll need to have the =markdown= Perl script installed somewhere on your path.  Mine's at =/usr/bin/markdown=.  It also needs to be named =markdown=, since that's what =markdown-mode= looks for by default; that's configurable, though.
+   You'll need to have the =markdown= Perl script installed somewhere on your path.  Mine's at =/usr/bin/markdown=.  It also needs to be named =markdown=, since that's what =markdown-mode= looks for by default; that's configurable, though.
 
-Download markdown at http://daringfireball.net/projects/markdown/
+   Download markdown at http://daringfireball.net/projects/markdown/
 
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (concat external-code-dir "markdown"))
+  (load-vendor-package "markdown")
   (require 'markdown-mode)
 #+end_src
 
-There's a bunch of different extensions people use for Markdown docs; register them all.
+   There's a bunch of different extensions people use for Markdown docs; register them all.
 #+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 #+end_src
 
-I also want to treat files named "README" as Markdown files (useful for GitHub projects).
+   I also want to treat files named "README" as Markdown files (useful for GitHub projects).
 #+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
 #+end_src
 
-Finally, wrap lines!
+   Finally, wrap lines!
 #+begin_src emacs-lisp
   (add-hook 'markdown-mode-hook
             (lambda ()
@@ -485,7 +463,6 @@ Finally, wrap lines!
   (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
                                  (concat yasnippet-source-dir "snippets"))) ; default snippets
   (mapc 'yas/load-directory yas/root-directory)
-
 #+end_src
 * Languages
 ** Erlang
@@ -579,7 +556,7 @@ Finally, wrap lines!
   (define-key clojure-mode-map [M-f8] 'elein-reswank)
 #+end_src
 **** SLIME
-     Make it pretty
+     Make it pretty.
 #+begin_src emacs-lisp :tangle no
   (add-hook 'slime-repl-mode-hook
             'clojure-mode-font-lock-setup)
@@ -626,7 +603,6 @@ Finally, wrap lines!
   (global-set-key (kbd "<f9>") 'org-mobile-push)
   (global-set-key (kbd "S-<f9>") 'org-mobile-pull)
 #+end_src
-
 ** Agenda
 *** Agenda Files
     Right now, I assume all files are fair game for the agenda.  This may need to be pruned, however.
@@ -688,7 +664,6 @@ Finally, wrap lines!
           ("We" "Work" agenda ""
            ((org-agenda-files '("~/Dropbox/org/work.org"))
             (org-agenda-sorting-strategy '(priority-down effort-down))))))
-
 #+end_src
 *** Capture Templates
 #+begin_src emacs-lisp
@@ -721,7 +696,7 @@ Finally, wrap lines!
            "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)))
 #+end_src
 ** Hooks
-Use line wrap in Org mode buffers.
+   Use line wrap in Org mode buffers.
 #+begin_src emacs-lisp
   (defun my-org-mode-hook ()
     (progn
@@ -730,7 +705,7 @@ Use line wrap in Org mode buffers.
   (add-hook 'org-mode-hook 'my-org-mode-hook)
 #+end_src
 
-Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
+   Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook
             (let ((original-command (lookup-key org-mode-map [tab])))
@@ -739,7 +714,6 @@ Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
                        '(apply ,original-command))
                  (local-set-key [tab] 'yas/expand))))
 #+end_src
-
 ** Key Bindings
 #+begin_src emacs-lisp
   (global-set-key "\C-ca" 'org-agenda)
@@ -758,6 +732,7 @@ Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
   (setq org-todo-keywords
         '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/!)" "APPT(a)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(f@)")))
 #+end_src
+
     I don't want to do logging and processing when all I want to do is cycle a state.
 #+begin_src emacs-lisp
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -787,12 +762,12 @@ Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
   (setq org-src-fontify-natively t)
 #+end_src
 *** Miscellaneous
-Habit mode is pretty excellent.
+    Habit mode is pretty excellent.
 #+begin_src emacs-lisp
   (add-to-list 'org-modules 'org-habit)
 #+end_src
 
-Calculate statistics for everything in the subtree
+    Calculate statistics for everything in the subtree
 #+begin_src emacs-lisp
   (setq org-hierarchical-todo-statistics nil)
 #+end_src
@@ -827,8 +802,3 @@ Calculate statistics for everything in the subtree
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
 #+end_src
-* Stuff To Load
-- EShell
-- JavaScript
-- XML / HTML
-- Common Lisp

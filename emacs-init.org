@@ -269,7 +269,40 @@ Currently, I favor the =zenburn= color theme.
                                     (revert-buffer-function " %b"
                                     ("%b - Dir:  " default-directory)))))))
 #+end_src
-:
+
+   Make keys from multi-key commands appear quickly in the echo area.  The default of 1 second is just too long.
+#+begin_src emacs-lisp
+  (setq echo-keystrokes 0.1)
+#+end_src
+
+   Show the most fontification possible.
+#+begin_src emacs-lisp
+  (setq font-lock-maximum-decoration t)
+#+end_src
+
+   UTF-8 for everybody.
+#+begin_src emacs-lisp
+  (setq locale-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+#+end_src
+
+   Use a visible bell instead of an audible one... my God, what an annoying sound!
+#+begin_src emacs-lisp
+  (setq visible-bell t)
+#+end_src
+
+   Get rid of unnecessary window chrome.
+#+begin_src emacs-lisp
+  (if (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))
+  (if (fboundp 'tool-bar-mode)
+      (tool-bar-mode -1))
+  (if (fboundp 'menu-bar-mode)
+      (menu-bar-mode -1))
+#+end_src
 ** Mac OS X Modifier Keys
 Most people on Mac OS X seem to set their Option key to act as Meta, like so:
 

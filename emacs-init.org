@@ -96,60 +96,6 @@
       (package-install package)))
 
 #+end_src
-
-This function is taken from Eric Schulte's [[https://github.com/eschulte/emacs24-starter-kit][Emacs 24 Starter Kit]].
-#+srcname: starter-kit-load
-  #+begin_src emacs-lisp
-    (defun starter-kit-load (file &optional header-or-tag)
-      "Load configuration from other emacs-*.org files.
-    If the optional argument is the id of a subtree then only
-    configuration from within that subtree will be loaded.  If it is
-    not an id then it will be interpreted as a tag, and only subtrees
-    marked with the given tag will be loaded.
-
-    For example, to load all of starter-kit-lisp.org simply
-    add (starter-kit-load \"lisp\") to your configuration.
-
-    To load only the 'window-system' config from
-    starter-kit-misc-recommended.org add
-     (starter-kit-load \"misc-recommended\" \"window-system\")
-    to your configuration."
-      (let ((file (expand-file-name (if (string-match "emacs-.+\.org" file)
-                                        file
-                                      (format "emacs-%s.org" file))
-                                    user-emacs-directory)))
-        (org-babel-load-file
-         (if header-or-tag
-             (let* ((base (file-name-nondirectory file))
-                    (dir  (file-name-directory file))
-                    (partial-file (expand-file-name
-                                   (concat "." (file-name-sans-extension base)
-                                           ".part." header-or-tag ".org")
-                                   dir)))
-               (unless (file-exists-p partial-file)
-                 (with-temp-file partial-file
-                   (insert
-                    (with-temp-buffer
-                      (insert-file-contents file)
-                      (save-excursion
-                        (condition-case nil ;; collect as a header
-                            (progn
-                              (org-link-search (concat"#"header-or-tag))
-                              (org-narrow-to-subtree)
-                              (buffer-string))
-                          (error ;; collect all entries with as tags
-                           (let (body)
-                             (org-map-entries
-                              (lambda ()
-                                (save-restriction
-                                  (org-narrow-to-subtree)
-                                  (setq body (concat body "\n" (buffer-string)))))
-                              header-or-tag)
-                             body))))))))
-               partial-file)
-           file))))
-  #+end_src
-
 * Default Configurations
 
   A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is:

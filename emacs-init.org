@@ -117,6 +117,17 @@
 #+begin_example
 C-c C-x p <RET> tangle <RET> no <RET>
 #+end_example
+** Fullscreen
+   If you build Emacs for Mac OS X using [[http://mxcl.github.com/homebrew/][Homebrew]], you'll get the ability to run it fullscreen (the Emacs 24 nightlies from [[http://www.emacsformacosx.com/]] don't have this capability yet, for some reason).
+
+Here's the Homebrew command:
+#+begin_src sh :tangle no
+  brew install emacs --cocoa --use-git-head --HEAD
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f10>") 'ns-toggle-fullscreen)
+#+end_src
 ** AutoComplete
    See [[http://cx4a.org/software/auto-complete/][the documentation]] and [[https://github.com/m2ym/auto-complete][the code]].
 #+begin_src emacs-lisp

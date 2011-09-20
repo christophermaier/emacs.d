@@ -583,13 +583,10 @@ Finally, wrap lines!
 ** SuperCollider
    [[http://supercollider.sourceforge.net/][SuperCollider]] is a music synthesis programming language.
 
-   This requires Kyle Machulis' [[https://github.com/qdot/scel][scel]] library.  See [[http://sam.aaron.name/2010/02/09/hooking-supercollider-up-to-emacs-on-os-x.html][Sam Aaron's tutorial]] for how to set all this up on a Mac.  Currently I'm on his [[https://github.com/qdot/scel/tree/qdot-stuff/][qdot-stuff]] branch, which incorporates Sam Aaron's fixes, as well as a few others.
-
+   This requires Kyle Machulis' [[https://github.com/qdot/scel][scel]] library.  Currently I'm on his [[https://github.com/qdot/scel/tree/qdot-stuff/][qdot-stuff]] branch, which incorporates Sam Aaron's fixes, as well as a few others.  See [[http://sam.aaron.name/2010/02/09/hooking-supercollider-up-to-emacs-on-os-x.html][Sam Aaron's tutorial]] for how to set all this up on a Mac.
 #+begin_src emacs-lisp
   (add-to-list 'load-path (concat external-code-dir "scel/el"))
-#+end_src
 
-#+begin_src emacs-lisp
   (require 'sclang)
    (custom-set-variables
     '(sclang-auto-scroll-post-buffer t)

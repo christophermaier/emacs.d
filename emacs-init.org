@@ -94,7 +94,6 @@
   (dolist (package my-elpa-packages)
     (unless (package-installed-p package)
       (package-install package)))
-
 #+end_src
 * Default Configurations
 
@@ -144,7 +143,6 @@ Currently, I favor the =zenburn= color theme.
 #+begin_src emacs-lisp
   (global-hl-line-mode t)
 #+end_src
-
 
 ** Miscellaneous Configurations
    These are small tweaks that are globally useful, and not big or complex enough to warrant their own section.
@@ -271,7 +269,6 @@ Currently, I favor the =zenburn= color theme.
   (require 'undo-tree)
   (global-undo-tree-mode)
 #+end_src
-
 
 ** Mac OS X Modifier Keys
 Most people on Mac OS X seem to set their Option key to act as Meta, like so:

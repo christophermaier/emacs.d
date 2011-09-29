@@ -493,6 +493,8 @@ Currently, I favor the =zenburn= color theme.
   (add-to-list 'load-path (concat erlang-root-dir "/lib/tools-" erlang-version "/emacs"))
   (add-to-list 'exec-path (concat erlang-root-dir "/bin"))
 
+  (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
+  (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
   (require 'erlang-start)
 #+end_src
 

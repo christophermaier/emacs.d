@@ -433,9 +433,10 @@ Currently, I favor the =zenburn= color theme.
   (add-hook 'before-save-hook 'whitespace-cleanup)
 #+end_src
 ** Markdown
-   You'll need to have the =markdown= Perl script installed somewhere on your path.  Mine's at =/usr/bin/markdown=.  It also needs to be named =markdown=, since that's what =markdown-mode= looks for by default; that's configurable, though.
-
-   Download markdown at http://daringfireball.net/projects/markdown/
+   You'll need to have the =markdown= installed and on your path.  You can [[http://daringfireball.net/projects/markdown][download markdown]] manually, or just use Homebrew:
+#+begin_src sh :tangle no
+  brew install markdown
+#+end_src
 
 #+begin_src emacs-lisp
   (load-vendor-package "markdown")

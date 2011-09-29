@@ -841,6 +841,13 @@ Currently, I favor the =zenburn= color theme.
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 #+end_src
+* Registers
+  Jump to files with a simple =C-x r j <register>=.
+#+begin_src emacs-lisp
+  (set-register ?i `(file . ,(concat user-emacs-directory "emacs-init.org")))
+  (set-register ?r `(file . "~/.bashrc"))
+#+end_src
+
 * Customizations
   Don't pollute =init.el= with GUI-made customizations.
 #+begin_src emacs-lisp

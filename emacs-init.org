@@ -509,6 +509,28 @@ Currently, I favor the =zenburn= color theme.
   (add-hook 'erlang-mode-hook 'autopair-on
 #+end_src
 
+
+   Set up Flymake to catch syntax errors and such.  This was taken from [[http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html#sec16][Alex Ott's excellent tutorial on setting up Emacs for Erlang]].
+#+begin_src emacs-lisp
+  (require 'flymake)
+
+  (defun flymake-erlang-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list (concat user-emacs-directory "bin/eflymake") (list local-file))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.erl\\'" flymake-erlang-init))
+
+  (defun turn-on-flymake-mode()
+    (flymake-mode 1))
+
+  (add-hook 'erlang-mode-hook 'turn-on-flymake-mode)
+#+end_src
+
 ** Haskell
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)

@@ -473,6 +473,7 @@ Currently, I favor the =zenburn= color theme.
 
   (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
   (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
+
   (require 'erlang-start)
 #+end_src
 

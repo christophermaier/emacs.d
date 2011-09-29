@@ -644,6 +644,12 @@ Currently, I favor the =zenburn= color theme.
 
   (setq org-agenda-include-diary nil)
 #+end_src
+
+    Habit mode is pretty excellent.
+#+begin_src emacs-lisp
+  (add-to-list 'org-modules 'org-habit)
+#+end_src
+
 *** Custom agenda specifications.
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
@@ -785,11 +791,6 @@ Currently, I favor the =zenburn= color theme.
   (setq org-src-fontify-natively t)
 #+end_src
 *** Miscellaneous
-    Habit mode is pretty excellent.
-#+begin_src emacs-lisp
-  (add-to-list 'org-modules 'org-habit)
-#+end_src
-
     Calculate statistics for everything in the subtree
 #+begin_src emacs-lisp
   (setq org-hierarchical-todo-statistics nil)

@@ -371,7 +371,9 @@ Currently, I favor the =zenburn= color theme.
      (require 'autopair)
    #+end_src
 
-   It's safe to enable =autopair= globally, because it defers to =paredit-mode= when the latter is enabled; see http://www.emacswiki.org/emacs/AutoPairs#toc4
+   It's safe to enable =autopair= globally, because it defers to =paredit-mode= when the latter is enabled; see http://www.emacswiki.org/emacs/AutoPairs#toc4.
+
+   _NOTE_: For some reason this doesn't appear to be working:
 #+begin_src emacs-lisp
   (autopair-global-mode)
 #+end_src
@@ -493,6 +495,18 @@ Currently, I favor the =zenburn= color theme.
 
   (require 'erlang-start)
 #+end_src
+
+   Add a hook for autopair mode.
+#+begin_src emacs-lisp
+  (add-hook 'erlang-mode-hook
+            (lambda () (autopair-mode +1)))
+#+end_src
+
+   (For some reason, using the proper function doesn't seem to work)
+#+begin_src emacs-lisp :tangle no
+  (add-hook 'erlang-mode-hook 'autopair-on
+#+end_src
+
 ** Haskell
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)

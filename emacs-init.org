@@ -292,6 +292,29 @@ Currently, I favor the =zenburn= color theme.
   (require 'undo-tree)
   (global-undo-tree-mode)
 #+end_src
+** Mac OS X Modifier Keys
+   Most people on Mac OS X seem to set their Option key to act as Meta, like so:
+#+begin_src emacs-lisp :tangle no
+  (setq mac-option-modifier 'meta)
+#+end_src
+
+   (Note that the =ESC= key always acts as Meta).
+
+   At the expense of messing up my Apple muscle memory, however, I prefer using the Command key for Meta instead; it's just physically easier to get to.
+
+   Currently I only use the [[http://www.emacsformacosx.com][GNU Emacs for Mac OS X]] stand-alone application.  This configuration is probably not complete for Terminal usage.
+
+   Be sure to see [[http://www.emacswiki.org/emacs/MetaKeyProblems]] for more details on this.
+#+begin_src emacs-lisp
+  (setq mac-option-key-is-meta nil)
+  (setq mac-command-key-is-meta t)
+  (setq mac-command-modifier 'meta)
+#+end_src
+
+   In GNU Emacs on Mac OS X, many commands have Mac-like keybindings, based on Command being mapped to the Super modifier key.  Thus, =yank= is bound to =s-v=, =save-buffer= to =s-s=, =isearch-forward= to =s-f=, and so on.  By setting the Option key to Super, I can still use those standard shortcuts if I want (just shift my thumb over one key), but have the Meta key (which I use way more often) in a more convenient place on the keyboard.
+#+begin_src emacs-lisp
+  (setq mac-option-modifier 'super)
+#+end_src
 ** Ido Mode
    Ido ("interactive do") is awesome.  Use it.
    #+begin_src emacs-lisp

@@ -7,3 +7,6 @@
 [submodule "ext/align-cljlet"]
 	path = ext/align-cljlet
 	url = git://github.com/gstamp/align-cljlet.git
+[submodule "ext/distel"]
+	path = ext/distel
+	url = git://github.com/massemanet/distel.git

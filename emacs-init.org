@@ -533,6 +533,19 @@ Currently, I favor the =zenburn= color theme.
   (add-hook 'erlang-mode-hook 'turn-on-flymake-mode)
 #+end_src
 
+*** Distel Mode
+    [[https://github.com/massemanet/distel][Distel]] is like SLIME for Erlang.
+#+begin_src emacs-lisp
+  (load-vendor-package "distel/elisp")
+  (require 'distel)
+  (distel-setup)
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq inferior-erlang-machine-options '("-sname" "emacs"))
+#+end_src
+
+
 ** Haskell
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)

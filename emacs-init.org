@@ -87,6 +87,7 @@
       javascript
       js2-mode
       magit
+      mode-compile
       muse
       nxml-mode
       paredit

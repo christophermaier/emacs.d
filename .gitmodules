@@ -10,3 +10,6 @@
 [submodule "ext/distel"]
 	path = ext/distel
 	url = git://github.com/massemanet/distel.git
+[submodule "ext/chef-mode"]
+	path = ext/chef-mode
+	url = git://github.com/mpasternacki/chef-mode.git

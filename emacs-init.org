@@ -438,6 +438,14 @@ Currently, I favor the =zenburn= color theme.
 #+begin_src emacs-lisp
   (add-hook 'before-save-hook 'whitespace-cleanup)
 #+end_src
+
+   I'd like to see all whitespace by default in Makefiles, though.
+#+begin_src emacs-lisp
+  (add-hook 'makefile-mode-hook
+            (lambda ()
+              (whitespace-mode t)))
+#+end_src
+
 ** Markdown
    You'll need to have the =markdown= installed and on your path.  You can [[http://daringfireball.net/projects/markdown][download markdown]] manually, or just use Homebrew:
 #+begin_src sh :tangle no

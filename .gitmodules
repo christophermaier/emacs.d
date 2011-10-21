@@ -13,3 +13,6 @@
 [submodule "ext/chef-mode"]
 	path = ext/chef-mode
 	url = git://github.com/mpasternacki/chef-mode.git
+[submodule "ext/minimap"]
+	path = ext/minimap
+	url = git://randomsample.de/minimap.git

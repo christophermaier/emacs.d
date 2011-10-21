@@ -491,6 +491,15 @@ Currently, I favor the =zenburn= color theme.
   (turn-on-chef-mode)
 #+end_src
 
+
+** MiniMap
+   See [[http://www.emacswiki.org/emacs/MiniMap]].
+#+begin_src emacs-lisp
+  (load-vendor-package "minimap")
+  (require 'minimap)
+#+end_src
+
+
 * Languages
 ** Erlang
    On OS X, I install Erlang from source; a vanilla install goes here by default:

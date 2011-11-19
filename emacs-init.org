@@ -702,6 +702,17 @@ Currently, I favor the =zenburn= color theme.
   (put 'run 'scheme-indent-function 2)
 #+end_src
 
+** Prolog
+   Adding an alternative Prolog mode from [[http://bruda.ca/emacs-prolog/][here]].
+   #+begin_src emacs-lisp
+     (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+     (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+     (autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+     (setq prolog-system 'swi)
+     (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
+                                     ("\\.m$" . mercury-mode))
+                                   auto-mode-alist))
+   #+end_src
 
 ** Ruby
    Make [[http://vagrantup.com/][Vagrant]] files behave like Ruby:

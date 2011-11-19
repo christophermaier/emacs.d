@@ -734,6 +734,12 @@ Currently, I favor the =zenburn= color theme.
             (lambda ()
               (ruby-electric-mode t)))
 #+end_src
+
+  =inf-ruby= always echoes the command... that's annoying.
+#+begin_src emacs-lisp
+  (setq comint-process-echoes t)
+#+end_src
+
 ** SuperCollider
    [[http://supercollider.sourceforge.net/][SuperCollider]] is a music synthesis programming language.
 

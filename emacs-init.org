@@ -522,6 +522,13 @@ Currently, I favor the =zenburn= color theme.
   (require 'minimap)
 #+end_src
 
+** Sizing
+   #+begin_src emacs-lisp
+      (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+      (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+      (global-set-key (kbd "S-C-<down>") 'shrink-window)
+      (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+   #+end_src
 
 * Languages
 ** Erlang

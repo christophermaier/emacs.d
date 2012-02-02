@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Create a new Erlang module
+# key: module
+# --
+%% -*- erlang-indent-level: 4;indent-tabs-mode: nil; fill-column: 92-*-
+%% ex: ts=4 sw=4 et
+%% @author `user-full-name` <`user-mail-address`>
+%% @copyright `(calendar-extract-year (calendar-current-date))` `(getenv "ORGANIZATION")`
+
+-module(`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`).
+
+$0

@@ -16,3 +16,6 @@
 [submodule "ext/minimap"]
 	path = ext/minimap
 	url = git://randomsample.de/minimap.git
+[submodule "ext/eflymake"]
+	path = ext/eflymake
+	url = https://github.com/retnuh/eflymake

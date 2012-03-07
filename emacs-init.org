@@ -665,27 +665,41 @@ Currently, I favor the =zenburn= color theme.
   (define-key clojure-mode-map (kbd "C-c C-c a") 'align-cljlet)
 #+end_src
 *** Scheme
-    Instructions for running [[http://www.scheme.com/petitechezscheme.html][Petite Chez Scheme]] through Emacs from [[http://www.cs.indiana.edu/chezscheme/emacs/][Indiana University]] (and they should know!).
+    Instructions for running [[http://www.scheme.com/petitechezscheme.html][Petite Chez Scheme]] through Emacs from
+    [[http://www.cs.indiana.edu/chezscheme/emacs/][Indiana University]] (and they should know!).
 
-    (I'm using Petite Chez Scheme, because that's what Dan Friedman and William Byrd used at Clojure Conj, 2011; if it's good enough for them, it's good enough for me.)
+    (I'm using Petite Chez Scheme, because that's what Dan Friedman
+    and William Byrd used at Clojure Conj, 2011; if it's good enough
+    for them, it's good enough for me.)
 
-#+begin_src emacs-lisp
-  (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
-  (autoload 'run-scheme "cmuscheme" "Switch to interactive Scheme buffer." t)
-  (setq auto-mode-alist (cons '("\\.ss" . scheme-mode) auto-mode-alist))
-#+end_src
+    #+begin_src emacs-lisp
+      (autoload 'scheme-mode "cmuscheme"
+        "Major mode for Scheme." t)
+      (autoload 'run-scheme "cmuscheme"
+        "Switch to interactive Scheme buffer." t)
+      (add-to-list 'auto-mode-alist
+                   '("\\.ss" . scheme-mode)
+                   '("\\.scm" . scheme-mode))
+    #+end_src
 
-    Make Emacs invoke Petite Chez Scheme when running =M-x run-scheme= (assumes =petite= is on your path):
-#+begin_src emacs-lisp
-  (custom-set-variables '(scheme-program-name "petite"))
-#+end_src
+    Make Emacs invoke Petite Chez Scheme when running =M-x run-scheme=
+    (assumes =petite= is on your path):
+    #+begin_src emacs-lisp
+      (custom-set-variables '(scheme-program-name "petite"))
+    #+end_src
 
-    Add some special indentation rules for Kanren / miniKanren function calls.
-#+begin_src emacs-lisp
-  (put 'fresh 'scheme-indent-function 1)
-  (put 'run 'scheme-indent-function 2)
-#+end_src
+    Add some special indentation rules for Kanren / miniKanren
+    function calls.
+    #+begin_src emacs-lisp
+      (put 'fresh 'scheme-indent-function 1)
+      (put 'run 'scheme-indent-function 2)
+    #+end_src
 
+    Can't forget Paredit!
+    #+begin_src emacs-lisp
+      (add-hook 'scheme-mode-hook
+                'enable-paredit-mode)
+    #+end_src
 ** Prolog
    Adding an alternative Prolog mode from [[http://bruda.ca/emacs-prolog/][here]].
    #+begin_src emacs-lisp

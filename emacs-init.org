@@ -836,35 +836,39 @@ Currently, I favor the =zenburn= color theme.
             (org-agenda-sorting-strategy '(priority-down effort-down))))))
 #+end_src
 *** Capture Templates
-#+begin_src emacs-lisp
-    (setq org-default-notes-file (concat org-directory "/inbox.org"))
-#+end_src
-#+begin_src emacs-lisp
-  (setq org-capture-templates
-        '(("o" "Organization and Planning")
+    #+begin_src emacs-lisp
+      (setq org-default-notes-file (concat org-directory "/inbox.org"))
+    #+end_src
+    #+begin_src emacs-lisp
+      (setq org-capture-templates
+            '(("o" "Organization and Planning")
 
-          ("oe" "Emacs Setup and Tweaking" entry
-           (file+headline "~/Dropbox/org/personal.org" "Emacs Configuration")
-           "* TODO %?")
+              ("oe" "Emacs Setup and Tweaking" entry
+               (file+headline "~/Dropbox/org/personal.org" "Emacs Configuration")
+               "* TODO %?")
 
-          ("oo" "Org-Mode Setup and Tweaking" entry
-           (file+headline "~/Dropbox/org/personal.org" "Org-Mode Configuration")
-           "* TODO %?")
+              ("oo" "Org-Mode Setup and Tweaking" entry
+               (file+headline "~/Dropbox/org/personal.org" "Org-Mode Configuration")
+               "* TODO %?")
 
-          ("s" "Shopping")
+              ("s" "Shopping")
 
-          ("sg" "Groceries" entry
-           (file+headline "~/Dropbox/org/shopping.org" "Groceries")
-           "* TODO %? %^G\n")
+              ("sg" "Groceries" entry
+               (file+headline "~/Dropbox/org/shopping.org" "Groceries")
+               "* TODO %? %^G\n")
 
-          ("ss" "General Shopping" entry
-           (file+headline "~/Dropbox/org/shopping.org" "Other Things To Buy")
-           "* TODO %? %^G\n")
+              ("ss" "General Shopping" entry
+               (file+headline "~/Dropbox/org/shopping.org" "Other Things To Buy")
+               "* TODO %? %^G\n")
 
-          ("t" "General TODO" entry
-           (file org-default-notes-file)
-           "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)))
-#+end_src
+              ("t" "General TODO" entry
+               (file org-default-notes-file)
+               "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)
+
+              ("w" "Work Tasks" entry
+               (file+headline "~/Dropbox/org/opscode.org" "Daily Catch-All")
+               "* TODO %?")))
+    #+end_src
 ** Hooks
    Use line wrap in Org mode buffers.
 #+begin_src emacs-lisp

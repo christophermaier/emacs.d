@@ -538,13 +538,6 @@ Here's the Homebrew command:
   (mapc 'yas/load-directory yas/root-directory)
 #+end_src
 
-** Chef Mode
-#+begin_src emacs-lisp
-  (load-vendor-package "chef-mode")
-  (require 'chef-mode)
-  (turn-on-chef-mode)
-#+end_src
-
 ** Sizing
    #+begin_src emacs-lisp
       (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)

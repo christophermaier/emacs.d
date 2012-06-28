@@ -76,7 +76,7 @@
       clojure-test-mode
       clojurescript-mode
       color-theme
-      color-theme-zenburn
+      color-theme-solarized
       css-mode
       durendal
       elein
@@ -148,15 +148,11 @@ Here's the Homebrew command:
   (setq ac-dwim t)
 #+end_src
 ** Colors
-#+begin_src emacs-lisp
-  (require 'color-theme)
-#+end_src
-
-Currently, I favor the =zenburn= color theme.
-#+begin_src emacs-lisp
-  (require 'color-theme-zenburn)
-  (color-theme-zenburn)
-#+end_src
+   Currently, I favor the =solarized-dark= color theme.
+   #+begin_src emacs-lisp
+     (require 'color-theme)
+     (color-theme-solarized-dark)
+   #+end_src
 ** Highline
    Highlight the current line; set a custom face, so we can recognize from the normal marking (selection).
 #+begin_src emacs-lisp
@@ -490,7 +486,6 @@ Currently, I favor the =zenburn= color theme.
   (require 'chef-mode)
   (turn-on-chef-mode)
 #+end_src
-
 
 ** MiniMap
    See [[http://www.emacswiki.org/emacs/MiniMap]].

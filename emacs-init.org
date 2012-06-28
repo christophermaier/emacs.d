@@ -400,36 +400,26 @@ Here's the Homebrew command:
   (global-set-key "\C-xt" 'eshell)
 #+end_src
 ** Autopair
-   :PROPERTIES:
-   :tangle:   yes
-   :END:
-   Who has time to manually type closing parentheses?  See [[http://code.google.com/p/autopair/]] for more.
+   Who has time to manually type closing parentheses?  See
+   [[http://code.google.com/p/autopair/]] for more.
    #+begin_src emacs-lisp
      (require 'autopair)
    #+end_src
 
-   It's safe to enable =autopair= globally, because it defers to =paredit-mode= when the latter is enabled; see http://www.emacswiki.org/emacs/AutoPairs#toc4.
+   It's safe to enable =autopair= globally, because it defers to
+   =paredit-mode= when the latter is enabled; see
+   http://www.emacswiki.org/emacs/AutoPairs#toc4.
+   #+begin_src emacs-lisp
+     (autopair-global-mode)
+   #+end_src
 
-   _NOTE_: For some reason this doesn't appear to be working:
-#+begin_src emacs-lisp
-  (autopair-global-mode)
-#+end_src
-
-   Autopair doesn't seem to work properly in a few modes, so we'll disable it in those situations.
-
-   Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] is problematic.  This fix worked pre-Emacs 24.
-#+begin_src emacs-lisp :tangle no
-  (add-hook 'sldb-mode-hook
-            #'(lambda ()
-                (autopair-mode -1)))
-#+end_src
-
-   For Emacs 24, however, this is the way to go.
-#+begin_src emacs-lisp :tangle no
-  (set-default 'autopair-dont-activate
-               #'(lambda ()
-                   (eq major-mode 'sldb-mode)))
-#+end_src
+   Apparently, [[http://code.google.com/p/autopair/issues/detail?id%3D32][SLIME's debugger]] has problems with Autopair.  This is
+   the fix For Emacs 24.
+   #+begin_src emacs-lisp
+     (set-default 'autopair-dont-activate
+                  #'(lambda ()
+                      (eq major-mode 'sldb-mode)))
+   #+end_src
 ** Rainbow Parentheses
    Rainbow parentheses are nice to have, and not just when coding Lisp.  I use =highlight-parentheses-mode= for this.
 

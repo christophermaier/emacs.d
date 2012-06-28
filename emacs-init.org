@@ -367,11 +367,11 @@ Currently, I favor the =zenburn= color theme.
 #+begin_src emacs-lisp :tangle no
   (add-hook 'sldb-mode-hook
             #'(lambda ()
-                (setq autopair-dont-activate t)))
+                (autopair-mode -1)))
 #+end_src
 
    For Emacs 24, however, this is the way to go.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (set-default 'autopair-dont-activate
                #'(lambda ()
                    (eq major-mode 'sldb-mode)))
@@ -531,16 +531,8 @@ Currently, I favor the =zenburn= color theme.
 #+end_src
 
    Add a hook for autopair mode.
-#+begin_src emacs-lisp
-  (add-hook 'erlang-mode-hook
-            (lambda () (autopair-mode +1)))
-#+end_src
 
    (For some reason, using the proper function doesn't seem to work)
-#+begin_src emacs-lisp :tangle no
-  (add-hook 'erlang-mode-hook 'autopair-on
-#+end_src
-
 
    Set up Flymake to catch syntax errors and such.  This was taken from [[http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html#sec16][Alex Ott's excellent tutorial on setting up Emacs for Erlang]].
 #+begin_src emacs-lisp
@@ -589,7 +581,7 @@ Currently, I favor the =zenburn= color theme.
   (autoload 'js2-mode "js2-mode" "Start JS2 Mode" t)
 
   (defun js2-custom-setup ()
-    (setq autopair-dont-activate t))
+    (autopair-mode -1))
 
   (add-hook 'js2-mode-hook 'js2-custom-setup)
 #+end_src

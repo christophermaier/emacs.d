@@ -510,64 +510,37 @@ Currently, I favor the =zenburn= color theme.
 * Languages
 ** Erlang
    On OS X, I install Erlang from source; a vanilla install goes here by default:
-#+begin_src emacs-lisp
-  (setq erlang-root-dir "/usr/local/lib/erlang")
-#+end_src
+   #+begin_src emacs-lisp
+     (setq erlang-root-dir "/usr/local/lib/erlang")
+   #+end_src
 
    The current version is:
-#+begin_src emacs-lisp
-  (setq erlang-version "2.6.6.4")
-#+end_src
+   #+begin_src emacs-lisp
+     (setq erlang-version "2.6.7")
+   #+end_src
 
    The rest of this configuration is taken from [[http://www.erlang.org/doc/apps/tools/erlang_mode_chapter.html][the Erlang documentation]].
-#+begin_src emacs-lisp
-  (add-to-list 'load-path (concat erlang-root-dir "/lib/tools-" erlang-version "/emacs"))
-  (add-to-list 'exec-path (concat erlang-root-dir "/bin"))
+   #+begin_src emacs-lisp
+     (add-to-list 'load-path (concat erlang-root-dir "/lib/tools-" erlang-version "/emacs"))
+     (add-to-list 'exec-path (concat erlang-root-dir "/bin"))
 
-  (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
-  (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
+     (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
+     (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
 
-  (require 'erlang-start)
-#+end_src
-
-   Add a hook for autopair mode.
-
-   (For some reason, using the proper function doesn't seem to work)
-
-   Set up Flymake to catch syntax errors and such.  This was taken from [[http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html#sec16][Alex Ott's excellent tutorial on setting up Emacs for Erlang]].
-#+begin_src emacs-lisp
-  (require 'flymake)
-
-  (defun flymake-erlang-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list (concat user-emacs-directory "bin/eflymake") (list local-file))))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.erl\\'" flymake-erlang-init))
-
-  (defun turn-on-flymake-mode()
-    (flymake-mode 1))
-
-  (add-hook 'erlang-mode-hook 'turn-on-flymake-mode)
-#+end_src
-
+     (require 'erlang-start)
+     (require 'erlang-flymake)
+   #+end_src
 *** Distel Mode
     [[https://github.com/massemanet/distel][Distel]] is like SLIME for Erlang.
-#+begin_src emacs-lisp
-  (load-vendor-package "distel/elisp")
-  (require 'distel)
-  (distel-setup)
-#+end_src
+    #+begin_src emacs-lisp :tangle no
+      (load-vendor-package "distel/elisp")
+      (require 'distel)
+      (distel-setup)
+    #+end_src
 
-#+begin_src emacs-lisp
-  (setq inferior-erlang-machine-options '("-sname" "emacs"))
-#+end_src
-
-
+    #+begin_src emacs-lisp
+      (setq inferior-erlang-machine-options '("-sname" "emacs"))
+    #+end_src
 ** Haskell
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)

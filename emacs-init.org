@@ -770,18 +770,37 @@ Here's the Homebrew command:
   (setq org-agenda-files '("~/Dropbox/org"))
 #+end_src
 *** Agenda tweaks
-#+begin_src emacs-lisp
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-skip-scheduled-if-done t)
-  (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 
-  (setq org-agenda-include-diary nil)
-#+end_src
+    Only show the current day in the agenda.
+    #+begin_src emacs-lisp
+      (setq org-agenda-span 'day)
+    #+end_src
+
+    #+begin_src emacs-lisp
+      (setq org-agenda-skip-deadline-if-done t)
+      (setq org-agenda-skip-scheduled-if-done t)
+      (setq org-agenda-skip-scheduled-if-deadline-is-shown 'not-today)
+
+      (setq org-agenda-include-diary nil)
+    #+end_src
 
     Habit mode is pretty excellent.
-#+begin_src emacs-lisp
-  (add-to-list 'org-modules 'org-habit)
-#+end_src
+    #+begin_src emacs-lisp
+      (add-to-list 'org-modules 'org-habit)
+    #+end_src
+
+    I just discovered "log mode" for agendas... just press =l= in
+    agenda mode to show what happened on a given day.  By setting the
+    =org-agenda-log-mode-items= setting, you can determine what kinds
+    of information get shown.  Here, I'm mainly interested in seeing
+    when I closed a task, and when I logged time on a task.  You can
+    also add =state= to the list to see when state changes occurred.
+    However, this will result in some duplication in the view (when
+    you close an item, you'll get two lines: one for the closing, and
+    one for the state transition).
+    #+begin_src emacs-lisp
+      (setq org-agenda-log-mode-items '(closed clock))
+    #+end_src
 
 *** Custom agenda specifications.
 #+begin_src emacs-lisp
@@ -796,40 +815,33 @@ Here's the Homebrew command:
           ("pc" "C items" tags-todo "+PRIORITY=\"C\""
            ((org-agenda-todo-ignore-scheduled 'future)
             (org-agenda-tags-todo-honor-ignore-options t)))
+
           ("w" "Things I'm Waiting On" todo "WAITING")
 
           ("e" "Errands" tags-todo "errands|shopping"
            ((org-agenda-todo-ignore-scheduled 'future)
             (org-agenda-tags-todo-honor-ignore-options t)))
 
-          ("h" "Home Stuff" agenda ""
-           ((org-agenda-overriding-header "Home Stuff")
-            (org-agenda-todo-ignore-scheduled 'future)
-            (org-agenda-files '("~/Dropbox/org/maint.org"
-                                "~/Dropbox/org/clean.org"
-                                "~/Dropbox/org/moving.org"))))
-
-          ("z" "Personal Projects"
-           ((agenda ""))
-           ((org-agenda-overriding-header "Personal Projects")
-            (org-agenda-files '("~/Dropbox/org/personal.org"
-                                "~/Dropbox/org/exercise.org"
-                                "~/Dropbox/org/daily.org"
-                                "~/Dropbox/org/read.org"))))
-
           ("r" "Refile" tags "+REFILE")
 
-          ("s" "Scheduled for Today" agenda ""
+          ("n" "Scheduled for Today (n = now)" agenda ""
            ((org-agenda-entry-types '(:scheduled))
             (org-agenda-sorting-strategy '(time-up habit-up category-up tag-down))))
+
+          ("z" "By Date"
+           ((agenda "Dead" ((org-agenda-entry-types '(:deadline))
+                        (org-agenda-sorting-strategy '(priority-down category-keep))))
+            (agenda "Do" ((org-agenda-entry-types '(:scheduled))
+                        (org-agenda-sorting-strategy '(priority-down category-keep))))))
 
           ("f" "Financial Work" agenda ""
            ((org-agenda-files '("~/Dropbox/org/financial.org"))))
 
           ("W" . "Work Projects")
           ("We" "Work" agenda ""
-           ((org-agenda-files '("~/Dropbox/org/work.org"))
+           ((org-agenda-files '("~/Dropbox/org/opscode.org"))
             (org-agenda-sorting-strategy '(priority-down effort-down))))))
+
 #+end_src
 *** Capture Templates
     #+begin_src emacs-lisp
@@ -867,45 +879,52 @@ Here's the Homebrew command:
     #+end_src
 ** Hooks
    Use line wrap in Org mode buffers.
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-#+end_src
+   #+begin_src emacs-lisp
+     (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+   #+end_src
 
-   Make Yasnippet template expansion work with the =tab= key in Org mode buffers.
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-            (let ((original-command (lookup-key org-mode-map [tab])))
-              `(lambda ()
-                 (setq yas/fallback-behavior
-                       '(apply ,original-command))
-                 (local-set-key [tab] 'yas/expand))))
-#+end_src
+   #+begin_src emacs-lisp
+     (add-hook 'org-mode-hook 'turn-on-flyspell 'append)
+   #+end_src
+
+   Make Yasnippet template expansion work with the =tab= key in Org
+   mode buffers.
+   #+begin_src emacs-lisp
+     (add-hook 'org-mode-hook
+               (let ((original-command (lookup-key org-mode-map [tab])))
+                 `(lambda ()
+                    (setq yas/fallback-behavior
+                          '(apply ,original-command))
+                    (local-set-key [tab] 'yas/expand))))
+   #+end_src
 ** Key Bindings
-#+begin_src emacs-lisp
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cb" 'org-iswitchb)
-  (global-set-key "\C-cc" 'org-capture)
-  (global-set-key "\C-cl" 'org-store-link)
+   #+begin_src emacs-lisp
+     (global-set-key "\C-ca" 'org-agenda)
+     (global-set-key "\C-cb" 'org-iswitchb)
+     (global-set-key "\C-cc" 'org-capture)
+     (global-set-key "\C-cl" 'org-store-link)
 
-  (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
-  (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
-#+end_src
+     (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
+     (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
+   #+end_src
 ** Other
 *** To Do
-#+begin_src emacs-lisp
-  (setq org-enforce-todo-dependencies t)
+    #+begin_src emacs-lisp
+      (setq org-enforce-todo-dependencies t)
 
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/!)" "APPT(a)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(f@)")))
-#+end_src
+      (setq org-todo-keywords
+            '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/!)" "APPT(a)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(f@)")))
+    #+end_src
 
-    I don't want to do logging and processing when all I want to do is cycle a state.
-#+begin_src emacs-lisp
-  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-#+end_src
-#+begin_src emacs-lisp
-  (setq org-use-fast-todo-selection t)
-#+end_src
+    I don't want to do logging and processing when all I want to do is
+    cycle a state.
+
+    #+begin_src emacs-lisp
+      (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+    #+end_src
+    #+begin_src emacs-lisp
+      (setq org-use-fast-todo-selection t)
+    #+end_src
 *** Refiling
     Allow refiling a task to a new top-level item in a file.
 #+begin_src emacs-lisp
@@ -929,34 +948,34 @@ Here's the Homebrew command:
 #+end_src
 *** Miscellaneous
     Calculate statistics for everything in the subtree
-#+begin_src emacs-lisp
-  (setq org-hierarchical-todo-statistics nil)
-#+end_src
+    #+begin_src emacs-lisp
+      (setq org-hierarchical-todo-statistics nil)
+    #+end_src
 
-#+begin_src emacs-lisp
-  (setq org-clock-out-remove-zero-time-clocks t)
-  (setq org-deadline-warning-days 3)
+    #+begin_src emacs-lisp
+      (setq org-clock-out-remove-zero-time-clocks t)
+      (setq org-deadline-warning-days 3)
 
-  (setq org-log-done 'note)
-  (setq org-log-into-drawer t)
+      (setq org-log-done 'note)
+      (setq org-log-into-drawer t)
 
-  ;; Save clock history
-  (setq org-clock-persist t)
-  (org-clock-persistence-insinuate)
+      ;; Save clock history
+      (setq org-clock-persist t)
+      (org-clock-persistence-insinuate)
 
-  ;; YES! Use Ido!
-  (setq org-completion-use-ido t)
-  (setq org-outline-path-complete-in-steps t)
+      ;; YES! Use Ido!
+      (setq org-completion-use-ido t)
+      (setq org-outline-path-complete-in-steps t)
 
-  (setq org-hide-leading-stars t)
+      (setq org-hide-leading-stars t)
 
-  ;; Stole this next bit from the INFO pages
-  (defun org-summary-todo (n-done n-not-done)
-    "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-log-states)   ; turn off logging
-      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-#+end_src
+      ;; Stole this next bit from the INFO pages
+      (defun org-summary-todo (n-done n-not-done)
+        "Switch entry to DONE when all subentries are done, to TODO otherwise."
+        (let (org-log-done org-log-states)   ; turn off logging
+          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+      (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+    #+end_src
 * Registers
   Jump to files with a simple =C-x r j <register>=.
 #+begin_src emacs-lisp

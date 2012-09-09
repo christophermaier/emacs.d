@@ -8,7 +8,52 @@
 # don't use TeX syntax for sub and superscripts.
 # See http://orgmode.org/manual/Export-options.html
 
+* el-get
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+
+  Taken from the instructions in the [[https://github.com/dimitri/el-get/blob/master/README.md][el-get README file]]:
+  #+begin_src emacs-lisp
+    (add-to-list 'load-path
+                 (concat user-emacs-directory "el-get/el-get"))
+
+    (unless (require 'el-get nil t)
+      (url-retrieve
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+       (lambda (s)
+         (goto-char (point-max))
+         (eval-print-last-sexp))))
+
+    (setq my-recipe-directory
+          (concat user-emacs-directory "recipes"))
+    (add-to-list 'el-get-recipe-path my-recipe-directory)
+
+    (setq el-get-user-package-directory
+          (concat user-emacs-directory "init"))
+
+    (setq my-packages '(auto-complete
+                        autopair
+                        clojure-mode
+                        color-theme-solarized
+                        elein
+                        flymake-ruby
+                        magit
+                        magithub
+                        markdown-mode
+                        ruby-block
+                        ruby-mode
+                        ruby-tools
+                        smex
+                        yasnippet))
+
+    (el-get 'sync my-packages)
+  #+end_src
 * Basics
+  :PROPERTIES:
+  :tangle:   no
+  :END:
+
 - Load path etc.
   #+srcname: load-paths
   #+begin_src emacs-lisp
@@ -42,7 +87,16 @@
     (require 'ffap)                         ; Find file at point
   #+end_src
 * Path
-  Apparently we need to use =--login= (instead of =-i=) to also capture any =PATH= entries that OS X brings in via it's =/usr/libexec/path_helper= utility, which is only invoked for login shells.  This will incorporate any settings from =~/.bash_profile= as well, so I just source =~/.bashrc= from there to get everything at once.
+  :PROPERTIES:
+  :tangle:   no
+  :END:
+
+  Apparently we need to use =--login= (instead of =-i=) to also
+  capture any =PATH= entries that OS X brings in via it's
+  =/usr/libexec/path_helper= utility, which is only invoked for login
+  shells.  This will incorporate any settings from =~/.bash_profile=
+  as well, so I just source =~/.bashrc= from there to get everything
+  at once.
 
   (I swiped this code from [[https://github.com/purcell/emacs.d/blob/master/init-exec-path.el][Steve Purcell's emacs.d]])
 
@@ -54,6 +108,10 @@
   (if window-system (set-exec-path-from-shell-PATH))
 #+end_src
 * ELPA
+  :PROPERTIES:
+  :tangle:   no
+  :END:
+
   List the ELPA repositories to scan.
 #+begin_src emacs-lisp
   (setq package-archives
@@ -112,19 +170,33 @@
       (package-install package)))
 #+end_src
 * Default Configurations
+  :PROPERTIES:
+  :tangle:   no
+  :END:
 
-  A handy tip: if any of these code blocks is not working for some reason, simply add a =tangle: no= property either to the offending code block or to the heading, and the code will be gone.  The easiest way to do that on a header is:
+  A handy tip: if any of these code blocks is not working for some
+  reason, simply add a =tangle: no= property either to the offending
+  code block or to the heading, and the code will be gone.  The
+  easiest way to do that on a header is:
 
-#+begin_example
-C-c C-x p <RET> tangle <RET> no <RET>
-#+end_example
+  #+begin_example
+    C-c C-x p <RET> tangle <RET> no <RET>
+  #+end_example
+
+  NOTE: I am not tangling /any/ of these configurations yet.
 ** Fullscreen
-   If you build Emacs for Mac OS X using [[http://mxcl.github.com/homebrew/][Homebrew]], you'll get the ability to run it fullscreen (the Emacs 24 nightlies from [[http://www.emacsformacosx.com/]] don't have this capability yet, for some reason).
+   :PROPERTIES:
+   :tangle:   no
+   :END:
+   If you build Emacs for Mac OS X using [[http://mxcl.github.com/homebrew/][Homebrew]], you'll get the
+   ability to run it fullscreen (the Emacs 24 nightlies from
+   [[http://www.emacsformacosx.com/]] don't have this capability yet, for
+   some reason).
 
-Here's the Homebrew command:
-#+begin_src sh :tangle no
-  brew install emacs --cocoa --use-git-head --HEAD
-#+end_src
+   Here's the Homebrew command:
+   #+begin_src sh :tangle no
+     brew install emacs --cocoa --use-git-head --HEAD
+   #+end_src
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f10>") 'ns-toggle-fullscreen)
@@ -134,7 +206,9 @@ Here's the Homebrew command:
 #+begin_src emacs-lisp
   (require 'auto-complete-config)
 #+end_src
-   I'm not sure the best way to wire up the auto-complete dictionaries with an ELPA install.  For now, I'll just hard-code the path to the package files in my ELPA directory.
+   I'm not sure the best way to wire up the auto-complete dictionaries
+   with an ELPA install.  For now, I'll just hard-code the path to the
+   package files in my ELPA directory.
 #+begin_src emacs-lisp
   (add-to-list 'ac-dictionary-directories
                (elpa-path "auto-complete-1.4.20110207/dict"))
@@ -271,9 +345,9 @@ Here's the Homebrew command:
 #+end_src
 ** Server
    Start up a server so I can use =emacsclient= to open files.
-#+begin_src emacs-lisp
-  (server-start)
-#+end_src
+   #+begin_src emacs-lisp
+     (server-start)
+   #+end_src
 ** Smooth Scrolling
    See [[http://www.emacswiki.org/emacs/SmoothScrolling]] or download the [[http://adamspiers.org/computing/elisp/smooth-scrolling.el][file]].
 
@@ -361,9 +435,9 @@ Here's the Homebrew command:
     #+end_src
 ** Magit
    Magit is a nice Git integration.  See [[http://philjackson.github.com/magit/]] for more.
-#+begin_src emacs-lisp
-  (global-set-key [f7] 'magit-status)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-set-key [f7] 'magit-status)
+   #+end_src
 ** SavePlace
    See [[http://www.emacswiki.org/emacs/SavePlace]].  The configuration below was taken from [[http://emacs-fu.blogspot.com/2009/05/remembering-your-position-in-file.html][this Emacs-Fu blog post]].
 #+begin_src emacs-lisp
@@ -373,32 +447,32 @@ Here's the Homebrew command:
 #+end_src
 ** SMEX
    See [[http://www.emacswiki.org/emacs/Smex]].  Or just look at [[https://github.com/nonsequitur/smex][the code]] (the Github README file has lots of nice tips, too).
-#+begin_src emacs-lisp
-  (require 'smex)
-#+end_src
+   #+begin_src emacs-lisp
+     (require 'smex)
+   #+end_src
 
    Don't pollute the home directory with Smex spoor.  Note that this _must_ be done before initializing Smex.
-#+begin_src emacs-lisp
-  (setq smex-save-file (concat user-emacs-directory "smex-items"))
-#+end_src
+   #+begin_src emacs-lisp
+     (setq smex-save-file (concat user-emacs-directory "smex-items"))
+   #+end_src
 
-#+begin_src emacs-lisp
-  (smex-initialize)
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-#+end_src
+   #+begin_src emacs-lisp
+     (smex-initialize)
+     (global-set-key (kbd "M-x") 'smex)
+     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+   #+end_src
 
    In case you still want the old =M-x= command around, we can rebind it:
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+   #+end_src
 ** EShell: The Emacs Shell
    Make sure to checkout this [[http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/][excellent post]] at the [[http://www.masteringemacs.org][Mastering Emacs blog]] on EShell.
 
    I'd like to be able to fire up an EShell with a simple keystroke:
-#+begin_src emacs-lisp
-  (global-set-key "\C-xt" 'eshell)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-set-key "\C-xt" 'eshell)
+   #+end_src
 ** Autopair
    Who has time to manually type closing parentheses?  See
    [[http://code.google.com/p/autopair/]] for more.
@@ -423,113 +497,124 @@ Here's the Homebrew command:
                       (eq major-mode 'sldb-mode)))
    #+end_src
 ** Rainbow Parentheses
-   Rainbow parentheses are nice to have, and not just when coding Lisp.  I use =highlight-parentheses-mode= for this.
+   Rainbow parentheses are nice to have, and not just when coding
+   Lisp.  I use =highlight-parentheses-mode= for this.
 
-   Apparently highlight-parentheses-mode doesn't provide a way to programmatically activate it (you need to do it manually with =M-x highlight-parentheses-mode=) This is a pain, so we'll provide such a way, and go ahead and activate it globally.
+   Apparently highlight-parentheses-mode doesn't provide a way to
+   programmatically activate it (you need to do it manually with =M-x
+   highlight-parentheses-mode=) This is a pain, so we'll provide such
+   a way, and go ahead and activate it globally.
 
    Stolen from [[http://nflath.com/2010/02/emacs-minor-modes-mic-paren-pager-dired-isearch-whichfunc-winpoint-and-highlight-parentheses/][here]].
 
-#+begin_src emacs-lisp
-  (defun turn-on-highlight-parentheses-mode ()
-    (highlight-parentheses-mode t))
-  (define-global-minor-mode global-highlight-parentheses-mode
-    highlight-parentheses-mode
-    turn-on-highlight-parentheses-mode)
+   #+begin_src emacs-lisp
+     (defun turn-on-highlight-parentheses-mode ()
+       (highlight-parentheses-mode t))
+     (define-global-minor-mode global-highlight-parentheses-mode
+       highlight-parentheses-mode
+       turn-on-highlight-parentheses-mode)
 
-  (global-highlight-parentheses-mode)
-#+end_src
+     (global-highlight-parentheses-mode)
+   #+end_src
 
-   Since the default colors for highlight-parentheses-mode are kind of terrible, and I'd prefer "rainbow parens", we'll override the colors.  Stolen from [[http://stackoverflow.com/questions/2413047/how-do-i-get-rainbow-parentheses-in-emacs/2413472#2413472][this StackOverflow post]].
-#+begin_src emacs-lisp
-  (setq hl-paren-colors
-        '("orange1" "yellow1" "greenyellow" "green1"
-          "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
-#+end_src
+   Since the default colors for highlight-parentheses-mode are kind of
+   terrible, and I'd prefer "rainbow parens", we'll override the
+   colors.  Stolen from [[http://stackoverflow.com/questions/2413047/how-do-i-get-rainbow-parentheses-in-emacs/2413472#2413472][this StackOverflow post]].
+
+   #+begin_src emacs-lisp
+     (setq hl-paren-colors
+           '("orange1" "yellow1" "greenyellow" "green1"
+             "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+   #+end_src
 ** Tabs
    I hate tabs.
-#+begin_src emacs-lisp
-  (setq-default indent-tabs-mode nil)
-  (setq tab-width 4)
-#+end_src
+   #+begin_src emacs-lisp
+     (setq-default indent-tabs-mode nil)
+     (setq tab-width 4)
+   #+end_src
 ** Whitespace
    Easily toggle whitespace display.
-#+begin_src emacs-lisp
-  (global-set-key [f5] 'whitespace-mode)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-set-key [f5] 'whitespace-mode)
+   #+end_src
 
    Clean up whitespace before saving all files.
-#+begin_src emacs-lisp
-  (add-hook 'before-save-hook 'whitespace-cleanup)
-#+end_src
+   #+begin_src emacs-lisp
+     (add-hook 'before-save-hook 'whitespace-cleanup)
+   #+end_src
 
    I'd like to see all whitespace by default in Makefiles, though.
-#+begin_src emacs-lisp
-  (add-hook 'makefile-mode-hook
-            (lambda ()
-              (whitespace-mode t)))
-#+end_src
+   #+begin_src emacs-lisp
+     (add-hook 'makefile-mode-hook
+               (lambda ()
+                 (whitespace-mode t)))
+   #+end_src
 
-   Fancy! Stolen from [[http://xahlee.org/emacs/whitespace-mode.html]].  Makes =whitespace-mode= use “¶” for newline and “▷” for tab, along with the rest of its defaults.
-#+begin_src emacs-lisp
-  (setq whitespace-display-mappings
-   '((space-mark 32 [183] [46]) ; normal space, ·
-     (space-mark 160 [164] [95])
-     (space-mark 2208 [2212] [95])
-     (space-mark 2336 [2340] [95])
-     (space-mark 3616 [3620] [95])
-     (space-mark 3872 [3876] [95])
-     (newline-mark 10 [182 10]) ; newlne, ¶
-     (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
-  ))
+   Fancy! Stolen from [[http://xahlee.org/emacs/whitespace-mode.html]].
+   Makes =whitespace-mode= use “¶” for newline and “▷” for tab, along
+   with the rest of its defaults.
 
-#+end_src
-
+   #+begin_src emacs-lisp
+     (setq whitespace-display-mappings
+      '((space-mark 32 [183] [46]) ; normal space, ·
+        (space-mark 160 [164] [95])
+        (space-mark 2208 [2212] [95])
+        (space-mark 2336 [2340] [95])
+        (space-mark 3616 [3620] [95])
+        (space-mark 3872 [3876] [95])
+        (newline-mark 10 [182 10]) ; newlne, ¶
+        (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
+     ))
+   #+end_src
 ** Markdown
-   You'll need to have the =markdown= installed and on your path.  You can [[http://daringfireball.net/projects/markdown][download markdown]] manually, or just use Homebrew:
-#+begin_src sh :tangle no
-  brew install markdown
-#+end_src
+   You'll need to have the =markdown= installed and on your path.  You
+   can [[http://daringfireball.net/projects/markdown][download markdown]] manually, or just use Homebrew:
+   #+begin_src sh :tangle no
+     brew install markdown
+   #+end_src
 
-#+begin_src emacs-lisp
-  (load-vendor-package "markdown")
-  (require 'markdown-mode)
-#+end_src
+   #+begin_src emacs-lisp
+     (load-vendor-package "markdown")
+     (require 'markdown-mode)
+   #+end_src
 
-   There's a bunch of different extensions people use for Markdown docs; register them all.
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-#+end_src
+   There's a bunch of different extensions people use for Markdown
+   docs; register them all.
 
-   I also want to treat files named "README" as Markdown files (useful for GitHub projects).
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
-#+end_src
+   #+begin_src emacs-lisp
+     (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+     (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
+     (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+   #+end_src
+
+   I also want to treat files named "README" as Markdown files (useful
+   for GitHub projects).
+
+   #+begin_src emacs-lisp
+     (add-to-list 'auto-mode-alist '("README\\'" . markdown-mode))
+   #+end_src
 
    Finally, wrap lines!
-#+begin_src emacs-lisp
-  (add-hook 'markdown-mode-hook
-            'turn-on-visual-line-mode)
-#+end_src
-
+   #+begin_src emacs-lisp :tangle no
+     (add-hook 'markdown-mode-hook
+               'turn-on-visual-line-mode)
+   #+end_src
 ** Yasnippet
-   :PROPERTIES:
-   :tangle:   yes
-   :END:
-   See [[http://code.google.com/p/yasnippet/]].  We have to download the distribution ourselves, because only the =yasnippet-bundle= package is available in ELPA.  We need to use the =yasnippet= package, however, if we want to add our own snippets.
+   See [[http://code.google.com/p/yasnippet/]].  We have to download the
+   distribution ourselves, because only the =yasnippet-bundle= package
+   is available in ELPA.  We need to use the =yasnippet= package,
+   however, if we want to add our own snippets.
 
-#+begin_src emacs-lisp
-  (setq yasnippet-source-dir (vendor-path "yasnippet-0.6.1c/"))
-  (add-to-list 'load-path yasnippet-source-dir)
+   #+begin_src emacs-lisp
+     (setq yasnippet-source-dir (vendor-path "yasnippet-0.6.1c/"))
+     (add-to-list 'load-path yasnippet-source-dir)
 
-  (require 'yasnippet)
-  (yas/initialize)
-  (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
-                                 (concat yasnippet-source-dir "snippets"))) ; default snippets
-  (mapc 'yas/load-directory yas/root-directory)
-#+end_src
-
+     (require 'yasnippet)
+     (yas/initialize)
+     (setq yas/root-directory (list (concat user-emacs-directory "snippets") ; my snippets
+                                    (concat yasnippet-source-dir "snippets"))) ; default snippets
+     (mapc 'yas/load-directory yas/root-directory)
+   #+end_src
 ** Sizing
    #+begin_src emacs-lisp
       (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
@@ -537,9 +622,14 @@ Here's the Homebrew command:
       (global-set-key (kbd "S-C-<down>") 'shrink-window)
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
-
 * Languages
+  :PROPERTIES:
+  :tangle:   no
+  :END:
 ** Erlang
+   :PROPERTIES:
+   :tangle: yes
+   :END:
    On OS X, I install Erlang from source; a vanilla install goes here by default:
    #+begin_src emacs-lisp
      (setq erlang-root-dir "/usr/local/lib/erlang")
@@ -562,8 +652,12 @@ Here's the Homebrew command:
      (require 'erlang-flymake)
    #+end_src
 *** Distel Mode
+    :PROPERTIES:
+    :tangle: no
+    :END:
+
     [[https://github.com/massemanet/distel][Distel]] is like SLIME for Erlang.
-    #+begin_src emacs-lisp :tangle no
+    #+begin_src emacs-lisp
       (load-vendor-package "distel/elisp")
       (require 'distel)
       (distel-setup)
@@ -573,93 +667,97 @@ Here's the Homebrew command:
       (setq inferior-erlang-machine-options '("-sname" "emacs"))
     #+end_src
 ** Haskell
-#+begin_src emacs-lisp
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-#+end_src
+   #+begin_src emacs-lisp
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+   #+end_src
 ** Javascript
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+   #+begin_src emacs-lisp
+     (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+     (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
-  (autoload 'js2-mode "js2-mode" "Start JS2 Mode" t)
+     (autoload 'js2-mode "js2-mode" "Start JS2 Mode" t)
 
-  (defun js2-custom-setup ()
-    (autopair-mode -1))
+     (defun js2-custom-setup ()
+       (autopair-mode -1))
 
-  (add-hook 'js2-mode-hook 'js2-custom-setup)
-#+end_src
+     (add-hook 'js2-mode-hook 'js2-custom-setup)
+   #+end_src
 ** Lisps
 *** Paredit
     Structural editing of Lisp code is absolutely mandatory!
-#+begin_src emacs-lisp
-  (require 'paredit)
-#+end_src
+    #+begin_src emacs-lisp
+      (require 'paredit)
+    #+end_src
 *** SLIME
-#+begin_src emacs-lisp
-  (global-set-key "\C-cs" 'slime-selector)
-#+end_src
+    #+begin_src emacs-lisp
+      (global-set-key "\C-cs" 'slime-selector)
+    #+end_src
 **** AutoComplete in SLIME
      Steve Purcell made [[https://github.com/purcell/ac-slime][this snazzy add-on]] for AutoComplete to use SLIME symbols.
-#+begin_src emacs-lisp
-  (load-vendor-package "ac-slime")
 
-  (require 'ac-slime)
-  (add-hook 'slime-mode-hook 'set-up-slime-ac)
-  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-#+end_src
+     #+begin_src emacs-lisp
+       (load-vendor-package "ac-slime")
+
+       (require 'ac-slime)
+       (add-hook 'slime-mode-hook 'set-up-slime-ac)
+       (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+     #+end_src
 *** Emacs Lisp
     It's nice to have Paredit in Emacs Lisp, no?
-#+begin_src emacs-lisp
-  (add-hook 'emacs-lisp-mode-hook
-            'enable-paredit-mode)
-#+end_src
+
+    #+begin_src emacs-lisp
+      (add-hook 'emacs-lisp-mode-hook
+                'enable-paredit-mode)
+    #+end_src
 *** Clojure
 **** All The Modes
-#+begin_src emacs-lisp
-  (require 'clojure-mode)
-  (require 'clojure-test-mode)
-  (require 'clojurescript-mode)
-#+end_src
+     #+begin_src emacs-lisp
+       (require 'clojure-mode)
+       (require 'clojure-test-mode)
+       (require 'clojurescript-mode)
+     #+end_src
 **** Durendal
-#+begin_src emacs-lisp
-  (require 'durendal)
-  (add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
-  (add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
-  (add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
-;;  (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
-#+end_src
+     #+begin_src emacs-lisp
+       (require 'durendal)
+       (add-hook 'clojure-mode-hook 'durendal-enable-auto-compile)
+       (add-hook 'slime-repl-mode-hook 'durendal-slime-repl-paredit)
+       (add-hook 'sldb-mode-hook 'durendal-dim-sldb-font-lock)
+       ;;  (add-hook 'slime-compilation-finished-hook 'durendal-hide-successful-compile)
+     #+end_src
 **** Paredit
      Can't code Clojure without it.
-#+begin_src emacs-lisp
-  (add-hook 'clojure-mode-hook
-            'enable-paredit-mode)
-#+end_src
+     #+begin_src emacs-lisp
+       (add-hook 'clojure-mode-hook
+                 'enable-paredit-mode)
+     #+end_src
 **** Elein
      Emacs + Leiningen = Love.
-#+begin_src emacs-lisp
-  (require 'elein)
+     #+begin_src emacs-lisp
+       (require 'elein)
 
-  (define-key clojure-mode-map [f8] 'elein-swank)
-  (define-key clojure-mode-map [S-f8] 'elein-kill-swank)
-  (define-key clojure-mode-map [M-f8] 'elein-reswank)
-  (define-key clojure-mode-map (kbd "<f13>") 'elein-deps)
-
-#+end_src
+       (define-key clojure-mode-map [f8] 'elein-swank)
+       (define-key clojure-mode-map [S-f8] 'elein-kill-swank)
+       (define-key clojure-mode-map [M-f8] 'elein-reswank)
+       (define-key clojure-mode-map (kbd "<f13>") 'elein-deps)
+     #+end_src
 **** SLIME
      Make it pretty.
-#+begin_src emacs-lisp :tangle no
-  (add-hook 'slime-repl-mode-hook
-            'clojure-mode-font-lock-setup)
-#+end_src
-**** Miscellaneous
-     [[https://github.com/gstamp/align-cljlet][align-cljlet]] is a neat little package that allows you to neatly align entries in Clojure bindings and literal hashes.
-#+begin_src emacs-lisp
-  (load-vendor-package "align-cljlet")
-  (require 'align-cljlet)
 
-  (define-key clojure-mode-map (kbd "C-c C-c a") 'align-cljlet)
-#+end_src
+     #+begin_src emacs-lisp
+       (add-hook 'slime-repl-mode-hook
+                 'clojure-mode-font-lock-setup)
+     #+end_src
+**** Miscellaneous
+     [[https://github.com/gstamp/align-cljlet][align-cljlet]] is a neat little package that allows you to neatly
+     align entries in Clojure bindings and literal hashes.
+
+     #+begin_src emacs-lisp
+       (load-vendor-package "align-cljlet")
+       (require 'align-cljlet)
+
+       (define-key clojure-mode-map (kbd "C-c C-c a") 'align-cljlet)
+     #+end_src
 *** Scheme
     Instructions for running [[http://www.scheme.com/petitechezscheme.html][Petite Chez Scheme]] through Emacs from
     [[http://www.cs.indiana.edu/chezscheme/emacs/][Indiana University]] (and they should know!).
@@ -698,6 +796,7 @@ Here's the Homebrew command:
     #+end_src
 ** Prolog
    Adding an alternative Prolog mode from [[http://bruda.ca/emacs-prolog/][here]].
+
    #+begin_src emacs-lisp
      (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
      (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
@@ -707,51 +806,58 @@ Here's the Homebrew command:
                                      ("\\.m$" . mercury-mode))
                                    auto-mode-alist))
    #+end_src
-
 ** Ruby
    Make [[http://vagrantup.com/][Vagrant]] files behave like Ruby:
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
-#+end_src
+   #+begin_src emacs-lisp
+     (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+   #+end_src
 
    Make Rake files behave like Ruby:
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.rake?$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-#+end_src
+   #+begin_src emacs-lisp
+     (add-to-list 'auto-mode-alist '("\\.rake?$" . ruby-mode))
+     (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+   #+end_src
 
    Electric Ruby
-#+begin_src emacs-lisp
-  (require 'ruby-electric)
+   #+begin_src emacs-lisp :tangle no
+     (require 'ruby-electric)
 
-  (add-hook 'ruby-mode-hook
-            (lambda ()
-              (ruby-electric-mode t)))
-#+end_src
+     (add-hook 'ruby-mode-hook
+               (lambda ()
+                 (ruby-electric-mode t)))
+   #+end_src
 
   =inf-ruby= always echoes the command... that's annoying.
-#+begin_src emacs-lisp
-  (setq comint-process-echoes t)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq comint-process-echoes t)
+  #+end_src
 
 ** SuperCollider
    [[http://supercollider.sourceforge.net/][SuperCollider]] is a music synthesis programming language.
 
-   This requires Kyle Machulis' [[https://github.com/qdot/scel][scel]] library.  Currently I'm on his [[https://github.com/qdot/scel/tree/qdot-stuff/][qdot-stuff]] branch, which incorporates Sam Aaron's fixes, as well as a few others.  See [[http://sam.aaron.name/2010/02/09/hooking-supercollider-up-to-emacs-on-os-x.html][Sam Aaron's tutorial]] for how to set all this up on a Mac.
-#+begin_src emacs-lisp
-  (load-vendor-package "scel/el")
+   This requires Kyle Machulis' [[https://github.com/qdot/scel][scel]] library.  Currently I'm on his
+   [[https://github.com/qdot/scel/tree/qdot-stuff/][qdot-stuff]] branch, which incorporates Sam Aaron's fixes, as well as
+   a few others.  See [[http://sam.aaron.name/2010/02/09/hooking-supercollider-up-to-emacs-on-os-x.html][Sam Aaron's tutorial]] for how to set all this up
+   on a Mac.
 
-  (require 'sclang)
-   (custom-set-variables
-    '(sclang-auto-scroll-post-buffer t)
-    '(sclang-eval-line-forward nil)
-    '(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
-    '(sclang-runtime-directory "~/.sclang/"))
-#+end_src
+   #+begin_src emacs-lisp :tangle no
+     (load-vendor-package "scel/el")
+
+     (require 'sclang)
+      (custom-set-variables
+       '(sclang-auto-scroll-post-buffer t)
+       '(sclang-eval-line-forward nil)
+       '(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
+       '(sclang-runtime-directory "~/.sclang/"))
+   #+end_src
 * Org Mode
-#+begin_src emacs-lisp
-  (setq org-directory "~/Dropbox/org")
-#+end_src
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+
+  #+begin_src emacs-lisp
+    (setq org-directory "~/Dropbox/org")
+  #+end_src
 ** MobileOrg
 #+begin_src emacs-lisp
   (require 'org-mobile)
@@ -952,7 +1058,7 @@ Here's the Homebrew command:
       (setq org-hierarchical-todo-statistics nil)
     #+end_src
 
-    #+begin_src emacs-lisp
+    #+begin_src emacs-lisp :tangle no
       (setq org-clock-out-remove-zero-time-clocks t)
       (setq org-deadline-warning-days 3)
 
@@ -977,15 +1083,24 @@ Here's the Homebrew command:
       (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
     #+end_src
 * Registers
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+
   Jump to files with a simple =C-x r j <register>=.
-#+begin_src emacs-lisp
-  (set-register ?i `(file . ,(concat user-emacs-directory "emacs-init.org")))
-  (set-register ?r `(file . "~/.bashrc"))
-#+end_src
+  #+begin_src emacs-lisp
+    (set-register ?i `(file . ,(concat user-emacs-directory "emacs-init.org")))
+    (set-register ?r `(file . "~/.bashrc"))
+  #+end_src
 
 * Customizations
+  :PROPERTIES:
+  :tangle:   no
+  :END:
+
   Don't pollute =init.el= with GUI-made customizations.
-#+begin_src emacs-lisp
-  (setq custom-file (concat user-emacs-directory "custom.el"))
-  (load custom-file)
-#+end_src
+
+  #+begin_src emacs-lisp
+    (setq custom-file (concat user-emacs-directory "custom.el"))
+    (load custom-file)
+  #+end_src

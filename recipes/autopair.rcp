@@ -1,0 +1,5 @@
+;; -*- mode: emacs-lisp -*-
+(:name autopair
+       :type elpa
+       :features autopair)
+		

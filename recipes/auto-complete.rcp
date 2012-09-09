@@ -1,0 +1,8 @@
+;; -*- mode: emacs-lisp -*-
+(:name auto-complete
+       :website "http://cx4a.org/software/auto-complete/"
+       :description "The most intelligent auto-completion extension."
+       :type github
+       :pkgname "auto-complete/auto-complete"
+       :depends (popup fuzzy)
+       :features (auto-complete auto-complete-config)))

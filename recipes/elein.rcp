@@ -1,0 +1,10 @@
+(:name elein
+       :description "Running leiningen commands from emacs"
+       :type github
+       :pkgname "remvee/elein"
+       :features elein
+       :load    "elein.el"
+       :compile "elein.el"
+       :depends clojure-mode) ;; not technically, but no point having
+			      ;; this without clojure-mode; plus my
+			      ;; configuration depends on it

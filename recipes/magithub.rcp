@@ -1,0 +1,4 @@
+;; -*- mode: emacs-lisp -*-
+(:name magithub
+       :type elpa
+       :depends magit)

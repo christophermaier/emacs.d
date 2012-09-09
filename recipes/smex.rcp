@@ -1,0 +1,7 @@
+(:name smex
+       :description "M-x interface with Ido-style fuzzy matching."
+       :type github
+       :pkgname "nonsequitur/smex"
+       :features smex
+       :before (setq smex-save-file (concat user-emacs-directory "smex-items")) ;; must be done before initialization!
+       :post-init (smex-initialize))

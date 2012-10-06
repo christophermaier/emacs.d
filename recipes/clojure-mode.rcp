@@ -1,4 +1,3 @@
-;; -*- mode: emacs-lisp -*-
 (:name clojure-mode
        :type elpa
        :feature clojure-mode

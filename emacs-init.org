@@ -37,21 +37,22 @@
 	  (in-emacs-dir "init"))
 
     (setq my-packages '(auto-complete
-			autopair
-			clojure-mode
-			color-theme-solarized
-			elein
-			flymake-ruby
-			magit
-			magithub
-			markdown-mode
-			ruby-block
-			ruby-mode
-			ruby-tools
-			smex
-			yasnippet
-			smooth-scrolling ;; from el-get
-			))
+                        autopair
+                        clojure-mode
+                        color-theme-solarized
+                        elein
+                        flymake-ruby
+                        magit
+                        magithub
+                        markdown-mode
+                        ruby-block
+                        ruby-mode
+                        ruby-tools
+                        smex
+                        yasnippet
+                        slime
+                        smooth-scrolling ;; from el-get
+                        ))
 
     (el-get 'sync my-packages)
 

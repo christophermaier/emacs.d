@@ -52,6 +52,7 @@
                         yasnippet
                         slime
                         smooth-scrolling ;; from el-get
+                        gnuplot-mode
                         ))
 
     (el-get 'sync my-packages)

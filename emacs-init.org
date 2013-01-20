@@ -542,7 +542,8 @@
           org-src-fontify-natively t
           org-src-tab-acts-natively t
           org-src-window-setup 'current-window
-          org-use-sub-superscripts '{})
+          org-use-sub-superscripts '{}
+          org-habit-graph-column 60)
 
     (org-clock-persistence-insinuate)
 

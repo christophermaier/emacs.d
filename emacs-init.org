@@ -41,6 +41,7 @@
                         clojure-mode
                         color-theme-solarized
                         elein
+                        feature-mode
                         flymake-ruby
                         magit
                         magithub

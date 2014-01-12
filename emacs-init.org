@@ -56,6 +56,7 @@
                         slime
                         smooth-scrolling ;; from el-get
                         gnuplot-mode
+                        gist
                         ))
 
     (el-get 'sync my-packages)
@@ -298,13 +299,25 @@
       (global-set-key (kbd "S-C-<down>") 'shrink-window)
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
+* Gist
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+
+  Documentation available at https://github.com/defunkt/gist.el.
+
+  View a gist once it has been created.
+  #+begin_src emacs-lisp
+    (setq gist-view-gist t)
+  #+end_src
+
 * Languages
   :PROPERTIES:
   :tangle:   no
   :END:
 ** Erlang
    :PROPERTIES:
-   :tangle: yes
+   :tangle: no
    :END:
    On OS X, I install Erlang from source; a vanilla install goes here by default:
    #+begin_src emacs-lisp

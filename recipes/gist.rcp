@@ -1,1 +1,2 @@
-(:name gist :depends gh)
+(:name gist
+       :type elpa :depends gh)

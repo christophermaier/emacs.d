@@ -1,0 +1,13 @@
+# name: Create Function
+# key: function
+# --
+CREATE OR REPLACE FUNCTION $1.$2($3)
+RETURNS $4
+LANGUAGE $5
+AS $$
+  $0
+
+$$;
+
+COMMENT ON FUNCTION $1.$2($3) IS
+$$<comment>$$;

@@ -1,0 +1,11 @@
+# name: Create pgTAP test Function
+# key: test
+# --
+CREATE OR REPLACE FUNCTION test_$1()
+RETURNS SETOF TEXT
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  $0
+END;
+$$;

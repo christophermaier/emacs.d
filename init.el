@@ -11,4 +11,5 @@
 
 (org-babel-load-file
  (expand-file-name "emacs-init.org"
-		   user-emacs-directory))
+                   user-emacs-directory))
+(put 'narrow-to-region 'disabled nil)

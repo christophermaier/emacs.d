@@ -94,6 +94,7 @@
    :tangle:   yes
    :END:
    #+begin_src emacs-lisp
+     (setq initial-major-mode 'org-mode)
      (set-face-attribute 'default nil :family "Anonymous Pro" :height 150)
      (setq inhibit-startup-screen t ;; There's no good reason to keep the startup screen.
            next-line-add-newlines t

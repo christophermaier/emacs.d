@@ -39,6 +39,7 @@
     (setq my-packages '(auto-complete
                         autopair
                         clojure-mode
+                        nrepl
                         color-theme-solarized
                         elein
                         feature-mode

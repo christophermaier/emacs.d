@@ -493,7 +493,8 @@
     (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
     (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 
-    (setq org-directory "~/Dropbox/org"
+    (setq org-blank-before-new-entry nil
+          org-directory "~/Dropbox/org"
           org-mobile-files `(,org-directory)
           org-mobile-directory "~/Dropbox/MobileOrg"
           org-mobile-inbox-for-pull (org-file "from-inbox")

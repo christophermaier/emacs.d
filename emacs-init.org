@@ -63,19 +63,22 @@
     ;; (Optional) configuration for these packages is found in the
     ;; "init-<package>.el" files in `el-get-user-package-directory`
     (setq el-get-user-package-directory (in-emacs-dir "init"))
-    (setq my-packages '(
-                        flycheck
-                        magit
-                        gist
-                        ruby-mode
-                        ruby-tools
+    (setq my-packages '(flycheck
                         smex
                         yasnippet
                         ;; gnuplot-mode
                         ))
 
+    (when (executable-find "git")
+      (add-to-list 'my-packages 'magit)
+      (add-to-list 'my-packages 'gist))
+
     (when (executable-find "markdown")
       (add-to-list 'my-packages 'markdown-mode))
+
+    (when (executable-find "ruby")
+      (add-to-list 'my-packages 'ruby-mode)
+      (add-to-list 'my-packages 'ruby-tools))
 
     (el-get 'sync my-packages)
   #+end_src

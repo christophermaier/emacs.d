@@ -387,7 +387,7 @@
    :END:
    On OS X, I install Erlang from source; a vanilla install goes here by default:
    #+begin_src emacs-lisp
-     (setq erlang-root-dir "/Users/maier/src/erlang/otp_src_R16B03")
+     (setq erlang-root-dir "/Users/cm/src/erlang/otp_src_R16B03")
 ;;     (setq erlang-root-dir (getenv "ERL_TOP"))
    #+end_src
 

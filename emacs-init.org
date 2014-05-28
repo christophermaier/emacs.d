@@ -37,8 +37,7 @@
     (setq my-packages '(
                         flycheck
                         magit
-                        ;; magithub
-                        ;; gist
+                        gist
                         ;; markdown-mode
                         ;; ruby-tools ;; Appears to not work properly with modern stuff; perhaps find a fork?
                         smex
@@ -305,18 +304,6 @@
       (global-set-key (kbd "S-C-<down>") 'shrink-window)
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
-* Gist
-  :PROPERTIES:
-  :tangle:   no
-  :END:
-
-  Documentation available at https://github.com/defunkt/gist.el.
-
-  View a gist once it has been created.
-  #+begin_src emacs-lisp
-    (setq gist-view-gist t)
-  #+end_src
-
 * Languages
   :PROPERTIES:
   :tangle:   no

@@ -22,3 +22,5 @@ ac-comphist.dat
 # El-Get stuff isn't needed
 el-get/*
 init/*.elc
+
+elpa/*

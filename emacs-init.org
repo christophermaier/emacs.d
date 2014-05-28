@@ -39,7 +39,8 @@
                         magit
                         gist
                         ;; markdown-mode
-                        ;; ruby-tools ;; Appears to not work properly with modern stuff; perhaps find a fork?
+                        ruby-mode
+                        ruby-tools
                         smex
                         yasnippet
                         ;; gnuplot-mode

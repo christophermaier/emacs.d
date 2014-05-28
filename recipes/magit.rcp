@@ -1,3 +1,0 @@
-;; -*- mode: emacs-lisp -*-
-(:name magit
-       :type elpa)

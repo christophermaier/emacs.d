@@ -35,21 +35,17 @@
     ;; "init-<package>.el" files in `el-get-user-package-directory`
     (setq el-get-user-package-directory (in-emacs-dir "init"))
     (setq my-packages '(
-                        ;; auto-complete
-                        ;; autopair
-                        ;; color-theme-solarized
                         flycheck
                         magit
                         ;; magithub
                         ;; gist
                         ;; markdown-mode
-                        ;; Enhanced-Ruby-Mode ;; Not needed if using modern ruby-mode?
                         ;; ruby-tools ;; Appears to not work properly with modern stuff; perhaps find a fork?
                         smex
                         yasnippet
                         ;; gnuplot-mode
                         ))
-    (package-initialize)
+
     (el-get 'sync my-packages)
   #+end_src
 * Path

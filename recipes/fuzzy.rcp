@@ -1,6 +1,0 @@
-;; -*- mode: emacs-lisp -*-
-(:name fuzzy
-       :website "https://github.com/auto-complete/fuzzy-el"
-       :description "Fuzzy matching utilities for GNU Emacs"
-       :type github
-       :pkgname "auto-complete/fuzzy-el")

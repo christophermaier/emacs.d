@@ -1,6 +1,0 @@
-;; -*- mode: emacs-lisp -*-
-(:name ruby-mode
-       :type elpa
-       :after (progn
-                (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-                (add-to-list 'auto-mode-alist '("Berksfile$" . ruby-mode))))

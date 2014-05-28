@@ -22,45 +22,35 @@
   #+begin_src emacs-lisp
     (add-to-list 'load-path (in-emacs-dir "el-get/el-get"))
 
-    (unless (require 'el-get nil t)
-      (url-retrieve
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-       (lambda (s)
-         (goto-char (point-max))
-         (eval-print-last-sexp))))
+    (unless (require 'el-get nil 'noerror)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
 
-    (setq my-recipe-directory
-          (in-emacs-dir "recipes"))
-    (add-to-list 'el-get-recipe-path my-recipe-directory)
+    (add-to-list 'el-get-recipe-path (in-emacs-dir "recipes"))
 
-    (setq el-get-user-package-directory
-          (in-emacs-dir "init"))
-
-    (setq my-packages '(auto-complete
-                        autopair
-                        clojure-mode
-                        nrepl
-                        color-theme-solarized
-                        elein
-                        feature-mode
-                        flymake-ruby
-                        magit
-                        magithub
-                        markdown-mode
-                        ruby-block
-                        ruby-mode
-                        ruby-tools
+    ;; (Optional) configuration for these packages is found in the
+    ;; "init-<package>.el" files in `el-get-user-package-directory`
+    (setq el-get-user-package-directory (in-emacs-dir "init"))
+    (setq my-packages '(
+                        ;; auto-complete
+                        ;; autopair
+                        ;; color-theme-solarized
+                        flycheck
+                        ;; magit
+                        ;; magithub
+                        ;; gist
+                        ;; markdown-mode
+                        ;; Enhanced-Ruby-Mode ;; Not needed if using modern ruby-mode?
+                        ;; ruby-tools ;; Appears to not work properly with modern stuff; perhaps find a fork?
                         smex
                         yasnippet
-                        yaml-mode
-                        slime
-                        smooth-scrolling ;; from el-get
-                        gnuplot-mode
-                        gist
+                        ;; gnuplot-mode
                         ))
-
+    (package-initialize)
     (el-get 'sync my-packages)
-
   #+end_src
 * Path
   :PROPERTIES:
@@ -110,10 +100,10 @@
            ;; Send backups and autosaves to the temp folder instead of polluting the current directory.
            backup-directory-alist `((".*" . ,temporary-file-directory))
            auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+           create-lockfiles nil
            echo-keystrokes 0.1
            font-lock-maximum-decoration t
            visible-bell t)
-
      (add-hook 'after-save-hook
                'executable-make-buffer-file-executable-if-script-p)
 
@@ -125,10 +115,10 @@
 
      ;; From http://eden.rutgers.edu/~mangesh/emacs.html
      (setq-default frame-title-format
-                   (list '((buffer-file-name " %f" (dired-directory
-                                                    dired-directory
-                                                    (revert-buffer-function " %b"
-                                                                            ("%b - Dir:  " default-directory)))))))
+      (list '((buffer-file-name " %f" (dired-directory
+                                       dired-directory
+                                       (revert-buffer-function " %b"
+                                       ("%b - Dir:  " default-directory)))))))
 
      (setq locale-coding-system 'utf-8)
      (set-terminal-coding-system 'utf-8)
@@ -143,7 +133,11 @@
      (if (fboundp 'menu-bar-mode)
          (menu-bar-mode -1))
 
+
      (define-key global-map (kbd "C-+") 'text-scale-increase)
+     ;; Set to = so you don't have to hold the Shift key, and
+     ;; increase/decrease are symmetric
+     (define-key global-map (kbd "C-=") 'text-scale-increase)
      (define-key global-map (kbd "C--") 'text-scale-decrease)
 
      ;; Also toss in OS X bindings for the hell of it
@@ -158,6 +152,8 @@
          (interactive)
          (text-scale-set 0)))
 
+     ;; Apparently this RET and C-j were swapped recently
+     (define-key global-map (kbd "C-j") 'newline-and-indent)
 
 #+end_src
 ** Server
@@ -315,7 +311,7 @@
    #+end_src
 * Gist
   :PROPERTIES:
-  :tangle:   yes
+  :tangle:   no
   :END:
 
   Documentation available at https://github.com/defunkt/gist.el.
@@ -331,28 +327,24 @@
   :END:
 ** Erlang
    :PROPERTIES:
-   :tangle: no
+   :tangle: yes
    :END:
    On OS X, I install Erlang from source; a vanilla install goes here by default:
    #+begin_src emacs-lisp
-     (setq erlang-root-dir "/usr/local/lib/erlang")
-   #+end_src
-
-   The current version is:
-   #+begin_src emacs-lisp
-     (setq erlang-version "2.6.8")
+     (setq erlang-root-dir "/Users/maier/src/erlang/otp_src_R16B03")
+;;     (setq erlang-root-dir (getenv "ERL_TOP"))
    #+end_src
 
    The rest of this configuration is taken from [[http://www.erlang.org/doc/apps/tools/erlang_mode_chapter.html][the Erlang documentation]].
    #+begin_src emacs-lisp
-     (add-to-list 'load-path (concat erlang-root-dir "/lib/tools-" erlang-version "/emacs"))
+     (add-to-list 'load-path (concat erlang-root-dir "/lib/tools/emacs"))
      (add-to-list 'exec-path (concat erlang-root-dir "/bin"))
 
      (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
      (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
 
      (require 'erlang-start)
-     (require 'erlang-flymake)
+;;     (require 'erlang-flymake)
    #+end_src
 ** Javascript
    #+begin_src emacs-lisp

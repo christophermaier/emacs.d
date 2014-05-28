@@ -8,7 +8,7 @@
 ;; it gets the same base name as the Org file.  Thus, tangling Emacs Lisp from
 ;; a file `init.org` would generate `init.el`, obliterating this file in the
 ;; process!
-
+(require 'org)
 (org-babel-load-file
  (expand-file-name "emacs-init.org"
                    user-emacs-directory))

@@ -85,6 +85,7 @@
     ;; "init-<package>.el" files in `el-get-user-package-directory`
     (setq el-get-user-package-directory (in-emacs-dir "init"))
     (setq my-packages '(flycheck
+                        smartparens
                         smex
                         yasnippet
                         ;; gnuplot-mode

@@ -67,6 +67,7 @@
                         smex
                         yasnippet
                         ;; gnuplot-mode
+                        color-theme-zenburn
                         js2-mode
                         auto-complete
                         auto-complete-css

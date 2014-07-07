@@ -67,6 +67,7 @@
                         smex
                         yasnippet
                         ;; gnuplot-mode
+                        js2-mode
                         auto-complete
                         auto-complete-css
                         auto-complete-emacs-lisp
@@ -343,18 +344,6 @@
      (require 'erlang-start)
 ;;     (require 'erlang-flymake)
    #+end_src
-** Javascript
-   #+begin_src emacs-lisp
-     (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-     (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
-     (autoload 'js2-mode "js2-mode" "Start JS2 Mode" t)
-
-     (defun js2-custom-setup ()
-       (autopair-mode -1))
-
-     (add-hook 'js2-mode-hook 'js2-custom-setup)
-   #+end_src
 ** Lisps
 *** SLIME
     #+begin_src emacs-lisp
@@ -584,12 +573,12 @@
                                        (calendar-extract-month end-day)
                                        (calendar-extract-day end-day))))))
 
-    (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((clojure . t)
-                                   (sh . t)
-                                   (dot . t)))
-
-
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((clojure . t)
+       (sh . t)
+       (dot . t)
+       (js . t)))
 
     #+end_src
 * Registers

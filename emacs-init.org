@@ -67,6 +67,10 @@
                         smex
                         yasnippet
                         ;; gnuplot-mode
+                        auto-complete
+                        auto-complete-css
+                        auto-complete-emacs-lisp
+                        auto-complete-yasnippet
                         ))
 
     (when (executable-find "git")
@@ -78,7 +82,8 @@
 
     (when (executable-find "ruby")
       (add-to-list 'my-packages 'ruby-mode)
-      (add-to-list 'my-packages 'ruby-tools))
+      (add-to-list 'my-packages 'ruby-tools)
+      (add-to-list 'my-packages 'auto-complete-ruby))
 
     (el-get 'sync my-packages)
   #+end_src

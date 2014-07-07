@@ -320,6 +320,13 @@
       (global-set-key (kbd "S-C-<down>") 'shrink-window)
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
+** Auto-fill
+
+   #+begin_src emacs-lisp
+     (defun cwm-auto-fill-comments ()
+       (setq comment-auto-fill-only-comments t)
+       (auto-fill-mode 1))
+   #+end_src
 * Languages
   :PROPERTIES:
   :tangle:   no
@@ -344,6 +351,10 @@
 
      (require 'erlang-start)
 ;;     (require 'erlang-flymake)
+
+     (add-hook 'erlang-mode-hook 'cwm-auto-fill-comments)
+
+
    #+end_src
 ** Lisps
 *** SLIME
@@ -454,6 +465,9 @@
 
     (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
     (add-hook 'org-mode-hook 'turn-on-flyspell 'append)
+    (add-hook 'org-mode-hook (lambda ()
+                               (auto-fill-mode 1)))
+
     (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
     (global-set-key "\C-ca" 'org-agenda)

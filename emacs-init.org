@@ -95,6 +95,7 @@
                         auto-complete-css
                         auto-complete-emacs-lisp
                         auto-complete-yasnippet
+                        yaml-mode
                         ))
 
     (when (executable-find "git")

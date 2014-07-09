@@ -13,6 +13,22 @@
     (defun in-emacs-dir (path)
       (concat user-emacs-directory path))
   #+end_src
+* Customizations
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+
+  Don't pollute =init.el= with GUI-made customizations.
+
+  This is also used for theme loading, as well. It needs to be loaded
+  early on; otherwise loading themes via el-get mechanisms bites
+  because you have to continually accept their loading.
+
+  #+begin_src emacs-lisp
+    (setq custom-file (in-emacs-dir "custom.el"))
+    (load custom-file)
+  #+end_src
+
 * Path
   :PROPERTIES:
   :tangle:   yes
@@ -605,16 +621,4 @@
   #+begin_src emacs-lisp
     (set-register ?i `(file . ,(in-emacs-dir "emacs-init.org")))
     (set-register ?r `(file . "~/.bashrc"))
-  #+end_src
-
-* Customizations
-  :PROPERTIES:
-  :tangle:   yes
-  :END:
-
-  Don't pollute =init.el= with GUI-made customizations.
-
-  #+begin_src emacs-lisp
-    (setq custom-file (in-emacs-dir "custom.el"))
-    (load custom-file)
   #+end_src

@@ -656,6 +656,7 @@
   Jump to files with a simple =C-x r j <register>=.
   #+begin_src emacs-lisp
     (set-register ?i `(file . ,(in-emacs-dir "emacs-init.org")))
+    (set-register ?z `(file . "~/.zshrc"))
     (set-register ?w `(file . ,(in-org-dir "work_log.org")))
     (set-register ?t `(file . ,(in-org-dir "todo.org")))
     (set-register ?d `(file . ,(in-org-dir "daily.org")))

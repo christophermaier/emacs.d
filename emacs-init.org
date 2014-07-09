@@ -348,6 +348,35 @@
        (setq comment-auto-fill-only-comments t)
        (auto-fill-mode 1))
    #+end_src
+* Custom Functions
+** cwm-insert-date
+   Inspired by Xah Lee's work at
+   http://ergoemacs.org/emacs/elisp_datetime.html, along with the
+   source code to =calendar-day-of-year-string=
+
+   #+begin_src emacs-lisp
+     (defun cwm-insert-date ()
+       "Insert current date string"
+       (interactive)
+       (when (use-region-p)
+         (delete-region (region-beginning)
+                        (region-end)))
+       (let* ((today     (calendar-current-date))
+              (year      (calendar-extract-year today))
+              (month     (calendar-extract-month today))
+              (date      (calendar-extract-day today))
+              (day       (calendar-day-number today))
+              (day-name  (calendar-day-name today))
+              (eoy       (list 12 31 year))
+              (num-days  (calendar-day-number eoy))
+              (remaining (- (calendar-day-number eoy) day)))
+         (insert (format "%d-%02d-%02d, %s; Day %d of %d (%d remaining in %d)"
+                         year month date day-name day num-days remaining year))))
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "<f6>") 'cwm-insert-date)
+   #+end_src
 * Languages
   :PROPERTIES:
   :tangle:   no

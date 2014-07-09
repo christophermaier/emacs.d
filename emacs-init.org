@@ -13,6 +13,11 @@
     (defun in-emacs-dir (path)
       (concat user-emacs-directory path))
   #+end_src
+
+  #+begin_src emacs-lisp
+    (defun in-org-dir (path)
+      (concat "~/Dropbox/org/" path))
+  #+end_src
 * Customizations
   :PROPERTIES:
   :tangle:   yes
@@ -620,5 +625,7 @@
   Jump to files with a simple =C-x r j <register>=.
   #+begin_src emacs-lisp
     (set-register ?i `(file . ,(in-emacs-dir "emacs-init.org")))
-    (set-register ?r `(file . "~/.bashrc"))
+    (set-register ?w `(file . ,(in-org-dir "work_log.org")))
+    (set-register ?t `(file . ,(in-org-dir "todo.org")))
+    (set-register ?d `(file . ,(in-org-dir "daily.org")))
   #+end_src

@@ -377,7 +377,18 @@
    #+end_src
 
    #+begin_src emacs-lisp
+     (defun cwm-today ()
+       "Insert current date string"
+       (interactive)
+       (when (use-region-p)
+         (delete-region (region-beginning)
+                        (region-end)))
+       (insert (format-time-string "%Y-%m-%d")))
+   #+end_src
+
+   #+begin_src emacs-lisp
      (global-set-key (kbd "<f6>") 'cwm-insert-date)
+     (global-set-key (kbd "C-<f6>") 'cwm-today)
    #+end_src
 * Languages
   :PROPERTIES:

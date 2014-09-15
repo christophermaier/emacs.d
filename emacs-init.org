@@ -344,10 +344,13 @@
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
 ** Auto-fill
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
    #+begin_src emacs-lisp
      (defun cwm-auto-fill-comments ()
        (setq comment-auto-fill-only-comments t)
-       (auto-fill-mode 1))
+       (auto-fill-mode))
    #+end_src
 ** Spelling
    Install aspell on Macs using Homebrew:

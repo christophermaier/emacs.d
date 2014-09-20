@@ -441,9 +441,6 @@
      (require 'erlang-start)
 ;;     (require 'erlang-flymake)
 
-     (add-hook 'erlang-mode-hook 'cwm-auto-fill-comments)
-
-
    #+end_src
 ** Lisps
 *** SLIME
@@ -544,6 +541,8 @@
 
    #+begin_src emacs-lisp
      (cwm-add-to-hooks 'cwm-flyspell-comments
+                       my-programming-modes)
+     (cwm-add-to-hooks 'cwm-auto-fill-comments
                        my-programming-modes)
    #+end_src
 * Org Mode

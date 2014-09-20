@@ -344,12 +344,23 @@
       (global-set-key (kbd "S-C-<up>") 'enlarge-window)
    #+end_src
 ** Auto-fill
-
    #+begin_src emacs-lisp
      (defun cwm-auto-fill-comments ()
        (setq comment-auto-fill-only-comments t)
        (auto-fill-mode 1))
    #+end_src
+** Spelling
+   Install aspell on Macs using Homebrew:
+
+   #+begin_src sh
+     brew install aspell --with-lang-en
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (defun cwm-flyspell-comments ()
+       (flyspell-prog-mode))
+   #+end_src
+
 * Custom Functions
 ** cwm-insert-date
    Inspired by Xah Lee's work at
@@ -523,6 +534,18 @@
       (add-hook 'scheme-mode-hook
                 'enable-paredit-mode)
     #+end_src
+
+* Cross-mode Configuration
+   #+begin_src emacs-lisp
+     (setq my-programming-modes
+           '(ruby-mode
+             erlang-mode))
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (cwm-add-to-hooks 'cwm-flyspell-comments
+                       my-programming-modes)
+   #+end_src
 * Org Mode
   :PROPERTIES:
   :tangle:   yes

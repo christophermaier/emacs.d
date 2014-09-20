@@ -390,6 +390,21 @@
      (global-set-key (kbd "<f6>") 'cwm-insert-date)
      (global-set-key (kbd "C-<f6>") 'cwm-today)
    #+end_src
+** Multi-hook
+   Based (sort of) on http://stackoverflow.com/a/7400476
+
+   This allows you to add a function as a hook to multiple modes at
+   once. It's handy for setting up, say, all your programming modes
+   with flyspell and autofill enabled in comment sections.
+
+   #+begin_src emacs-lisp
+     (defun cwm-add-to-hooks (function modes)
+       "Adds FUNCTION to the hooks of each one of MODES"
+       (mapc (lambda (mode)
+               (add-hook (intern (concat (symbol-name mode) "-hook"))
+                         function))
+             modes))
+   #+end_src
 * Languages
   :PROPERTIES:
   :tangle:   no

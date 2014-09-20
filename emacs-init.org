@@ -353,9 +353,12 @@
        (auto-fill-mode))
    #+end_src
 ** Spelling
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
    Install aspell on Macs using Homebrew:
 
-   #+begin_src sh
+   #+begin_src sh :tangle no
      brew install aspell --with-lang-en
    #+end_src
 

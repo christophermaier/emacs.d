@@ -96,6 +96,10 @@
                         auto-complete-emacs-lisp
                         auto-complete-yasnippet
                         yaml-mode
+
+                        helm
+                        helm-ls-git
+                        helm-git-grep
                         ))
 
     (when (executable-find "git")
@@ -365,6 +369,38 @@
    #+begin_src emacs-lisp
      (defun cwm-flyspell-comments ()
        (flyspell-prog-mode))
+   #+end_src
+** Helm
+  :PROPERTIES:
+  :tangle:   yes
+  :END:
+   Helm is kinda awesome.
+
+   I'm going to try replacing Emacs' built-in file finder with Helm's.
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x C-f") 'helm-find-files)
+   #+end_src
+
+   This is from [[https://github.com/emacs-helm/helm-ls-git][helm-ls-git]]. Another fun thing is =C-]=, which toggles
+   full paths on and off.
+
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x C-d") 'helm-browse-project)
+   #+end_src
+
+   This sets up Helm in the =M-x= prompt! SQUEE!
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "M-x") 'helm-M-x)
+   #+end_src
+
+   Holy crap, this is a _much_ better way to interact with the kill ring!
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+   #+end_src
+
+   Waaaaay better way to interact with currently-open buffers!
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x b") 'helm-mini)
    #+end_src
 
 * Custom Functions

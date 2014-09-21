@@ -100,6 +100,8 @@
                         helm
                         helm-ls-git
                         helm-git-grep
+
+                        nyan-mode
                         ))
 
     (when (executable-find "git")
@@ -193,7 +195,14 @@
      ;; Apparently this RET and C-j were swapped recently
      (define-key global-map (kbd "C-j") 'newline-and-indent)
 
+
 #+end_src
+
+   Why WOULDN'T you have this?!
+   #+begin_src emacs-lisp
+     (nyan-mode)
+   #+end_src
+
 ** Server
    :PROPERTIES:
    :tangle:   yes

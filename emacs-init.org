@@ -153,6 +153,11 @@
 
      (global-auto-revert-mode t)
 
+     ;; http://whattheemacsd.com/sane-defaults.el-01.html
+     ;; Auto-refresh dired buffers, too
+     (setq global-auto-revert-non-file-buffers t)
+     (setq auto-revert-verbose nil)
+
      ;; From http://eden.rutgers.edu/~mangesh/emacs.html
      (setq-default frame-title-format
       (list '((buffer-file-name " %f" (dired-directory

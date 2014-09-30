@@ -91,15 +91,15 @@
                         ;; gnuplot-mode
                         color-theme-zenburn
                         js2-mode
-                        auto-complete
-                        auto-complete-css
-                        auto-complete-emacs-lisp
-                        auto-complete-yasnippet
                         yaml-mode
+
+
+                        company-mode
 
                         helm
                         helm-ls-git
                         helm-git-grep
+                        helm-company
 
                         nyan-mode
                         ))

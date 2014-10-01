@@ -10,6 +10,12 @@
 
 * Preliminaries
   #+begin_src emacs-lisp
+    (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+    (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+    (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  #+end_src
+
+  #+begin_src emacs-lisp
     (defun in-emacs-dir (path)
       (concat user-emacs-directory path))
   #+end_src
@@ -171,14 +177,6 @@
      (set-keyboard-coding-system 'utf-8)
      (set-selection-coding-system 'utf-8)
      (prefer-coding-system 'utf-8)
-
-     (if (fboundp 'scroll-bar-mode)
-         (scroll-bar-mode -1))
-     (if (fboundp 'tool-bar-mode)
-         (tool-bar-mode -1))
-     (if (fboundp 'menu-bar-mode)
-         (menu-bar-mode -1))
-
 
      (define-key global-map (kbd "C-+") 'text-scale-increase)
      ;; Set to = so you don't have to hold the Shift key, and

@@ -109,6 +109,8 @@
 
                         nyan-mode
                         sqitch
+
+                        projectile
                         ))
 
     (when (executable-find "git")

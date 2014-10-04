@@ -90,7 +90,9 @@
     ;; (Optional) configuration for these packages is found in the
     ;; "init-<package>.el" files in `el-get-user-package-directory`
     (setq el-get-user-package-directory (in-emacs-dir "init"))
-    (setq my-packages '(flycheck
+    (setq my-packages '(
+                        diminish
+                        flycheck
                         smartparens
                         smex
                         yasnippet

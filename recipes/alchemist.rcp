@@ -1,0 +1,4 @@
+(:name alchemist
+       :type github
+       :pkgname "tonini/alchemist.el"
+       :features alchemist)

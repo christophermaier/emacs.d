@@ -130,6 +130,10 @@
       (add-to-list 'my-packages 'ruby-tools)
       (add-to-list 'my-packages 'auto-complete-ruby))
 
+    (when (executable-find "elixir")
+      (add-to-list 'my-packages 'elixir-mode)
+      (add-to-list 'my-packages 'alchemist))
+
     (el-get 'sync my-packages)
   #+end_src
 * Default Configurations

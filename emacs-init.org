@@ -116,6 +116,7 @@
 
                         rainbow-delimiters
 
+                        rust-mode
                         ))
 
     (when (executable-find "git")

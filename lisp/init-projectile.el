@@ -2,7 +2,8 @@
 (require-package 'helm-projectile)
 
 (with-eval-after-load 'projectile
-  (projectile-global-mode))
+  (projectile-global-mode)
+  (setq projectile-use-git-grep t))
 
 ;; Some key commands:
 ;; C-c p p -> switch project

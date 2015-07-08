@@ -17,7 +17,8 @@
   (global-set-key (kbd "C-c m") 'helm-bookmarks))
 
 (with-eval-after-load 'helm-swoop
-  (global-set-key (kbd "s-i") 'helm-swoop))
+  ;; Yup, overriding isearch-forward
+  (global-set-key (kbd "C-s") 'helm-swoop))
 
 (with-eval-after-load 'helm-ls-git
   ;; Another fun thing is =C-]=, which toggles full paths on and off.

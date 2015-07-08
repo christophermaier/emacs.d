@@ -1,5 +1,6 @@
 (require-package 'helm)
 (require-package 'helm-ls-git)
+(require-package 'helm-swoop)
 
 (with-eval-after-load 'helm
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)

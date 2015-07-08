@@ -26,7 +26,7 @@
 (require 'init-lisp)
 (require 'init-clojure)
 (require 'init-rust)
-
+(require 'init-yaml)
 (require 'init-yasnippet)
 
 (require 'init-spelling)

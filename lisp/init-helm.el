@@ -16,6 +16,9 @@
   (global-set-key (kbd "C-x m") 'helm-bookmarks)
   (global-set-key (kbd "C-c m") 'helm-bookmarks))
 
+(with-eval-after-load 'helm-swoop
+  (global-set-key (kbd "s-i") 'helm-swoop))
+
 (with-eval-after-load 'helm-ls-git
   ;; Another fun thing is =C-]=, which toggles full paths on and off.
   (global-set-key (kbd "C-x C-d") 'helm-browse-project))

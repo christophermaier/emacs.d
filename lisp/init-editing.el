@@ -9,6 +9,12 @@
  font-lock-maximum-decoration t
  visible-bell t)
 
+;; recentf
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq-default
+ recentf-max-saved-items 200
+ recentf-max-menu-items 20)
+
 ;; Ido
 ;; (mainly for org-switchb, since I'm using Helm pretty extensively)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

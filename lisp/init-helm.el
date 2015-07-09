@@ -1,6 +1,7 @@
 (require-package 'helm)
 (require-package 'helm-ls-git)
 (require-package 'helm-swoop)
+(require-package 'helm-descbinds)
 
 (with-eval-after-load 'helm
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
@@ -23,5 +24,8 @@
 (with-eval-after-load 'helm-ls-git
   ;; Another fun thing is =C-]=, which toggles full paths on and off.
   (global-set-key (kbd "C-x C-d") 'helm-browse-project))
+
+(with-eval-after-load 'helm-descbinds
+  (global-set-key (kbd "C-h b") 'helm-descbinds))
 
 (provide 'init-helm)

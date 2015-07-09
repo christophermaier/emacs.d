@@ -24,3 +24,9 @@ el-get/*
 init/*.elc
 
 elpa/*
+
+
+bookmarks
+projectile.cache
+projectile-bookmarks.eld
+recentf

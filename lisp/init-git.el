@@ -1,7 +1,8 @@
 (when (executable-find "git")
   (require-package 'magit)
   (with-eval-after-load 'magit
-    (global-set-key [f7] 'magit-status))
+    (global-set-key [f7] 'magit-status)
+    (fullframe magit-status magit-mode-quit-window))
 
   (require-package 'github-browse-file)
   (with-eval-after-load 'github-browse-file

@@ -7,6 +7,7 @@
 (require 'init-utils)
 (require 'init-package)
 (require-package 'diminish)
+(require-package 'fullframe)
 
 (require 'init-exec-path)
 (require 'init-frames)

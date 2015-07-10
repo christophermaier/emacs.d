@@ -149,7 +149,7 @@
                           :prepend t)
                          ("tw" "TODO for this weekend" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwm-this-coming-day-date 6) Sat> DEADLINE: <%(cwm-this-coming-day-date 0) Sun>")
+                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/this-coming-day-date 6) Sat> DEADLINE: <%(cwmaier/this-coming-day-date 0) Sun>")
 
                          ("w" "Work")
                          ;; Add a timestamped entry to today's

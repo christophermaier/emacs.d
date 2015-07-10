@@ -23,4 +23,20 @@
     (and is-last-day is-weekday)
     (and (memq day last-two-days-before-last-day) is-friday))))
 
+(defun cwmaier/this-coming-day-date (coming-day)
+  "Return the date of this coming COMING-DAY (or today, if today
+  is COMING-DAY). COMING-DAY is an integer, with 0 = Sunday, 1 =
+  Monday, etc."
+  (let* ((today (calendar-current-date))
+         (day-of-week (calendar-day-of-week today))
+         (diff (- day-of-week coming-day))
+         (to-add (if (< diff 0)
+                     (abs diff)
+                   (- 7 diff)))
+         (coming-date (calendar-current-date to-add)))
+    (format "%d-%02d-%02d"
+            (calendar-extract-year coming-date)
+            (calendar-extract-month coming-date)
+            (calendar-extract-day coming-date))))
+
 (provide 'init-utils)

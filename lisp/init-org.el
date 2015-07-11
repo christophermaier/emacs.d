@@ -74,7 +74,8 @@
  org-src-tab-acts-natively t
  org-src-window-setup 'current-window
  org-use-sub-superscripts '{}
- org-habit-graph-column 60)
+ org-habit-graph-column 60
+ org-startup-with-inline-images t)
 
 ;; Agenda Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

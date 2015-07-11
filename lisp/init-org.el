@@ -155,20 +155,26 @@
                          ("tw" "TODO for this weekend" entry
                           (file org-default-notes-file)
                           "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/this-coming-day-date 6) Sat> DEADLINE: <%(cwmaier/this-coming-day-date 0) Sun>")
+                         ("tx" "TODO sometime in the next week" entry
+                          (file org-default-notes-file)
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/one-week-from-today)>"
+                          :prepend t
+                          :immediate-finish t)
 
                          ("w" "Work")
-                         ;; Add a timestamped entry to today's
-                         ;; work log
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
-                          "** %T - %^{Activity}")
-                         ;; Create a new entry with a deadline of
-                         ;; 5:00 PM today at the top of the
-                         ;; "chef" file
+                          "* %U - %^{Activity}\n  %?")
                          ("wt" "Work TODO Today" entry
                           (file (org-file "chef"))
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"
-                          :prepend t)))
+                          :prepend t
+                          :immediate-finish t)
+                         ("wx" "Work TODO sometime in the next week" entry
+                          (file (org-file "chef"))
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/one-week-from-today) 17:00>"
+                          :prepend t
+                          :immediate-finish t)))
 
 (org-clock-persistence-insinuate)
 

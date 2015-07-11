@@ -7,9 +7,8 @@
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
-;; (add-hook 'org-mode-hook 'turn-on-flyspell 'append)
-;; (add-hook 'org-mode-hook (lambda ()
-;;                            (auto-fill-mode 1)))
+(add-hook 'org-mode-hook 'turn-on-flyspell 'append)
+(add-hook 'org-mode-hook 'auto-fill-mode 'append)
 
 ;; Stole this next bit from the INFO pages
 (defun org-summary-todo (n-done n-not-done)

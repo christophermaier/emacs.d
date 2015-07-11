@@ -1,4 +1,0 @@
-(:name elixir-mode
-       :type github
-       :pkgname "elixir-lang/emacs-elixir"
-       :features elixir-mode)

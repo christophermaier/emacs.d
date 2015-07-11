@@ -1,7 +1,0 @@
-;; -*- mode: emacs-lisp -*-
-;; Also available at https://github.com/rejeep/ruby-tools
-(:name ruby-tools
-       :description "Collection of handy functions for ruby-mode."
-       :type elpa
-       :load "ruby-tools.el"
-       :features ruby-tools)

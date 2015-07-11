@@ -140,6 +140,11 @@
                           "* TODO %? %^G\n")
 
                          ("t" "New TODO")
+                         ("te" "Emacs TODO" entry
+                          (file (org-file "projects/emacs"))
+                          "* TODO %^{Task}\n  Added: %U"
+                          :prepend t
+                          :immediate-finish t)
                          ("tg" "General TODO" entry
                           (file org-default-notes-file)
                           "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)

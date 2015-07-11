@@ -39,4 +39,7 @@
             (calendar-extract-month coming-date)
             (calendar-extract-day coming-date))))
 
+(defun cwmaier/one-week-from-today ()
+  (cwmaier/this-coming-day-date (calendar-day-of-week (calendar-current-date))))
+
 (provide 'init-utils)

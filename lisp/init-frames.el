@@ -6,6 +6,9 @@
     (menu-bar-mode -1))
 
 (setq-default
- inhibit-startup-screen t)
+ inhibit-startup-screen t
+ initial-scratch-message ""
+ initial-major-mode 'org-mode
+ inhibit-startup-message t)
 
 (provide 'init-frames)

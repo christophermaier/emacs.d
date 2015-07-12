@@ -154,10 +154,10 @@
                           :prepend t)
                          ("tw" "TODO for this weekend" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/this-coming-day-date 6) Sat> DEADLINE: <%(cwmaier/this-coming-day-date 0) Sun>")
+                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/format-date (cwmaier/this-weekends-saturday)) Sat> DEADLINE: <%(cwmaier/format-date (cwmaier/this-weekends-sunday)) Sun>")
                          ("tx" "TODO sometime in the next week" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/one-week-from-today)>"
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/format-date (cwmaier/one-week-from-today))>"
                           :prepend t
                           :immediate-finish t)
 
@@ -172,7 +172,7 @@
                           :immediate-finish t)
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "chef"))
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/one-week-from-today) 17:00>"
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/format-date (cwmaier/one-week-from-today)) 17:00>"
                           :prepend t
                           :immediate-finish t)))
 

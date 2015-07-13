@@ -73,4 +73,11 @@
   "Returns (MONTH DAY YEAR) of one week from now"
   (calendar-current-date 7))
 
+(defun cwmaier/org-date (date)
+  "DATE is (MONTH DAY YEAR). Returns formatted string for
+  embedding in an Org date, e.g. '2015-07-13 Mon'"
+  (concat (cwmaier/format-date date)
+          " "
+          (calendar-day-name date t)))
+
 (provide 'init-utils)

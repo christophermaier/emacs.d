@@ -193,7 +193,28 @@
                           (file (org-file "chef"))
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"
                           :prepend t
-                          :immediate-finish t)))
+                          :immediate-finish t)
+
+                         ;; Templates for 1-on-1 discussions with each team member
+                         ("z" "Team")
+                         ("za" "Salim" entry
+                          (file+datetree (org-file "team/salim"))
+                          "** %U - %^{Activity}\n   %?")
+                         ("zf" "Seth" entry
+                          (file+datetree (org-file "team/seth"))
+                          "** %U - %^{Activity}\n   %?")
+                         ("zj" "Jon A." entry
+                          (file+datetree (org-file "team/jon_a"))
+                          "** %U - %^{Activity}\n   %?")
+                         ("zm" "Jess" entry
+                          (file+datetree (org-file "team/jess"))
+                          "** %U - %^{Activity}\n   %?")
+                         ("zs" "Scott" entry
+                          (file+datetree (org-file "team/scott"))
+                          "** %U - %^{Activity}\n   %?")
+                         ("zt" "Tom" entry
+                          (file+datetree (org-file "team/tom"))
+                          "** %U - %^{Activity}\n   %?")))
 
 
 (org-clock-persistence-insinuate)

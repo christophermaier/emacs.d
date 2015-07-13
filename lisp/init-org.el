@@ -129,7 +129,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq-default
  org-default-notes-file (org-file "inbox")
- org-capture-templates '(("s" "Shopping")
+ org-capture-templates '(
+
+                         ("l" "Weight" table-line
+                          (file+headline "/Users/maier/weight.org" "Weight")
+                          "|%<%Y-%m-%d>|%^{Weight}||"
+                          :immediate-finish t)
+
+                         ("s" "Shopping")
                          ("sg" "Groceries" entry
                           (file+headline (org-file "shopping")
                                          "Groceries")
@@ -140,11 +147,19 @@
                           "* TODO %? %^G\n")
 
                          ("t" "New TODO")
-                         ("te" "Emacs TODO" entry
-                          (file (org-file "projects/emacs"))
+                         ("tc" "Computer TODO" entry
+                          (file+headline (org-file "projects/computer") "General Computer Setup")
                           "* TODO %^{Task}\n  Added: %U"
                           :prepend t
                           :immediate-finish t)
+
+                         ("te" "Emacs TODO" entry
+                          (file+headline (org-file "projects/computer") "Emacs")
+                          "* TODO %^{Task}\n  Added: %U"
+                          :prepend t
+                          :immediate-finish t)
+
+
                          ("tg" "General TODO" entry
                           (file org-default-notes-file)
                           "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)
@@ -152,12 +167,16 @@
                           (file org-default-notes-file)
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>"
                           :prepend t)
+                         ("tu" "TODO For tomorrow" entry
+                          (file org-default-notes-file)
+                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 23:59>"
+                          :prepend t)
                          ("tw" "TODO for this weekend" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/format-date (cwmaier/this-weekends-saturday)) Sat> DEADLINE: <%(cwmaier/format-date (cwmaier/this-weekends-sunday)) Sun>")
+                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/org-date (cwmaier/this-weekends-saturday))> DEADLINE: <%(cwmaier/org-date (cwmaier/this-weekends-sunday))>")
                          ("tx" "TODO sometime in the next week" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/format-date (cwmaier/one-week-from-today))>"
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today))>"
                           :prepend t
                           :immediate-finish t)
 
@@ -172,9 +191,10 @@
                           :immediate-finish t)
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "chef"))
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/format-date (cwmaier/one-week-from-today)) 17:00>"
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"
                           :prepend t
                           :immediate-finish t)))
+
 
 (org-clock-persistence-insinuate)
 

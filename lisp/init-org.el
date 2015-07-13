@@ -189,6 +189,10 @@
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"
                           :prepend t
                           :immediate-finish t)
+                         ("wu" "Work TODO for tomorrow" entry
+                          (file (org-file "chef"))
+                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>"
+                          :prepend t)
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "chef"))
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"

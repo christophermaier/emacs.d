@@ -161,17 +161,11 @@
                           "* TODO %^{Task}\n  Added: %U"
                           :prepend t
                           :immediate-finish t)
-
                          ("te" "Emacs TODO" entry
                           (file+headline (org-file "projects/computer") "Emacs")
                           "* TODO %^{Task}\n  Added: %U"
                           :prepend t
                           :immediate-finish t)
-
-
-                         ("tg" "General TODO" entry
-                          (file org-default-notes-file)
-                          "* TODO %?\n%U\n%a" :clock-in t :clock-resume t)
                          ("tt" "TODO For TODAY" entry
                           (file org-default-notes-file)
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>"
@@ -208,13 +202,9 @@
                           :prepend t
                           :immediate-finish t)
 
-                         ;; Templates for 1-on-1 discussions with each team member
                          ("z" "Team")
                          ("za" "Salim" entry
                           (file+datetree (org-file "team/salim"))
-                          "** %U - %^{Activity}\n   %?")
-                         ("zf" "Seth" entry
-                          (file+datetree (org-file "team/seth"))
                           "** %U - %^{Activity}\n   %?")
                          ("zj" "Jon A." entry
                           (file+datetree (org-file "team/jon_a"))
@@ -228,7 +218,6 @@
                          ("zt" "Tom" entry
                           (file+datetree (org-file "team/tom"))
                           "** %U - %^{Activity}\n   %?")))
-
 
 (org-clock-persistence-insinuate)
 

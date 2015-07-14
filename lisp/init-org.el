@@ -117,6 +117,11 @@
                               ("we" "Work" agenda ""
                                ((org-agenda-files `(,(org-file "chef")))
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
+                              ("wd" "Staff Meeting Agenda" tags-todo "staff")
+                              ("wj" "Jeff Meeting Agenda" tags-todo "jeff")
+                              ("wo" "Oliver Meeting Agenda" tags-todo "oliver")
+                              ("ws" "Seth Meeting Agenda" tags-todo "seth")
+
                               ("z" "Appointments Today" agenda*)))
 
 ;; Capture Configuration
@@ -124,6 +129,12 @@
 (setq-default
  org-default-notes-file (org-file "inbox")
  org-capture-templates '(
+
+                         ("d" "Delivery Staff")
+                         ("do" "Oliver Agenda Item" entry (file+headline (org-file "chef") "Oliver") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
+                         ("ds" "Seth Agenda Item"   entry (file+headline (org-file "chef") "Seth") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
+                         ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
+                         ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
 
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))

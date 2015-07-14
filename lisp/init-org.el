@@ -109,12 +109,6 @@
                               ("h" "Habits Only"
                                ((agenda "Habits" ((org-agenda-sorting-strategy '(habit-up time-up))))))
 
-                              ;; ("z" "By Date"
-                              ;;  ((agenda "Dead" ((org-agenda-entry-types '(:deadline))
-                              ;;                   (org-agenda-sorting-strategy '(priority-down category-keep))))
-                              ;;   (agenda "Do" ((org-agenda-entry-types '(:scheduled))
-                              ;;                 (org-agenda-sorting-strategy '(priority-down category-keep))))))
-
                               ("f" "Financial Work" agenda ""
                                ((org-agenda-files `(,(org-file "financial")))))
 

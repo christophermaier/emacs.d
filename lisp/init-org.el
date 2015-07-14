@@ -145,6 +145,11 @@
                           "|%<%Y-%m-%d>|%^{Weight}||"
                           :immediate-finish t)
 
+                         ;; Intend for this to be refiled when added
+                         ("m" "Management Note" entry
+                          (file (org-file "management_notes"))
+                          "* %^{Heading}\n  %U\n  %?")
+
                          ("s" "Shopping")
                          ("sg" "Groceries" entry
                           (file+headline (org-file "shopping")

@@ -131,11 +131,11 @@
  org-default-notes-file (org-file "inbox")
  org-capture-templates '(
 
-                         ("d" "Delivery Staff")
-                         ("do" "Oliver Agenda Item" entry (file+headline (org-file "chef") "Oliver") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
-                         ("ds" "Seth Agenda Item"   entry (file+headline (org-file "chef") "Seth") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
-                         ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
-                         ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
+                         ("d" "Delivery Agenda Items")
+                         ("do" "Oliver Agenda Item" entry (file+headline (org-file "chef") "Oliver Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("ds" "Seth Agenda Item"   entry (file+headline (org-file "chef") "Seth Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
                          ("dr" "Retrospective Item" entry (file+headline (org-file "chef") "Retrospective Topics") "* TODO %^{Topic}\n  %U\n  %?" :prepend t)
 
                          ("j" "Daily Journal" entry

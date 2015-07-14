@@ -131,6 +131,10 @@
  org-default-notes-file (org-file "inbox")
  org-capture-templates '(
 
+                         ("j" "Daily Journal" entry
+                          (file+datetree (org-file "review"))
+                          "* %U - %^{Activity}\n  %?")
+
                          ("l" "Weight" table-line
                           (file+headline "/Users/maier/weight.org" "Weight")
                           "|%<%Y-%m-%d>|%^{Weight}||"

@@ -120,6 +120,7 @@
                               ("wd" "Staff Meeting Agenda" tags-todo "staff")
                               ("wj" "Jeff Meeting Agenda" tags-todo "jeff")
                               ("wo" "Oliver Meeting Agenda" tags-todo "oliver")
+                              ("wr" "Retrospective Agenda" tags-todo "retro")
                               ("ws" "Seth Meeting Agenda" tags-todo "seth")
 
                               ("z" "Appointments Today" agenda*)))
@@ -135,6 +136,7 @@
                          ("ds" "Seth Agenda Item"   entry (file+headline (org-file "chef") "Seth") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
                          ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
                          ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff") "* TODO %^{Activity}\n  %U\n  %?",:prepend t)
+                         ("dr" "Retrospective Item" entry (file+headline (org-file "chef") "Retrospective Topics") "* TODO %^{Topic}\n  %U\n  %?" :prepend t)
 
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))

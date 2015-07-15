@@ -123,6 +123,13 @@
                               ("wr" "Retrospective Agenda" tags-todo "retro")
                               ("ws" "Seth Meeting Agenda" tags-todo "seth")
 
+                              ("wz" "Upcoming work deadlines - next 10 days" agenda ""
+                               ((org-agenda-files `(,(org-file "chef")))
+                                (org-agenda-time-grid nil)
+                                (org-deadline-warning-days 10)
+                                (org-agenda-entry-types '(:deadline))
+                                (org-agenda-sorting-strategy '(deadline-up))))
+
                               ("z" "Appointments Today" agenda*)))
 
 ;; Capture Configuration

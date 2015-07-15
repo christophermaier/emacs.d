@@ -144,6 +144,11 @@
                          ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
                          ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
                          ("dr" "Retrospective Item" entry (file+headline (org-file "chef") "Retrospective Topics") "* TODO %^{Topic}\n  %U\n  %?" :prepend t)
+                         ("d1" "Tom Agenda Item" entry (file+headline (org-file "chef") "Tom Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("d2" "Jon A. Agenda Item" entry (file+headline (org-file "chef") "Jon A. Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("d3" "Scott Agenda Item" entry (file+headline (org-file "chef") "Scott Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("d4" "Salim Agenda Item" entry (file+headline (org-file "chef") "Salim Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ("d5" "Jess Agenda Item" entry (file+headline (org-file "chef") "Jess Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
 
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))
@@ -216,20 +221,20 @@
                           :prepend t
                           :immediate-finish t)
 
-                         ("z" "Team")
-                         ("za" "Salim" entry
+                         ("z" "Direct Reports")
+                         ("za" "Salim Note" entry
                           (file+datetree (org-file "team/salim"))
                           "** %U - %^{Activity}\n   %?")
-                         ("zj" "Jon A." entry
+                         ("zj" "Jon A. Note" entry
                           (file+datetree (org-file "team/jon_a"))
                           "** %U - %^{Activity}\n   %?")
-                         ("zm" "Jess" entry
+                         ("zm" "Jess Note" entry
                           (file+datetree (org-file "team/jess"))
                           "** %U - %^{Activity}\n   %?")
-                         ("zs" "Scott" entry
+                         ("zs" "Scott Note" entry
                           (file+datetree (org-file "team/scott"))
                           "** %U - %^{Activity}\n   %?")
-                         ("zt" "Tom" entry
+                         ("zt" "Tom Note" entry
                           (file+datetree (org-file "team/tom"))
                           "** %U - %^{Activity}\n   %?")))
 

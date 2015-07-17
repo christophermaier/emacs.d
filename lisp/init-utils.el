@@ -58,11 +58,11 @@
          (day-of-week (calendar-day-of-week today)))
     (cond
      ;; today is saturday
-     ((= 6 day-of-week)  today)
+     ((= 6 day-of-week) today)
      ;; today is sunday; yesterday was the start of this weekend
-     ((= 0 day-of-week) (calendar-current-date -1)
+     ((= 0 day-of-week) (calendar-current-date -1))
      ;; must be next weekend, then
-     (cwmaier/this-coming-day-date 6)))))
+     ((cwmaier/this-coming-day-date 6)))))
 
 (defun cwmaier/this-weekends-sunday ()
   "Returns (MONTH DAY YEAR) of the day after

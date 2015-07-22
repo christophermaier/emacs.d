@@ -119,6 +119,7 @@
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
                               ("wd" "Staff Meeting Agenda" tags-todo "staff")
                               ("wj" "Jeff Meeting Agenda" tags-todo "jeff")
+                              ("wm" "Megan Meeting Agenda" tags-todo "megan")
                               ("wo" "Oliver Meeting Agenda" tags-todo "oliver")
                               ("wr" "Retrospective Agenda" tags-todo "retro")
                               ("ws" "Seth Meeting Agenda" tags-todo "seth")
@@ -144,19 +145,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq-default
  org-default-notes-file (org-file "inbox")
- org-capture-templates '(
-
+ org-capture-templates `(
                          ("d" "Delivery Agenda Items")
-                         ("do" "Oliver Agenda Item" entry (file+headline (org-file "chef") "Oliver Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("ds" "Seth Agenda Item"   entry (file+headline (org-file "chef") "Seth Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("dt" "Staff Agenda Item"  entry (file+headline (org-file "chef") "Staff Meeting Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("dj" "Jeff Agenda Item"   entry (file+headline (org-file "chef") "Jeff Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("dr" "Retrospective Item" entry (file+headline (org-file "chef") "Retrospective Topics") "* TODO %^{Topic}\n  %U\n  %?" :prepend t)
-                         ("d1" "Tom Agenda Item" entry (file+headline (org-file "chef") "Tom Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("d2" "Jon A. Agenda Item" entry (file+headline (org-file "chef") "Jon A. Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("d3" "Scott Agenda Item" entry (file+headline (org-file "chef") "Scott Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("d4" "Salim Agenda Item" entry (file+headline (org-file "chef") "Salim Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
-                         ("d5" "Jess Agenda Item" entry (file+headline (org-file "chef") "Jess Agenda Items") "* TODO %^{Activity}\n  %U\n  %?", :prepend t)
+                         ,(my/agenda-item "do" "Oliver Agenda Item" (org-file "chef") "Oliver Agenda Items")
+                         ,(my/agenda-item "dm" "Megan Agenda Item" (org-file "chef") "Megan Agenda Items")
+                         ,(my/agenda-item "ds" "Seth Agenda Item" (org-file "chef") "Seth Agenda Items")
+                         ,(my/agenda-item "dt" "Staff Agenda Item" (org-file "chef") "Staff Agenda Items")
+                         ,(my/agenda-item "dj" "Jeff Agenda Item" (org-file "chef") "Jeff Agenda Items")
+                         ,(my/agenda-item "dr" "Retrospective Item" (org-file "chef") "Retrospective Topics")
+                         ,(my/agenda-item "d1" "Tom Agenda Item" (org-file "chef") "Tom Agenda Items")
+                         ,(my/agenda-item "d2" "Jon A. Agenda Item" (org-file "chef") "Jon A. Agenda Items")
+                         ,(my/agenda-item "d3" "Scott Agenda Item" (org-file "chef") "Scott Agenda Items")
+                         ,(my/agenda-item "d4" "Salim Agenda Item" (org-file "chef") "Salim Agenda Items")
+                         ,(my/agenda-item "d5" "Jess Agenda Item" (org-file "chef") "Jess Agenda Items")
 
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))
@@ -230,21 +231,11 @@
                           :immediate-finish t)
 
                          ("z" "Direct Reports")
-                         ("za" "Salim Note" entry
-                          (file+datetree (org-file "team/salim"))
-                          "** %U - %^{Activity}\n   %?")
-                         ("zj" "Jon A. Note" entry
-                          (file+datetree (org-file "team/jon_a"))
-                          "** %U - %^{Activity}\n   %?")
-                         ("zm" "Jess Note" entry
-                          (file+datetree (org-file "team/jess"))
-                          "** %U - %^{Activity}\n   %?")
-                         ("zs" "Scott Note" entry
-                          (file+datetree (org-file "team/scott"))
-                          "** %U - %^{Activity}\n   %?")
-                         ("zt" "Tom Note" entry
-                          (file+datetree (org-file "team/tom"))
-                          "** %U - %^{Activity}\n   %?")))
+                         ,(my/direct-report-item "za" "Salim Note" (org-file "team/salim"))
+                         ,(my/direct-report-item "zj" "Jon A. Note" (org-file "team/jon_a"))
+                         ,(my/direct-report-item "zm" "Jess Note" (org-file "team/jess"))
+                         ,(my/direct-report-item "zs" "Scott Note" (org-file "team/scott"))
+                         ,(my/direct-report-item "zt" "Tom Note" (org-file "team/tom"))))
 
 (org-clock-persistence-insinuate)
 

@@ -80,4 +80,12 @@
           " "
           (calendar-day-name date t)))
 
+(defun my/agenda-item (key description file heading)
+  "Helpful function to create entries for `org-capture-templates` for agenda items for meeting with people"
+  `(,key ,description entry (file+headline ,file ,heading) "* TODO %^{Item}\n  %U\n  %?" :prepend t))
+
+(defun my/direct-report-item (key description file)
+  "Create entries for `org-capture-templates` for capturing info about team members"
+  `(,key ,description entry (file+datetree ,file) "** %U - %^{Activity}\n   %?"))
+
 (provide 'init-utils)

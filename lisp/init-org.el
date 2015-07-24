@@ -27,6 +27,13 @@
 
 ;; (global-set-key (kbd "<f9>") 'org-mobile-push)
 ;; (global-set-key (kbd "S-<f9>") 'org-mobile-pull)
+
+(defun my/work-log ()
+  "Capture a work log item; see org-capture-templates"
+  (interactive)
+  (org-capture nil "wl"))
+(global-set-key (kbd "<f10>") 'my/work-log)
+
 (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
 (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 

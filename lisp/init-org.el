@@ -30,6 +30,9 @@
 (global-set-key (kbd "<f11>") 'org-agenda-clock-in)
 (global-set-key (kbd "<f12>") 'org-agenda-clock-out)
 
+(define-key org-agenda-mode-map (kbd "C->") 'org-agenda-date-later-hours)
+(define-key org-agenda-mode-map (kbd "C-<") 'org-agenda-date-earlier-hours)
+
 ;; Basic Config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq

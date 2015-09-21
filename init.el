@@ -22,6 +22,7 @@
 
 (require 'init-prog-mode)
 (require 'init-erlang)
+(require 'init-elixir)
 (require 'init-ruby)
 (require 'init-paredit)
 (require 'init-lisp)

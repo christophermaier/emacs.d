@@ -1,0 +1,31 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: supervisor
+# key: supervisor
+# binding: direct-keybinding
+# --
+-behaviour(supervisor).
+
+%% Public API
+-export([
+          start_link/0
+        ]).
+
+%% Behaviour callbacks
+-export([
+         init/1
+        ]).
+
+-define(ONE_FOR_ONE_RESTART_STRATEGY,
+        {one_for_one, 5, 10}).
+
+-define(PERMANENT_CHILD_WORKER_SPEC (Module,Function,Args),
+        {Module, {Module,Function,Args}, permanent, 5000, worker, [Module]}).
+
+start_link() ->
+    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+
+init([]) ->
+    {ok, {?ONE_FOR_ONE_RESTART_STRATEGY,
+          [?PERMANENT_CHILD_WORKER_SPEC(${1:worker_module_name},
+                                        ${2:start_link}, ${3:[]})]}}.
+$0

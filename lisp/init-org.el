@@ -4,6 +4,8 @@
 (defun org-file (filename-without-extension)
   (concat org-directory "/" filename-without-extension ".org"))
 
+(defvar work-org-file (org-file "operable"))
+
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
@@ -123,26 +125,19 @@
                                ((org-agenda-files `(,(org-file "financial")))))
 
                               ("w" . "Work Stuff")
-                              ("w1" "1-on-1 Discussion Points" tags-todo "1-on-1")
                               ("we" "Work" agenda ""
-                               ((org-agenda-files `(,(org-file "chef")))
+                               ((org-agenda-files `(,work-org-file))
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
-                              ("wd" "Staff Meeting Agenda" tags-todo "staff")
-                              ("wj" "Jeff Meeting Agenda" tags-todo "jeff")
-                              ("wm" "Megan Meeting Agenda" tags-todo "megan")
-                              ("wo" "Oliver Meeting Agenda" tags-todo "oliver")
-                              ("wr" "Retrospective Agenda" tags-todo "retro")
-                              ("ws" "Seth Meeting Agenda" tags-todo "seth")
 
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,(org-file "chef")))
+                               ((org-agenda-files `(,work-org-file))
                                 (org-agenda-time-grid nil)
                                 (org-deadline-warning-days 10)
                                 (org-agenda-entry-types '(:deadline))
                                 (org-agenda-sorting-strategy '(deadline-up))))
 
                               ("y" "Upcoming personal deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,@(delete (file-truename (org-file "chef"))
+                               ((org-agenda-files `(,@(delete (file-truename work-org-file)
                                                               (org-agenda-files))))
                                 (org-agenda-time-grid nil)
                                 (org-deadline-warning-days 10)
@@ -156,19 +151,6 @@
 (setq-default
  org-default-notes-file (org-file "inbox")
  org-capture-templates `(
-                         ("d" "Delivery Agenda Items")
-                         ,(my/agenda-item "do" "Oliver Agenda Item" (org-file "chef") "Oliver Agenda Items")
-                         ,(my/agenda-item "dm" "Megan Agenda Item" (org-file "chef") "Megan Agenda Items")
-                         ,(my/agenda-item "ds" "Seth Agenda Item" (org-file "chef") "Seth Agenda Items")
-                         ,(my/agenda-item "dt" "Staff Agenda Item" (org-file "chef") "Staff Agenda Items")
-                         ,(my/agenda-item "dj" "Jeff Agenda Item" (org-file "chef") "Jeff Agenda Items")
-                         ,(my/agenda-item "dr" "Retrospective Item" (org-file "chef") "Retrospective Topics")
-                         ,(my/agenda-item "d1" "Tom Agenda Item" (org-file "chef") "Tom Agenda Items")
-                         ,(my/agenda-item "d2" "Jon A. Agenda Item" (org-file "chef") "Jon A. Agenda Items")
-                         ,(my/agenda-item "d3" "Scott Agenda Item" (org-file "chef") "Scott Agenda Items")
-                         ,(my/agenda-item "d4" "Salim Agenda Item" (org-file "chef") "Salim Agenda Items")
-                         ,(my/agenda-item "d5" "Jess Agenda Item" (org-file "chef") "Jess Agenda Items")
-
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))
                           "* %U - %^{Activity}\n  %?")
@@ -177,11 +159,6 @@
                           (file+headline "/Users/maier/weight.org" "Weight")
                           "|%<%Y-%m-%d>|%^{Weight}||"
                           :immediate-finish t)
-
-                         ;; Intend for this to be refiled when added
-                         ("m" "Management Note" entry
-                          (file (org-file "management_notes"))
-                          "* %^{Heading}\n  %U\n  %?")
 
                          ("s" "Shopping")
                          ("sg" "Groceries" entry
@@ -226,26 +203,19 @@
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")
                          ("wt" "Work TODO Today" entry
-                          (file (org-file "chef"))
+                          (file work-org-file)
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"
                           :prepend t
                           :immediate-finish t)
                          ("wu" "Work TODO for tomorrow" entry
-                          (file (org-file "chef"))
+                          (file work-org-file)
                           "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>"
                           :prepend t)
                          ("wx" "Work TODO sometime in the next week" entry
-                          (file (org-file "chef"))
+                          (file work-org-file)
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"
                           :prepend t
-                          :immediate-finish t)
-
-                         ("z" "Direct Reports")
-                         ,(my/direct-report-item "za" "Salim Note" (org-file "team/salim"))
-                         ,(my/direct-report-item "zj" "Jon A. Note" (org-file "team/jon_a"))
-                         ,(my/direct-report-item "zm" "Jess Note" (org-file "team/jess"))
-                         ,(my/direct-report-item "zs" "Scott Note" (org-file "team/scott"))
-                         ,(my/direct-report-item "zt" "Tom Note" (org-file "team/tom"))))
+                          :immediate-finish t)))
 
 (org-clock-persistence-insinuate)
 

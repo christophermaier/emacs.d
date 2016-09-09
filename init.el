@@ -31,6 +31,7 @@
 (require 'init-go)
 (require 'init-yaml)
 (require 'init-yasnippet)
+(require 'init-terraform)
 
 (require 'init-spelling)
 (require 'init-eshell)

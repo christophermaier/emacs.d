@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: skip-test
+# key: skip
+# binding: direct-keybinding
+# --
+@tag :skip
+test "$1" do
+  flunk "implement me"
+end
+$0

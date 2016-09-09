@@ -4,6 +4,8 @@
 (defun org-file (filename-without-extension)
   (concat org-directory "/" filename-without-extension ".org"))
 
+(setq org-directory "~/Dropbox/org")
+
 (defvar work-org-file (org-file "operable"))
 
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
@@ -46,7 +48,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq
  org-blank-before-new-entry nil
- org-directory "~/Dropbox/org"
 ;; org-mobile-files `(,org-directory)
 ;; org-mobile-directory "~/Dropbox/MobileOrg"
 ;; org-mobile-inbox-for-pull (org-file "from-inbox")
@@ -154,11 +155,6 @@
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))
                           "* %U - %^{Activity}\n  %?")
-
-                         ("l" "Weight" table-line
-                          (file+headline "/Users/maier/weight.org" "Weight")
-                          "|%<%Y-%m-%d>|%^{Weight}||"
-                          :immediate-finish t)
 
                          ("s" "Shopping")
                          ("sg" "Groceries" entry

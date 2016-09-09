@@ -99,4 +99,9 @@
 (setq save-place-file (concat user-emacs-directory "saveplace"))
 (setq-default save-place t)
 
+;; Executable Files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
+
 (provide 'init-editing)

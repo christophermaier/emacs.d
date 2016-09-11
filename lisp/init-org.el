@@ -4,10 +4,6 @@
 (defun org-file (filename-without-extension)
   (concat org-directory "/" filename-without-extension ".org"))
 
-(setq org-directory "~/Dropbox/org")
-
-(defvar work-org-file (org-file "operable"))
-
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
@@ -47,6 +43,7 @@
 ;; Basic Config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq
+ org-directory "~/Dropbox/org"
  org-blank-before-new-entry nil
 ;; org-mobile-files `(,org-directory)
 ;; org-mobile-directory "~/Dropbox/MobileOrg"
@@ -127,18 +124,18 @@
 
                               ("w" . "Work Stuff")
                               ("we" "Work" agenda ""
-                               ((org-agenda-files `(,work-org-file))
+                               ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
 
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,work-org-file))
+                               ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-time-grid nil)
                                 (org-deadline-warning-days 10)
                                 (org-agenda-entry-types '(:deadline))
                                 (org-agenda-sorting-strategy '(deadline-up))))
 
                               ("y" "Upcoming personal deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,@(delete (file-truename work-org-file)
+                               ((org-agenda-files `(,@(delete (file-truename (org-file "work"))
                                                               (org-agenda-files))))
                                 (org-agenda-time-grid nil)
                                 (org-deadline-warning-days 10)
@@ -199,16 +196,16 @@
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")
                          ("wt" "Work TODO Today" entry
-                          (file work-org-file)
+                          (file (org-file "work"))
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"
                           :prepend t
                           :immediate-finish t)
                          ("wu" "Work TODO for tomorrow" entry
-                          (file work-org-file)
+                          (file (org-file "work"))
                           "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>"
                           :prepend t)
                          ("wx" "Work TODO sometime in the next week" entry
-                          (file work-org-file)
+                          (file (org-file "work"))
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"
                           :prepend t
                           :immediate-finish t)))

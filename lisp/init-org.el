@@ -127,6 +127,7 @@
                                ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
 
+                              ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
                                ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-time-grid nil)
@@ -192,6 +193,9 @@
                           :immediate-finish t)
 
                          ("w" "Work")
+                         ,(my/agenda-item "wm" "1-on-1 Agenda Item"
+                                          (org-file "work")
+                                          "Manager 1-on-1 Meeting Agenda Items")
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")

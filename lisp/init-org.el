@@ -128,6 +128,7 @@
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
 
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
+                              ("wp" "Principals Meeting" tags-todo "principals")
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
                                ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-time-grid nil)
@@ -199,6 +200,9 @@
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")
+                         ,(my/agenda-item "wp" "Principals Meeting Agenda Item"
+                                          (org-file "work")
+                                          "Principals Meeting Agenda Items")
                          ("wt" "Work TODO Today" entry
                           (file (org-file "work"))
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"

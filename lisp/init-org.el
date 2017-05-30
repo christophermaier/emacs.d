@@ -1,6 +1,8 @@
 ;; (require 'org-mobile)
 (require 'org-habit)
 
+(setq org-directory "~/Dropbox/org")
+
 (defun org-file (filename-without-extension)
   (concat org-directory "/" filename-without-extension ".org"))
 
@@ -135,6 +137,8 @@
                                 (org-agenda-entry-types '(:deadline))
                                 (org-agenda-sorting-strategy '(deadline-up))))
 
+                              ("x" "Added and undone in the past week" tags-todo "+Added>=\"<-7d>\"")
+
                               ("y" "Upcoming personal deadlines - next 10 days" agenda ""
                                ((org-agenda-files `(,@(delete (file-truename (org-file "work"))
                                                               (org-agenda-files))))
@@ -167,30 +171,29 @@
                          ("t" "New TODO")
                          ("tc" "Computer TODO" entry
                           (file+headline (org-file "projects/computer") "General Computer Setup")
-                          "* TODO %^{Task}\n  Added: %U"
+                          "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t
                           :immediate-finish t)
                          ("te" "Emacs TODO" entry
                           (file+headline (org-file "projects/computer") "Emacs")
-                          "* TODO %^{Task}\n  Added: %U"
+                          "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t
                           :immediate-finish t)
-                         ("tt" "TODO For TODAY" entry
+                         ("tt" "TODO For today" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>"
+                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t)
-                         ("tu" "TODO For tomorrow" entry
+                         ("tu" "TODO for tomorrow" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 23:59>"
+                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 23:59>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t)
                          ("tw" "TODO for this weekend" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/org-date (cwmaier/this-weekends-saturday))> DEADLINE: <%(cwmaier/org-date (cwmaier/this-weekends-sunday))>")
+                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/org-date (cwmaier/this-weekends-saturday))> DEADLINE: <%(cwmaier/org-date (cwmaier/this-weekends-sunday))>\n  :PROPERTIES:\n  :Added: %U\n  :END:")
                          ("tx" "TODO sometime in the next week" entry
                           (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today))>"
-                          :prepend t
-                          :immediate-finish t)
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today))>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+                          :prepend t)
 
                          ("w" "Work")
                          ,(my/agenda-item "wm" "1-on-1 Agenda Item"
@@ -199,20 +202,18 @@
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")
-                         ("wt" "Work TODO Today" entry
+                         ("wt" "Work TODO today" entry
                           (file (org-file "work"))
-                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>"
-                          :prepend t
-                          :immediate-finish t)
+                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+                          :prepend t)
                          ("wu" "Work TODO for tomorrow" entry
                           (file (org-file "work"))
-                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>"
+                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t)
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "work"))
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>"
-                          :prepend t
-                          :immediate-finish t)))
+                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+                          :prepend t)))
 
 (org-clock-persistence-insinuate)
 

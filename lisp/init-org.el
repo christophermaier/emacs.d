@@ -130,6 +130,9 @@
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
 
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
+
+                              ("wr" "Team Retrospective" tags-todo "team_retrospective")
+
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
                                ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-time-grid nil)
@@ -202,6 +205,9 @@
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Activity}\n  %?")
+                         ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
+                                          (org-file "work")
+                                          "Team Retrospective Agenda Items")
                          ("wt" "Work TODO today" entry
                           (file (org-file "work"))
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"

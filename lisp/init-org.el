@@ -219,7 +219,11 @@
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "work"))
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)))
+                          :prepend t)
+
+                         ("z" "Writing Idea" entry
+                          (file (org-file "writing"))
+                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:")))
 
 (org-clock-persistence-insinuate)
 

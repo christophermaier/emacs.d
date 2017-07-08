@@ -130,7 +130,11 @@
                                 (org-agenda-sorting-strategy '(priority-down effort-down))))
 
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
+
                               ("wp" "Principals Meeting" tags-todo "principals")
+
+                              ("wr" "Team Retrospective" tags-todo "team_retrospective")
+
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""
                                ((org-agenda-files `(,(org-file "work")))
                                 (org-agenda-time-grid nil)
@@ -207,6 +211,11 @@
                          ,(my/agenda-item "wp" "Principals Meeting Agenda Item"
                                           (org-file "work")
                                           "Principals Meeting Agenda Items")
+
+                         ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
+                                          (org-file "work")
+                                          "Team Retrospective Agenda Items")
+
                          ("wt" "Work TODO today" entry
                           (file (org-file "work"))
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
@@ -218,7 +227,11 @@
                          ("wx" "Work TODO sometime in the next week" entry
                           (file (org-file "work"))
                           "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)))
+                          :prepend t)
+
+                         ("z" "Writing Idea" entry
+                          (file (org-file "writing"))
+                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:")))
 
 (org-clock-persistence-insinuate)
 

@@ -65,7 +65,7 @@
  '(magit-commit-arguments (quote ("--signoff")))
  '(package-selected-packages
    (quote
-    (flycheck-color-mode-line flycheck helm-flycheck racer cargo protobuf-mode toml-mode graphviz-dot-mode gnuplot terraform-mode helm-c-yasnippet yasnippet yaml-mode flycheck-clojure cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file magit company helm-projectile projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
+    (tide flycheck-color-mode-line flycheck helm-flycheck racer cargo protobuf-mode toml-mode graphviz-dot-mode gnuplot terraform-mode helm-c-yasnippet yasnippet yaml-mode flycheck-clojure cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file magit company helm-projectile projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

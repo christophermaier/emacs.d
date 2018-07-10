@@ -50,13 +50,18 @@
 ;; org-mobile-files `(,org-directory)
 ;; org-mobile-directory "~/Dropbox/MobileOrg"
 ;; org-mobile-inbox-for-pull (org-file "from-inbox")
- org-agenda-files `(,org-directory "~/Dropbox/org/projects")
+ org-agenda-files `(,org-directory
+                    "~/Dropbox/org/projects"
+                    "~/Dropbox/org/projects/languages")
  org-agenda-span 'day
  org-agenda-skip-deadline-if-done t
  org-agenda-skip-scheduled-if-done t
  org-agenda-skip-scheduled-if-deadline-is-shown 'not-today
  org-agenda-include-diary nil
  org-agenda-log-mode-items '(closed clock)
+
+ org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA"
+
  org-enforce-todo-dependencies t
  org-todo-keywords '((sequence "TODO(t)"
                                "STARTED(s!)"
@@ -112,6 +117,12 @@
 
                               ("W" "Waiting" todo "WAITING")
 
+                              ("c" "Chores" agenda ""
+                               ((org-agenda-tag-filter-preset '("+chore"))
+                                (org-agenda-sorting-strategy '(time-up
+                                                               scheduled-up
+                                                               deadline-down))))
+
                               ("e" "Errands" tags-todo "errands|shopping"
                                ((org-agenda-todo-ignore-scheduled 'future)
                                 (org-agenda-tags-todo-honor-ignore-options t)))
@@ -127,7 +138,9 @@
                               ("w" . "Work Stuff")
                               ("we" "Work" agenda ""
                                ((org-agenda-files `(,(org-file "work")))
-                                (org-agenda-sorting-strategy '(priority-down effort-down))))
+                                (org-agenda-sorting-strategy '(time-up
+                                                               scheduled-up
+                                                               deadline-down))))
 
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
 
@@ -150,7 +163,10 @@
                                 (org-agenda-time-grid nil)
                                 (org-deadline-warning-days 10)
                                 (org-agenda-entry-types '(:deadline))
-                                (org-agenda-sorting-strategy '(deadline-up))))
+
+                                ;; TODO: use deadline-up once I sort
+                                ;; through the really old stuff
+                                (org-agenda-sorting-strategy '(deadline-down))))
 
                               ("z" "Appointments Today" agenda*)))
 
@@ -159,6 +175,12 @@
 (setq-default
  org-default-notes-file (org-file "inbox")
  org-capture-templates `(
+                         ("c" "Capture to refile" entry
+                          (file (org-file "refile"))
+                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+                          :prepend t
+                          :clock-in t
+                          :clock-resume t)
                          ("j" "Daily Journal" entry
                           (file+datetree (org-file "review"))
                           "* %U - %^{Activity}\n  %?")
@@ -206,11 +228,19 @@
                                           "Manager 1-on-1 Meeting Agenda Items")
                          ("wl" "Work Log" entry
                           (file+datetree (org-file "work_log"))
-                          "* %U - %^{Activity}\n  %?")
-
-                         ,(my/agenda-item "wp" "Principals Meeting Agenda Item"
-                                          (org-file "work")
-                                          "Principals Meeting Agenda Items")
+                          "* %U - %^{Activity}\n  %?"
+                          :clock-in t
+                          :clock-resume t)
+                         ("wn" "Work Meeting" entry
+                          (file+datetree (org-file "work_log"))
+                          "* %U - Meeting with %^{With} :meeting:\n  %?"
+                          :clock-in t
+                          :clock-resume t)
+                         ("wz" "End of Day Work Review" entry
+                          (file+datetree (org-file "work_log"))
+                          "* %U - End of Day Review :review:\n  %?"
+                          :clock-in t
+                          :clock-resume t)
 
                          ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
                                           (org-file "work")

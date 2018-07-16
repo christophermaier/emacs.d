@@ -178,10 +178,25 @@
                          ("c" "Capture to refile" entry
                           (file (org-file "refile"))
                           "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t
+                          :prepend f
                           :clock-in t
                           :clock-resume t)
-                         ("j" "Daily Journal" entry
+
+
+                         ("j" "Japanese")
+                         ("ja" "Anki Japanese Reviews" entry
+                          (file+datetree (org-file "projects/languages/japanese"))
+                          "* %U - Anki Japanese Reviews"
+                          :clock-in t
+                          :clock-resume t)
+                         ("jw" "WaniKani" entry
+                          (file+datetree (org-file "projects/languages/japanese"))
+                          "* %U - WaniKani %^{Activity|Reviews|Lessons}"
+                          :clock-in t
+                          :clock-resume t)
+
+
+                         ("k" "Daily Journal" entry
                           (file+datetree (org-file "review"))
                           "* %U - %^{Activity}\n  %?")
 

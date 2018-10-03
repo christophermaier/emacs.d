@@ -189,6 +189,11 @@
                           "* %U - Anki Japanese Reviews"
                           :clock-in t
                           :clock-resume t)
+                         ("jb" "Bunpro" entry
+                          (file+datetree (org-file "projects/languages/japanese"))
+                          "* %U - Bunpro %^{Activity|Reviews|Lessons}"
+                          :clock-in t
+                          :clock-resume t)
                          ("jw" "WaniKani" entry
                           (file+datetree (org-file "projects/languages/japanese"))
                           "* %U - WaniKani %^{Activity|Reviews|Lessons}"

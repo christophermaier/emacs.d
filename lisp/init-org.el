@@ -256,6 +256,11 @@
                           "* %U - Meeting with %^{With} :meeting:\n  %?"
                           :clock-in t
                           :clock-resume t)
+                         ("wp" "Code Review" entry
+                          (file+datetree (org-file "work_log"))
+                          "* %U - Code Review of %^{PR} :code-review:\n  %?"
+                          :clock-in t
+                          :clock-resume t)
                          ("wz" "End of Day Work Review" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - End of Day Review :review:\n  %?"

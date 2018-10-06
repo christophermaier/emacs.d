@@ -115,8 +115,6 @@
                               ("sd" "Dee"                tags-todo "dee&shopping")
                               ("sx" "Xmas Shopping"      tags-todo "xmas&shopping")
 
-                              ("W" "Waiting" todo "WAITING")
-
                               ("c" "Chores" agenda ""
                                ((org-agenda-tag-filter-preset '("+chore"))
                                 (org-agenda-sorting-strategy '(time-up

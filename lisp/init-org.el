@@ -144,8 +144,6 @@
 
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
 
-                              ("wp" "Principals Meeting" tags-todo "principals")
-
                               ("wr" "Team Retrospective" tags-todo "team_retrospective")
 
                               ("wz" "Upcoming work deadlines - next 10 days" agenda ""

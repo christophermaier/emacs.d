@@ -229,17 +229,6 @@
                           (file org-default-notes-file)
                           "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t)
-                         ("tu" "TODO for tomorrow" entry
-                          (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 23:59>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
-                         ("tw" "TODO for this weekend" entry
-                          (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%(cwmaier/org-date (cwmaier/this-weekends-saturday))> DEADLINE: <%(cwmaier/org-date (cwmaier/this-weekends-sunday))>\n  :PROPERTIES:\n  :Added: %U\n  :END:")
-                         ("tx" "TODO sometime in the next week" entry
-                          (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today))>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
 
                          ("w" "Work")
                          ,(my/agenda-item "w1" "1-on-1 Agenda Item"

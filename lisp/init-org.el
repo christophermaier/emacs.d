@@ -114,6 +114,9 @@
                               ("sc" "Me"                 tags-todo "chris&shopping-books")
                               ("sd" "Dee"                tags-todo "dee&shopping")
                               ("sx" "Xmas Shopping"      tags-todo "xmas&shopping")
+                              ("ss" "All Shopping" tags-todo "shopping"
+                               ((org-agenda-todo-ignore-scheduled 'future)
+                                (org-agenda-tags-todo-honor-ignore-options t)))
 
                               ("c" "Chores" agenda ""
                                ((org-agenda-tag-filter-preset '("+chore"))
@@ -121,7 +124,7 @@
                                                                scheduled-up
                                                                deadline-down))))
 
-                              ("e" "Errands" tags-todo "errands|shopping"
+                              ("e" "Errands" tags-todo "errands"
                                ((org-agenda-todo-ignore-scheduled 'future)
                                 (org-agenda-tags-todo-honor-ignore-options t)))
 

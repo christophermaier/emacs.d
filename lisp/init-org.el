@@ -181,6 +181,11 @@
                           :clock-in t
                           :clock-resume t)
 
+                         ("g" "Guitar Practice" entry
+                          (file+datetree (org-file "projects/music"))
+                          "* %U - Guitar Practice"
+                          :clock-in t
+                          :clock-resume t)
 
                          ("j" "Japanese")
                          ("ja" "Anki Japanese Reviews" entry

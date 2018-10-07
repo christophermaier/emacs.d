@@ -242,7 +242,7 @@
                           :prepend t)
 
                          ("w" "Work")
-                         ,(my/agenda-item "wm" "1-on-1 Agenda Item"
+                         ,(my/agenda-item "w1" "1-on-1 Agenda Item"
                                           (org-file "work")
                                           "Manager 1-on-1 Meeting Agenda Items")
                          ("wl" "Work Log" entry
@@ -250,38 +250,29 @@
                           "* %U - %^{Activity}\n  %?"
                           :clock-in t
                           :clock-resume t)
-                         ("wn" "Work Meeting" entry
+                         ("wm" "Work Meeting" entry
                           (file+datetree (org-file "work_log"))
-                          "* %U - Meeting with %^{With} :meeting:\n  %?"
+                          "* %U - %^{Meeting} Meeting :meeting:\n  %?"
                           :clock-in t
                           :clock-resume t)
-                         ("wp" "Code Review" entry
+                         ("wt" "Work Talk" entry
+                          (file+datetree (org-file "work_log"))
+                          "* %U - Talk with %^{With} about %^{About} :meeting:\n  %?"
+                          :clock-in t
+                          :clock-resume t)
+                         ("wr" "Code Review" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - Code Review of %^{PR} :code-review:\n  %?"
                           :clock-in t
                           :clock-resume t)
-                         ("wz" "End of Day Work Review" entry
+                         ("wp" "End of Day Work Review" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - End of Day Review :review:\n  %?"
                           :clock-in t
                           :clock-resume t)
-
                          ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
                                           (org-file "work")
                                           "Team Retrospective Agenda Items")
-
-                         ("wt" "Work TODO today" entry
-                          (file (org-file "work"))
-                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 17:00>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
-                         ("wu" "Work TODO for tomorrow" entry
-                          (file (org-file "work"))
-                          "* TODO %^{Activity}\n  DEADLINE: <%(cwmaier/org-date (calendar-current-date 1)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
-                         ("wx" "Work TODO sometime in the next week" entry
-                          (file (org-file "work"))
-                          "* TODO %^{Activity}\n  SCHEDULED: <%<%Y-%m-%d %a>> DEADLINE: <%(cwmaier/org-date (cwmaier/one-week-from-today)) 17:00>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
 
                          ("z" "Writing Idea" entry
                           (file (org-file "writing"))

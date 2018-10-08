@@ -143,6 +143,8 @@
                                                                scheduled-up
                                                                deadline-down))))
 
+                              ("wi" "Issues to File" tags-todo "issue")
+
                               ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
 
                               ("wr" "Team Retrospective" tags-todo "team_retrospective")
@@ -244,6 +246,9 @@
                           "* %U - %^{Activity}\n  %?"
                           :clock-in t
                           :clock-resume t)
+                         ,(my/agenda-item "wi" "Issue To File"
+                                          (org-file "work")
+                                          "Issues to File")
                          ("wm" "Work Meeting" entry
                           (file+datetree (org-file "work_log"))
                           "* %U - %^{Meeting} Meeting :meeting:\n  %?"

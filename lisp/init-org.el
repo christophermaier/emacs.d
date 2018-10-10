@@ -192,17 +192,17 @@
                          ("j" "Japanese")
                          ("ja" "Anki Japanese Reviews" entry
                           (file+datetree (org-file "projects/languages/japanese"))
-                          "* %U - Anki Japanese Reviews"
+                          "* %U - Anki Japanese Reviews :anki:"
                           :clock-in t
                           :clock-resume t)
                          ("jb" "Bunpro" entry
                           (file+datetree (org-file "projects/languages/japanese"))
-                          "* %U - Bunpro %^{Activity|Reviews|Lessons}"
+                          "* %U - Bunpro %^{Activity|Reviews|Lessons} :bunpro:"
                           :clock-in t
                           :clock-resume t)
                          ("jw" "WaniKani" entry
                           (file+datetree (org-file "projects/languages/japanese"))
-                          "* %U - WaniKani %^{Activity|Reviews|Lessons}"
+                          "* %U - WaniKani %^{Activity|Reviews|Lessons} :wanikani:"
                           :clock-in t
                           :clock-resume t)
 

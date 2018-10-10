@@ -261,7 +261,7 @@
                           :clock-resume t)
                          ("wr" "Code Review" entry
                           (file+datetree (org-file "work_log"))
-                          "* %U - Code Review of %^{PR} :code-review:\n  %?"
+                          "* %U - Code Review of %^{PR} :code_review:\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ("wp" "End of Day Work Review" entry

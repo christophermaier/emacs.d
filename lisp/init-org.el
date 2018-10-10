@@ -177,58 +177,58 @@
  org-default-notes-file (org-file "inbox")
  org-capture-templates `(
                          ("c" "Capture to refile" entry
-                          (file (org-file "refile"))
+                          (file ,(org-file "refile"))
                           "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend f
                           :clock-in t
                           :clock-resume t)
 
                          ("g" "Guitar Practice" entry
-                          (file+datetree (org-file "projects/music"))
+                          (file+datetree ,(org-file "projects/music"))
                           "* %U - Guitar Practice"
                           :clock-in t
                           :clock-resume t)
 
                          ("j" "Japanese")
                          ("ja" "Anki Japanese Reviews" entry
-                          (file+datetree (org-file "projects/languages/japanese"))
+                          (file+datetree ,(org-file "projects/languages/japanese"))
                           "* %U - Anki Japanese Reviews :anki:"
                           :clock-in t
                           :clock-resume t)
                          ("jb" "Bunpro" entry
-                          (file+datetree (org-file "projects/languages/japanese"))
+                          (file+datetree ,(org-file "projects/languages/japanese"))
                           "* %U - Bunpro %^{Activity|Reviews|Lessons} :bunpro:"
                           :clock-in t
                           :clock-resume t)
                          ("jw" "WaniKani" entry
-                          (file+datetree (org-file "projects/languages/japanese"))
+                          (file+datetree ,(org-file "projects/languages/japanese"))
                           "* %U - WaniKani %^{Activity|Reviews|Lessons} :wanikani:"
                           :clock-in t
                           :clock-resume t)
 
 
                          ("k" "Daily Journal" entry
-                          (file+datetree (org-file "review"))
+                          (file+datetree ,(org-file "review"))
                           "* %U - %^{Activity}\n  %?")
 
                          ("s" "Shopping")
                          ("sg" "Groceries" entry
-                          (file+headline (org-file "shopping")
+                          (file+headline ,(org-file "shopping")
                                          "Groceries")
                           "* TODO %? %^G\n")
                          ("ss" "General Shopping" entry
-                          (file+headline (org-file "shopping")
+                          (file+headline ,(org-file "shopping")
                                          "Other Things To Buy")
                           "* TODO %? %^G\n")
 
                          ("t" "New TODO")
                          ("tc" "Computer TODO" entry
-                          (file+headline (org-file "projects/computer") "General Computer Setup")
+                          (file+headline ,(org-file "projects/computer") "General Computer Setup")
                           "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t
                           :immediate-finish t)
                          ("te" "Emacs TODO" entry
-                          (file+headline (org-file "projects/computer") "Emacs")
+                          (file+headline ,(org-file "projects/computer") "Emacs")
                           "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
                           :prepend t
                           :immediate-finish t)
@@ -239,42 +239,42 @@
 
                          ("w" "Work")
                          ,(my/agenda-item "w1" "1-on-1 Agenda Item"
-                                          (org-file "work")
+                                          ,(org-file "work")
                                           "Manager 1-on-1 Meeting Agenda Items")
                          ("wl" "Work Log" entry
-                          (file+datetree (org-file "work_log"))
+                          (file+datetree ,(org-file "work_log"))
                           "* %U - %^{Activity}\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ,(my/agenda-item "wi" "Issue To File"
-                                          (org-file "work")
+                                          ,(org-file "work")
                                           "Issues to File")
                          ("wm" "Work Meeting" entry
-                          (file+datetree (org-file "work_log"))
+                          (file+datetree ,(org-file "work_log"))
                           "* %U - %^{Meeting} Meeting :meeting:\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ("wt" "Work Talk" entry
-                          (file+datetree (org-file "work_log"))
+                          (file+datetree ,(org-file "work_log"))
                           "* %U - Talk with %^{With} about %^{About} :meeting:\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ("wr" "Code Review" entry
-                          (file+datetree (org-file "work_log"))
+                          (file+datetree ,(org-file "work_log"))
                           "* %U - Code Review of %^{PR} :code_review:\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ("wp" "End of Day Work Review" entry
-                          (file+datetree (org-file "work_log"))
+                          (file+datetree ,(org-file "work_log"))
                           "* %U - End of Day Review :review:\n  %?"
                           :clock-in t
                           :clock-resume t)
                          ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
-                                          (org-file "work")
+                                          ,(org-file "work")
                                           "Team Retrospective Agenda Items")
 
                          ("z" "Writing Idea" entry
-                          (file (org-file "writing"))
+                          (file ,(org-file "writing"))
                           "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:")))
 
 (org-clock-persistence-insinuate)

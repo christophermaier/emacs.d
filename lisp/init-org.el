@@ -178,7 +178,7 @@
  org-capture-templates `(
                          ("c" "Capture to refile" entry
                           (file ,(org-file "refile"))
-                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:\n  %?"
                           :prepend f
                           :clock-in t
                           :clock-resume t)

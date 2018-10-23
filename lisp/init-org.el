@@ -1,5 +1,6 @@
 ;; (require 'org-mobile)
 (require 'org-habit)
+(add-to-list 'org-modules 'org-habit)
 
 (setq org-directory "~/Dropbox/org")
 
@@ -59,11 +60,10 @@
  org-agenda-skip-scheduled-if-deadline-is-shown 'not-today
  org-agenda-include-diary nil
  org-agenda-log-mode-items '(closed clock)
-
  org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA"
-
  org-enforce-todo-dependencies t
  org-todo-keywords '((sequence "TODO(t)"
+                               "NEXT(n)"
                                "STARTED(s!)"
                                "WAITING(w@/!)"
                                "APPT(a)"
@@ -91,191 +91,479 @@
  org-src-tab-acts-natively t
  org-src-window-setup 'current-window
  org-use-sub-superscripts '{}
- org-habit-graph-column 60
- org-startup-with-inline-images t)
+ org-habit-graph-column 80
+ org-startup-with-inline-images t
+ org-agenda-window-setup 'only-window
+ org-agenda-restore-windows-after-quit t)
 
 ;; Agenda Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq-default
- org-agenda-custom-commands '(("p" . "Priorities")
-                              ("pa" "A items" tags-todo "+PRIORITY=\"A\""
-                               ((org-agenda-todo-ignore-scheduled 'future)
-                                (org-agenda-tags-todo-honor-ignore-options t)))
-                              ("pb" "B items" tags-todo "+PRIORITY=\"B\""
-                               ((org-agenda-todo-ignore-scheduled 'future)
-                                (org-agenda-tags-todo-honor-ignore-options t)))
-                              ("pc" "C items" tags-todo "+PRIORITY=\"C\""
-                               ((org-agenda-todo-ignore-scheduled 'future)
-                                (org-agenda-tags-todo-honor-ignore-options t)))
+ org-agenda-custom-commands
+ '(
+   ("s" . "Shopping Lists")
+   ("sa" "Alex"               tags-todo "alex&shopping")
+   ("sb" "My Books"           tags-todo "chris&book&shopping")
+   ("sc" "Me"                 tags-todo "chris&shopping-books")
+   ("sd" "Dee"                tags-todo "dee&shopping")
+   ("sx" "Xmas Shopping"      tags-todo "xmas&shopping")
+   ("ss" "All Shopping" tags-todo "shopping"
+    ((org-agenda-todo-ignore-scheduled 'future)
+     (org-agenda-tags-todo-honor-ignore-options t)))
 
-                              ("s" . "Shopping Lists")
-                              ("sa" "Alex"               tags-todo "alex&shopping")
-                              ("sb" "My Books"           tags-todo "chris&book&shopping")
-                              ("sc" "Me"                 tags-todo "chris&shopping-books")
-                              ("sd" "Dee"                tags-todo "dee&shopping")
-                              ("sx" "Xmas Shopping"      tags-todo "xmas&shopping")
-                              ("ss" "All Shopping" tags-todo "shopping"
-                               ((org-agenda-todo-ignore-scheduled 'future)
-                                (org-agenda-tags-todo-honor-ignore-options t)))
+   ("c" "Chores"
+    ((agenda ""
+             ((org-agenda-overriding-header "Personal Chores")
+              (org-agenda-files `(,(org-file "daily")))))
+     (agenda ""
+             ((org-agenda-overriding-header "Habits")
+              (org-agenda-skip-function 'air-org-skip-subtree-if-not-habit)))
+     (agenda ""
+             ((org-agenda-overriding-header "Home Chores")
+              (org-agenda-files `(,(org-file "maint")))))))
 
-                              ("c" "Chores" agenda ""
-                               ((org-agenda-tag-filter-preset '("+chore"))
-                                (org-agenda-sorting-strategy '(time-up
-                                                               scheduled-up
-                                                               deadline-down))))
+   ("e" "Errands" tags-todo "errands"
+    ((org-agenda-todo-ignore-scheduled 'future)
+     (org-agenda-tags-todo-honor-ignore-options t)))
 
-                              ("e" "Errands" tags-todo "errands"
-                               ((org-agenda-todo-ignore-scheduled 'future)
-                                (org-agenda-tags-todo-honor-ignore-options t)))
+   ("r" "Refile"
+    ((tags "+REFILE"
+           ((org-agenda-overriding-header "Items to refile")
+            (org-agenda-skip-function
+             '(org-agenda-skip-entry-if 'todo 'done))))
+     (tags "+REFILE"
+           ((org-agenda-overriding-header "Done items that REALLY need to be refiled")
+            (org-agenda-skip-function
+             '(org-agenda-skip-entry-if 'nottodo 'done)))))
+    ((org-tags-match-list-sublevels 'indented)))
 
-                              ("r" "Refile" tags "+REFILE")
+   ("h" "Habits" agenda ""
+    ((org-agenda-overriding-header "Habits")
+     (org-agenda-skip-function 'air-org-skip-subtree-if-not-habit)))
 
-                              ("h" "Habits Only"
-                               ((agenda "Habits" ((org-agenda-sorting-strategy '(habit-up time-up))))))
+   ("f" "Financial Work" agenda ""
+    ((org-agenda-files `(,(org-file "financial")))))
 
-                              ("f" "Financial Work" agenda ""
-                               ((org-agenda-files `(,(org-file "financial")))))
+   ("w" . "Work Stuff")
+   ("we" "Work" agenda ""
+    ((org-agenda-files `(,(org-file "work")))
+     (org-agenda-sorting-strategy '(time-up
+                                    scheduled-up
+                                    deadline-down))))
 
-                              ("w" . "Work Stuff")
-                              ("we" "Work" agenda ""
-                               ((org-agenda-files `(,(org-file "work")))
-                                (org-agenda-sorting-strategy '(time-up
-                                                               scheduled-up
-                                                               deadline-down))))
+   ("wi" "Issues to File" tags-todo "issue")
 
-                              ("wi" "Issues to File" tags-todo "issue")
+   ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
 
-                              ("wm" "1-on-1 with my manager" tags-todo "manager_1on1")
+   ("wr" "Team Retrospective" tags-todo "team_retrospective")
 
-                              ("wr" "Team Retrospective" tags-todo "team_retrospective")
+   ("wz" "Upcoming work deadlines - next 10 days" agenda ""
+    ((org-agenda-files `(,(org-file "work")))
+     (org-agenda-time-grid nil)
+     (org-deadline-warning-days 10)
+     (org-agenda-entry-types '(:deadline))
+     (org-agenda-sorting-strategy '(deadline-up))))
 
-                              ("wz" "Upcoming work deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,(org-file "work")))
-                                (org-agenda-time-grid nil)
-                                (org-deadline-warning-days 10)
-                                (org-agenda-entry-types '(:deadline))
-                                (org-agenda-sorting-strategy '(deadline-up))))
+   ("x" "Added and undone in the past week" tags-todo "+Added>=\"<-7d>\"")
 
-                              ("x" "Added and undone in the past week" tags-todo "+Added>=\"<-7d>\"")
+   ("y" "Upcoming personal deadlines - next 10 days" agenda ""
+    ((org-agenda-files `(,@(delete (file-truename (org-file "work"))
+                                   (org-agenda-files))))
+     (org-agenda-time-grid nil)
+     (org-deadline-warning-days 10)
+     (org-agenda-entry-types '(:deadline))
 
-                              ("y" "Upcoming personal deadlines - next 10 days" agenda ""
-                               ((org-agenda-files `(,@(delete (file-truename (org-file "work"))
-                                                              (org-agenda-files))))
-                                (org-agenda-time-grid nil)
-                                (org-deadline-warning-days 10)
-                                (org-agenda-entry-types '(:deadline))
+     ;; TODO: use deadline-up once I sort
+     ;; through the really old stuff
+     (org-agenda-sorting-strategy '(deadline-down))))
 
-                                ;; TODO: use deadline-up once I sort
-                                ;; through the really old stuff
-                                (org-agenda-sorting-strategy '(deadline-down))))
+   ;;("z" "Appointments Today" agenda*)
 
-                              ("z" "Appointments Today" agenda*)))
+   ("z" "Work Agenda"
+    (
+     (todo "WAITING"
+           ((org-agenda-overriding-header "Waiting at Work")))
+     (todo "STARTED"
+           ((org-agenda-overriding-header "Started at Work")))
+     (agenda ""
+             ((org-agenda-overriding-header "Deadline TODAY")
+              (org-agenda-skip-function
+               '(org-agenda-skip-deadline-if-not-today))
+              (org-agenda-entry-types '(:deadline))
+              (org-agenda-sorting-strategy '(deadline-up))))
+     (agenda ""
+             ((org-agenda-overriding-header "Scheduled TODAY")
+              (org-agenda-skip-function
+               '(org-agenda-skip-scheduled-if-not-today))
+              (org-agenda-entry-types '(:scheduled))))
+
+     (tags-todo "PRIORITY=\"A\""
+                ((org-agenda-overriding-header "High-Priority Work Tasks")
+                 (org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 (org-agenda-tags-todo-honor-ignore-options t)))
+
+     (agenda ""
+             ((org-agenda-overriding-header "OVERDUE (Sometimes pathologically so)")
+              (org-agenda-entry-types '(:deadline))
+              (org-deadline-warning-days 0)
+              ;; Ugh, this function sucks
+              (org-agenda-skip-function
+               '(org-agenda-skip-deadline-if-today))
+              (org-agenda-sorting-strategy '(deadline-down))))
+     (tags-todo "issue"
+                ((org-agenda-overriding-header "Issues to file")))
+     )
+
+    (
+     (org-agenda-span 'day)
+     (org-agenda-files `(,(org-file "work")
+                         ,(org-file "work_log")))))
+
+   ("q" "Test Agenda"
+    (
+
+
+     ;; habits
+     ;; due today
+     ;; scheduled today
+     ;; started
+     ;; next
+     ;; stuck
+
+     ;; Idea: Separate agenda views for my
+     ;; areas of interest (japanese,
+     ;; exercise, things to research, etc.)
+
+     ;; TODO: actually prioritize work tasks
+     (agenda ""
+             ((org-agenda-overriding-header "Deadline TODAY")
+              (org-agenda-span 'day)
+              (org-agenda-skip-function '(org-agenda-skip-deadline-if-not-today))
+              (org-agenda-entry-types '(:deadline))
+              (org-agenda-sorting-strategy '(deadline-up))))
+
+     (agenda ""
+             ((org-agenda-overriding-header "Scheduled TODAY")
+              (org-agenda-span 'day)
+              (org-agenda-skip-function '(org-agenda-skip-scheduled-if-not-today))
+              (org-agenda-entry-types '(:scheduled))))
+
+     (agenda ""
+             ((org-agenda-overriding-header "Scheduled, no Due Date")
+              (org-agenda-span 'day)
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline))
+              (org-agenda-sorting-strategy '(scheduled-down))
+              (org-agenda-entry-types '(:scheduled))))
+
+     (todo "STARTED"
+           ((org-agenda-overriding-header "Started at Home")
+            (org-agenda-files `(,@(delete (file-truename (org-file "to_read"))
+                                          (delete (file-truename (org-file "work_log"))
+                                                  (delete (file-truename (org-file "work"))
+                                                          (org-agenda-files))))))))
+
+     ;; Planning View
+     ;; Potential Improvement: Only show if
+     ;; scheduled is in the past
+     (agenda ""
+             ((org-agenda-overriding-header "Due within 2 weeks")
+              (org-agenda-entry-types '(:deadline))
+              ;; This function sucks
+              (org-agenda-skip-function '(org-agenda-skip-deadline-if-past))
+              (org-deadline-warning-days 14)
+              (org-agenda-sorting-strategy '(deadline-up))))
+
+     ;; Pathology View
+     (agenda ""
+             ((org-agenda-overriding-header "OVERDUE (Sometimes pathologically so)")
+              (org-agenda-entry-types '(:deadline))
+              (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
+                                            (delete (file-truename (org-file "work"))
+                                                    (org-agenda-files)))))
+              (org-deadline-warning-days 0)
+              ;; Ugh, this function sucks
+              (org-agenda-skip-function '(org-agenda-skip-deadline-if-today))
+              (org-agenda-sorting-strategy '(deadline-down))))
+
+
+     ;; TODO Need to skip over things that
+     ;; are scheduled in the
+     ;; future... what's here doesn't
+     ;; appear to work
+     (tags-todo "PRIORITY=\"A\""
+                ((org-agenda-overriding-header "High-Priority Personal Tasks:")
+                 ;; This is horrible... how to
+                 ;; do better?
+
+                 ;; TODO: Could just set some
+                 ;; file-level tags on both
+                 ;; files, and then filter by that.
+
+                 (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
+                                               (delete (file-truename (org-file "work"))
+                                                       (org-agenda-files)))))
+                 (org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-tags-todo-honor-ignore-options t)
+                 (org-agenda-todo-ignore-scheduled 'future)))
+
+     ;; TODO Fix the priority
+     ;; setup... what's the range I'm
+     ;; dealing with here?
+
+     ;; (tags-todo "PRIORITY=\"B\""
+     ;;            ((org-agenda-overriding-header "B Priority (All)")
+     ;;             (org-agenda-todo-ignore-scheduled 'future)
+     ;;             (org-agenda-tags-todo-honor-ignore-options t)))
+
+     (tags-todo "PRIORITY=\"C\""
+                ((org-agenda-overriding-header "C Priority (All)")
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 (org-agenda-tags-todo-honor-ignore-options t)))
+
+     (todo "STARTED"
+           ((org-agenda-overriding-header "Currently Reading")
+            (org-agenda-files `(,(org-file "to_read")))))
+
+     ;; (tags-todo "PRIORITY=\"C\""
+     ;;       ((org-agenda-overriding-header "C Priority")))
+
+     ;; (tags-todo "PRIORITY=\"D\""
+     ;;       ((org-agenda-overriding-header "D Priority")))
+
+     (stuck ""
+            ((org-tags-match-list-sublevels 'indented)))
+
+     (todo "NEXT"
+           ((org-agenda-overriding-header "Available Next Actions")
+            (org-agenda-todo-ignore-scheduled 'future)))))
+   ))
+
+;; This is screwed up I think
+;; (setq org-highest-priority ?A)
+;; (setq org-lowest-priority ?C)
+;; (setq org-default-priority ?B)
+
+;; Original
+;; (setq org-stuck-projects
+;;       '("+LEVEL=2/-DONE" ("TODO" "NEXT" "NEXTACTION") nil ""))
+
+;; (IDENTIFY_A_PROJECT
+;;  TODO_KEYWORDS_NON_STUCK_PROJECTS
+;;  TAGS_NON_STUCK_PROJECTS
+;;  REGEX_NON_STUCK_PROJECTS)
+(setq org-stuck-projects
+      '("+project/TODO=-DONE-STARTED"
+        ("NEXT")
+        nil
+        ""))
+(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-track-ordered-property-with-tag t)
+
+
+
+
+
+
+
+
+
+;; https://emacs.stackexchange.com/a/30194
+(defun org-agenda-skip-deadline-if-not-today ()
+"If this function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the search
+should be continued."
+  (ignore-errors
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (deadline-day
+            (time-to-days
+              (org-time-string-to-time
+                (org-entry-get nil "DEADLINE"))))
+          (now (time-to-days (current-time))))
+       (and deadline-day
+            (not (= deadline-day now))
+            subtree-end))))
+
+(defun org-agenda-skip-deadline-if-today ()
+"If this function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the search
+should be continued."
+  (ignore-errors
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (deadline-day
+            (time-to-days
+              (org-time-string-to-time
+                (org-entry-get nil "DEADLINE"))))
+          (now (time-to-days (current-time))))
+       (and deadline-day
+            (= deadline-day now)
+            subtree-end))))
+
+(defun org-agenda-skip-deadline-if-past ()
+"If this function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the search
+should be continued."
+  (ignore-errors
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (deadline-day
+            (time-to-days
+              (org-time-string-to-time
+                (org-entry-get nil "DEADLINE"))))
+          (now (time-to-days (current-time))))
+       (and deadline-day
+            (not (> deadline-day now))
+            subtree-end))))
+
+(defun org-agenda-skip-scheduled-if-not-today ()
+"If this function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the search
+should be continued."
+  (ignore-errors
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (deadline-day
+            (time-to-days
+              (org-time-string-to-time
+                (org-entry-get nil "SCHEDULED"))))
+          (now (time-to-days (current-time))))
+       (and deadline-day
+            (not (= deadline-day now))
+            subtree-end))))
+
+
 
 ;; Capture Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq-default
  org-default-notes-file (org-file "inbox")
- org-capture-templates `(
-                         ("c" "Capture to refile" entry
-                          (file ,(org-file "refile"))
-                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:\n  %?"
-                          :prepend f
-                          :clock-in t
-                          :clock-resume t)
+ org-capture-templates
+ `(
+   ("a" "Work Project" entry
+    (file+headline ,(org-file "work") "Project Log")
+    "* TODO %^{Project}    :project:ORDERED:
+  :PROPERTIES:
+  :Added: %U
+  :Issue: %^{Issue}p
+  :PR:
+  :PR_Submitted:
+  :PR_Merged:
+  :ORDERED: t
+  :END:
 
-                         ("g" "Guitar Practice" entry
-                          (file+datetree ,(org-file "projects/music"))
-                          "* %U - Guitar Practice"
-                          :clock-in t
-                          :clock-resume t)
+** Description of the Situation
+   %?
+** Plan of Attack
+** Notes
+** Task List
+** Issues To Spin Out of This
+")
 
-                         ("j" "Japanese")
-                         ("ja" "Anki Japanese Reviews" entry
-                          (file+datetree ,(org-file "projects/languages/japanese"))
-                          "* %U - Anki Japanese Reviews :anki:"
-                          :clock-in t
-                          :clock-resume t)
-                         ("jb" "Bunpro" entry
-                          (file+datetree ,(org-file "projects/languages/japanese"))
-                          "* %U - Bunpro %^{Activity|Reviews|Lessons} :bunpro:"
-                          :clock-in t
-                          :clock-resume t)
-                         ("jw" "WaniKani" entry
-                          (file+datetree ,(org-file "projects/languages/japanese"))
-                          "* %U - WaniKani %^{Activity|Reviews|Lessons} :wanikani:"
-                          :clock-in t
-                          :clock-resume t)
+   ("c" "Capture to refile" entry
+    (file ,(org-file "refile"))
+    "* TODO %^{Activity}
+  :PROPERTIES:
+  :Added: %U
+  :END:
+  %?"
+    :prepend f
+    :clock-in t
+    :clock-resume t)
+
+   ("g" "Guitar Practice" entry
+    (file+datetree ,(org-file "projects/music"))
+    "* %U - Guitar Practice"
+    :clock-in t
+    :clock-resume t)
+
+   ("j" "Japanese")
+   ("ja" "Anki Japanese Reviews" entry
+    (file+datetree ,(org-file "projects/languages/japanese"))
+    "* %U - Anki Japanese Reviews :anki:"
+    :clock-in t
+    :clock-resume t)
+   ("jb" "Bunpro" entry
+    (file+datetree ,(org-file "projects/languages/japanese"))
+    "* %U - Bunpro %^{Activity|Reviews|Lessons} :bunpro:"
+    :clock-in t
+    :clock-resume t)
+   ("jw" "WaniKani" entry
+    (file+datetree ,(org-file "projects/languages/japanese"))
+    "* %U - WaniKani %^{Activity|Reviews|Lessons} :wanikani:"
+    :clock-in t
+    :clock-resume t)
 
 
-                         ("k" "Daily Journal" entry
-                          (file+datetree ,(org-file "review"))
-                          "* %U - %^{Activity}\n  %?")
+   ("k" "Daily Journal" entry
+    (file+datetree ,(org-file "review"))
+    "* %U - %^{Activity}\n  %?")
 
-                         ("s" "Shopping")
-                         ("sg" "Groceries" entry
-                          (file+headline ,(org-file "shopping")
-                                         "Groceries")
-                          "* TODO %? %^G\n")
-                         ("ss" "General Shopping" entry
-                          (file+headline ,(org-file "shopping")
-                                         "Other Things To Buy")
-                          "* TODO %? %^G\n")
+   ("s" "Shopping")
+   ("sg" "Groceries" entry
+    (file+headline ,(org-file "shopping")
+                   "Groceries")
+    "* TODO %? %^G\n")
+   ("ss" "General Shopping" entry
+    (file+headline ,(org-file "shopping")
+                   "Other Things To Buy")
+    "* TODO %? %^G\n")
 
-                         ("t" "New TODO")
-                         ("tc" "Computer TODO" entry
-                          (file+headline ,(org-file "projects/computer") "General Computer Setup")
-                          "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t
-                          :immediate-finish t)
-                         ("te" "Emacs TODO" entry
-                          (file+headline ,(org-file "projects/computer") "Emacs")
-                          "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t
-                          :immediate-finish t)
-                         ("tt" "TODO For today" entry
-                          (file org-default-notes-file)
-                          "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-                          :prepend t)
+   ("t" "New TODO")
+   ("tc" "Computer TODO" entry
+    (file+headline ,(org-file "projects/computer") "General Computer Setup")
+    "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+    :prepend t
+    :immediate-finish t)
+   ("te" "Emacs TODO" entry
+    (file+headline ,(org-file "projects/computer") "Emacs")
+    "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+    :prepend t
+    :immediate-finish t)
+   ("tt" "TODO For today" entry
+    (file org-default-notes-file)
+    "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
+    :prepend t)
 
-                         ("w" "Work")
-                         ,(my/agenda-item "w1" "1-on-1 Agenda Item"
-                                          ,(org-file "work")
-                                          "Manager 1-on-1 Meeting Agenda Items")
-                         ("wl" "Work Log" entry
-                          (file+datetree ,(org-file "work_log"))
-                          "* %U - %^{Activity}\n  %?"
-                          :clock-in t
-                          :clock-resume t)
-                         ,(my/agenda-item "wi" "Issue To File"
-                                          ,(org-file "work")
-                                          "Issues to File")
-                         ("wm" "Work Meeting" entry
-                          (file+datetree ,(org-file "work_log"))
-                          "* %U - %^{Meeting} Meeting :meeting:\n  %?"
-                          :clock-in t
-                          :clock-resume t)
-                         ("wt" "Work Talk" entry
-                          (file+datetree ,(org-file "work_log"))
-                          "* %U - Talk with %^{With} about %^{About} :meeting:\n  %?"
-                          :clock-in t
-                          :clock-resume t)
-                         ("wr" "Code Review" entry
-                          (file+datetree ,(org-file "work_log"))
-                          "* %U - Code Review of %^{PR} :code_review:\n  %?"
-                          :clock-in t
-                          :clock-resume t)
-                         ("wp" "End of Day Work Review" entry
-                          (file+datetree ,(org-file "work_log"))
-                          "* %U - End of Day Review :review:\n  %?"
-                          :clock-in t
-                          :clock-resume t)
-                         ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
-                                          ,(org-file "work")
-                                          "Team Retrospective Agenda Items")
+   ("w" "Work")
+   ,(my/agenda-item "w1" "1-on-1 Agenda Item"
+                    (org-file "work")
+                    "Manager 1-on-1 Meeting Agenda Items")
+   ("wl" "Work Log" entry
+    (file+olp+datetree ,(org-file "work_log"))
+    "* %U - %^{Activity}\n  %?"
+    :clock-in t
+    :clock-resume t)
+   ,(my/agenda-item "wi" "Issue To File"
+                    (org-file "work")
+                    "Issues to File")
+   ("wm" "Work Meeting" entry
+    (file+datetree ,(org-file "work_log"))
+    "* %U - %^{Meeting} Meeting :meeting:\n  %?"
+    :clock-in t
+    :clock-resume t)
+   ("wt" "Work Talk" entry
+    (file+datetree ,(org-file "work_log"))
+    "* %U - Talk with %^{With} about %^{About} :meeting:\n  %?"
+    :clock-in t
+    :clock-resume t)
+   ("wr" "Code Review" entry
+    (file+datetree ,(org-file "work_log"))
+    "* %U - Code Review of %^{PR} :code_review:\n  %?"
+    :clock-in t
+    :clock-resume t)
+   ("wp" "End of Day Work Review" entry
+    (file+datetree ,(org-file "work_log"))
+    "* %U - End of Day Review :review:\n  %?"
+    :clock-in t
+    :clock-resume t)
+   ,(my/agenda-item "wr" "Team Retrospective Agenda Item"
+                    (org-file "work")
+                    "Team Retrospective Agenda Items")
 
-                         ("z" "Writing Idea" entry
-                          (file ,(org-file "writing"))
-                          "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:")))
+   ("z" "Writing Idea" entry
+    (file ,(org-file "writing"))
+    "* TODO %^{Activity}\n  :PROPERTIES:\n  :Added: %U\n  :END:")))
+
 
 (org-clock-persistence-insinuate)
 
@@ -309,4 +597,25 @@
    ;;(js . t)
    (gnuplot . t)))
 (require-package 'gnuplot)
+
+
+
+
+
+;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
+(defun air-org-skip-subtree-if-not-habit ()
+  "Skip an agenda entry if it has a STYLE property not equal to \"habit\"."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+    (if (not (string= (org-entry-get nil "STYLE") "habit"))
+        subtree-end
+      nil)))
+
+
+
+
+
+
+
+
+
 (provide 'init-org)

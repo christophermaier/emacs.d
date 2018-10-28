@@ -198,7 +198,19 @@
               (org-agenda-entry-types '(:scheduled))))
 
      (tags-todo "PRIORITY=\"A\""
-                ((org-agenda-overriding-header "High-Priority Work Tasks")
+                ((org-agenda-overriding-header "Priority A")
+                 (org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 (org-agenda-tags-todo-honor-ignore-options t)))
+     (tags-todo "PRIORITY=\"B\""
+                ((org-agenda-overriding-header "Priority B")
+                 (org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 (org-agenda-tags-todo-honor-ignore-options t)))
+     (tags-todo "PRIORITY=\"C\""
+                ((org-agenda-overriding-header "Priority C")
                  (org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-todo-ignore-scheduled 'future)
@@ -288,30 +300,21 @@
               (org-agenda-sorting-strategy '(deadline-down))
               ))
 
-
-     ;; TODO Need to skip over things that
-     ;; are scheduled in the
-     ;; future... what's here doesn't
-     ;; appear to work
      (tags-todo "PRIORITY=\"A\""
-                ((org-agenda-overriding-header "High-Priority Personal Tasks:")
-                 (org-agenda-skip-function
-                  '(org-agenda-skip-entry-if 'todo 'done))
+                ((org-agenda-overriding-header "A Priority")
+                 ;; (org-agenda-skip-function
+                 ;;  '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-tags-todo-honor-ignore-options t)
                  (org-agenda-todo-ignore-scheduled 'future)
                  ))
 
-     ;; TODO Fix the priority
-     ;; setup... what's the range I'm
-     ;; dealing with here?
-
-     ;; (tags-todo "PRIORITY=\"B\""
-     ;;            ((org-agenda-overriding-header "B Priority (All)")
-     ;;             (org-agenda-todo-ignore-scheduled 'future)
-     ;;             (org-agenda-tags-todo-honor-ignore-options t)))
+     (tags-todo "PRIORITY=\"B\""
+                ((org-agenda-overriding-header "B Priority")
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 (org-agenda-tags-todo-honor-ignore-options t)))
 
      (tags-todo "PRIORITY=\"C\""
-                ((org-agenda-overriding-header "C Priority (All)")
+                ((org-agenda-overriding-header "C Priority")
                  (org-agenda-todo-ignore-scheduled 'future)
                  (org-agenda-tags-todo-honor-ignore-options t)
                  ))
@@ -320,12 +323,6 @@
            ((org-agenda-overriding-header "Currently Reading")
             (org-agenda-files `(,(org-file "to_read")))
             ))
-
-     ;; (tags-todo "PRIORITY=\"C\""
-     ;;       ((org-agenda-overriding-header "C Priority")))
-
-     ;; (tags-todo "PRIORITY=\"D\""
-     ;;       ((org-agenda-overriding-header "D Priority")))
 
      (stuck ""
             ((org-tags-match-list-sublevels 'indented)
@@ -344,10 +341,10 @@
      ))
    )
  )
-;; This is screwed up I think
-;; (setq org-highest-priority ?A)
-;; (setq org-lowest-priority ?C)
-;; (setq org-default-priority ?B)
+
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?D)
+(setq org-default-priority ?D)
 
 ;; Original
 ;; (setq org-stuck-projects

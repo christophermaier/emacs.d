@@ -219,7 +219,9 @@
     (
      (org-agenda-span 'day)
      (org-agenda-files `(,(org-file "work")
-                         ,(org-file "work_log")))))
+                         ,(org-file "work_log")))
+     )
+    )
 
    ("q" "Test Agenda"
     (
@@ -242,29 +244,29 @@
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-not-today))
               (org-agenda-entry-types '(:deadline))
-              (org-agenda-sorting-strategy '(deadline-up))))
+              (org-agenda-sorting-strategy '(deadline-up))
+              ))
 
      (agenda ""
              ((org-agenda-overriding-header "Scheduled TODAY")
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-scheduled-if-not-today))
-              (org-agenda-entry-types '(:scheduled))))
+              (org-agenda-entry-types '(:scheduled))
+              ))
 
      (agenda ""
              ((org-agenda-overriding-header "Scheduled, no Due Date")
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline))
               (org-agenda-sorting-strategy '(scheduled-down))
-              (org-agenda-entry-types '(:scheduled))))
+              (org-agenda-entry-types '(:scheduled))
+              ))
 
      (todo "STARTED"
            ((org-agenda-overriding-header "Started at Home")
-            (org-agenda-files `(,@(delete (file-truename (org-file "to_read"))
-                                          (delete (file-truename (org-file "work_log"))
-                                                  (delete (file-truename (org-file "work"))
-                                                          (org-agenda-files))))))))
+            ))
 
-     ;; Planning View
+     ;;
      ;; Potential Improvement: Only show if
      ;; scheduled is in the past
      (agenda ""
@@ -273,19 +275,18 @@
               ;; This function sucks
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-past))
               (org-deadline-warning-days 14)
-              (org-agenda-sorting-strategy '(deadline-up))))
+              (org-agenda-sorting-strategy '(deadline-up))
+              ))
 
      ;; Pathology View
      (agenda ""
              ((org-agenda-overriding-header "OVERDUE (Sometimes pathologically so)")
               (org-agenda-entry-types '(:deadline))
-              (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
-                                            (delete (file-truename (org-file "work"))
-                                                    (org-agenda-files)))))
               (org-deadline-warning-days 0)
               ;; Ugh, this function sucks
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-today))
-              (org-agenda-sorting-strategy '(deadline-down))))
+              (org-agenda-sorting-strategy '(deadline-down))
+              ))
 
 
      ;; TODO Need to skip over things that
@@ -294,20 +295,11 @@
      ;; appear to work
      (tags-todo "PRIORITY=\"A\""
                 ((org-agenda-overriding-header "High-Priority Personal Tasks:")
-                 ;; This is horrible... how to
-                 ;; do better?
-
-                 ;; TODO: Could just set some
-                 ;; file-level tags on both
-                 ;; files, and then filter by that.
-
-                 (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
-                                               (delete (file-truename (org-file "work"))
-                                                       (org-agenda-files)))))
                  (org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-tags-todo-honor-ignore-options t)
-                 (org-agenda-todo-ignore-scheduled 'future)))
+                 (org-agenda-todo-ignore-scheduled 'future)
+                 ))
 
      ;; TODO Fix the priority
      ;; setup... what's the range I'm
@@ -321,11 +313,13 @@
      (tags-todo "PRIORITY=\"C\""
                 ((org-agenda-overriding-header "C Priority (All)")
                  (org-agenda-todo-ignore-scheduled 'future)
-                 (org-agenda-tags-todo-honor-ignore-options t)))
+                 (org-agenda-tags-todo-honor-ignore-options t)
+                 ))
 
      (todo "STARTED"
            ((org-agenda-overriding-header "Currently Reading")
-            (org-agenda-files `(,(org-file "to_read")))))
+            (org-agenda-files `(,(org-file "to_read")))
+            ))
 
      ;; (tags-todo "PRIORITY=\"C\""
      ;;       ((org-agenda-overriding-header "C Priority")))
@@ -334,13 +328,22 @@
      ;;       ((org-agenda-overriding-header "D Priority")))
 
      (stuck ""
-            ((org-tags-match-list-sublevels 'indented)))
+            ((org-tags-match-list-sublevels 'indented)
+             ))
 
      (todo "NEXT"
            ((org-agenda-overriding-header "Available Next Actions")
-            (org-agenda-todo-ignore-scheduled 'future)))))
-   ))
-
+            (org-agenda-todo-ignore-scheduled 'future)
+            ))
+     )
+    (
+     ;; Agenda-wide Configuration
+     (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
+                                   (delete (file-truename (org-file "work"))
+                                           (org-agenda-files)))))
+     ))
+   )
+ )
 ;; This is screwed up I think
 ;; (setq org-highest-priority ?A)
 ;; (setq org-lowest-priority ?C)

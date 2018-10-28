@@ -496,36 +496,9 @@ should be continued."
     :clock-in t
     :clock-resume t)
 
-
    ("k" "Daily Journal" entry
     (file+datetree ,(org-file "review"))
     "* %U - %^{Activity}\n  %?")
-
-   ("s" "Shopping")
-   ("sg" "Groceries" entry
-    (file+headline ,(org-file "shopping")
-                   "Groceries")
-    "* TODO %? %^G\n")
-   ("ss" "General Shopping" entry
-    (file+headline ,(org-file "shopping")
-                   "Other Things To Buy")
-    "* TODO %? %^G\n")
-
-   ("t" "New TODO")
-   ("tc" "Computer TODO" entry
-    (file+headline ,(org-file "projects/computer") "General Computer Setup")
-    "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-    :prepend t
-    :immediate-finish t)
-   ("te" "Emacs TODO" entry
-    (file+headline ,(org-file "projects/computer") "Emacs")
-    "* TODO %^{Task}\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-    :prepend t
-    :immediate-finish t)
-   ("tt" "TODO For today" entry
-    (file org-default-notes-file)
-    "* TODO %^{Activity}\n  DEADLINE: <%<%Y-%m-%d %a 23:59>>\n  :PROPERTIES:\n  :Added: %U\n  :END:"
-    :prepend t)
 
    ("w" "Work")
    ,(my/agenda-item "w1" "1-on-1 Agenda Item"

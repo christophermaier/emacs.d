@@ -236,111 +236,66 @@
     )
 
    ("q" "Test Agenda"
-    (
-
-
-     ;; habits
-     ;; due today
-     ;; scheduled today
-     ;; started
-     ;; next
-     ;; stuck
-
-     ;; Idea: Separate agenda views for my
-     ;; areas of interest (japanese,
-     ;; exercise, things to research, etc.)
-
-     ;; TODO: actually prioritize work tasks
-     (agenda ""
+    ((agenda ""
              ((org-agenda-overriding-header "Deadline TODAY")
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-not-today))
               (org-agenda-entry-types '(:deadline))
-              (org-agenda-sorting-strategy '(deadline-up))
-              ))
-
+              (org-agenda-sorting-strategy '(deadline-up))))
      (agenda ""
              ((org-agenda-overriding-header "Scheduled TODAY")
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-scheduled-if-not-today))
-              (org-agenda-entry-types '(:scheduled))
-              ))
-
+              (org-agenda-entry-types '(:scheduled))))
      (agenda ""
              ((org-agenda-overriding-header "Scheduled, no Due Date")
               (org-agenda-span 'day)
               (org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline))
               (org-agenda-sorting-strategy '(scheduled-down))
-              (org-agenda-entry-types '(:scheduled))
-              ))
-
+              (org-agenda-entry-types '(:scheduled))))
      (todo "STARTED"
-           ((org-agenda-overriding-header "Started at Home")
-            ))
-
-     ;;
-     ;; Potential Improvement: Only show if
-     ;; scheduled is in the past
+           ((org-agenda-overriding-header "Started at Home")))
      (agenda ""
              ((org-agenda-overriding-header "Due within 2 weeks")
               (org-agenda-entry-types '(:deadline))
               ;; This function sucks
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-past))
               (org-deadline-warning-days 14)
-              (org-agenda-sorting-strategy '(deadline-up))
-              ))
-
-     ;; Pathology View
+              (org-agenda-sorting-strategy '(deadline-up))))
      (agenda ""
              ((org-agenda-overriding-header "OVERDUE (Sometimes pathologically so)")
               (org-agenda-entry-types '(:deadline))
               (org-deadline-warning-days 0)
               ;; Ugh, this function sucks
               (org-agenda-skip-function '(org-agenda-skip-deadline-if-today))
-              (org-agenda-sorting-strategy '(deadline-down))
-              ))
-
+              (org-agenda-sorting-strategy '(deadline-down))))
      (tags-todo "PRIORITY=\"A\""
                 ((org-agenda-overriding-header "A Priority")
                  ;; (org-agenda-skip-function
                  ;;  '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-tags-todo-honor-ignore-options t)
-                 (org-agenda-todo-ignore-scheduled 'future)
-                 ))
-
+                 (org-agenda-todo-ignore-scheduled 'future)))
      (tags-todo "PRIORITY=\"B\""
                 ((org-agenda-overriding-header "B Priority")
                  (org-agenda-todo-ignore-scheduled 'future)
                  (org-agenda-tags-todo-honor-ignore-options t)))
-
      (tags-todo "PRIORITY=\"C\""
                 ((org-agenda-overriding-header "C Priority")
                  (org-agenda-todo-ignore-scheduled 'future)
-                 (org-agenda-tags-todo-honor-ignore-options t)
-                 ))
-
+                 (org-agenda-tags-todo-honor-ignore-options t)))
      (todo "STARTED"
            ((org-agenda-overriding-header "Currently Reading")
-            (org-agenda-files `(,(org-file "to_read")))
-            ))
-
+            (org-agenda-files `(,(org-file "to_read")))))
      (stuck ""
-            ((org-tags-match-list-sublevels 'indented)
-             ))
-
+            ((org-tags-match-list-sublevels 'indented)))
      (todo "NEXT"
            ((org-agenda-overriding-header "Available Next Actions")
-            (org-agenda-todo-ignore-scheduled 'future)
-            ))
+            (org-agenda-todo-ignore-scheduled 'future)))
      )
-    (
-     ;; Agenda-wide Configuration
-     (org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
+    ((org-agenda-files `(,@(delete (file-truename (org-file "work_log"))
                                    (delete (file-truename (org-file "work"))
-                                           (org-agenda-files)))))
-     ))
-   )
- )
+                                           (org-agenda-files)))))))
+   ))
 
 (setq org-highest-priority ?A)
 (setq org-lowest-priority ?D)

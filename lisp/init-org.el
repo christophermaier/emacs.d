@@ -224,6 +224,11 @@
               (org-agenda-skip-function
                '(org-agenda-skip-deadline-if-today))
               (org-agenda-sorting-strategy '(deadline-down))))
+     (stuck ""
+            ((org-tags-match-list-sublevels 'indented)))
+     (todo "NEXT"
+           ((org-agenda-overriding-header "Available Next Actions")
+            (org-agenda-todo-ignore-scheduled 'future)))
      (tags-todo "issue"
                 ((org-agenda-overriding-header "Issues to file")))
      )

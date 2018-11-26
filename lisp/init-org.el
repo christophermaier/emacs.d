@@ -70,7 +70,16 @@
                                "|"
                                "DONE(d!)"
                                "CANCELLED(c@)"
-                               "DEFERRED(f@)"))
+                               "DEFERRED(f@)")
+
+                     ;; These are for code review workflows
+                     (sequence "REVIEW(r)"
+                               "GIVENFEEDBACK(f@)"
+                               "WAIT4FEEDBACK"
+                               "|"
+                               "MERGED(m!)"
+                               "CLOSED"
+                               "CANCELLED(c@)"))
  org-treat-S-cursor-todo-selection-as-state-change nil
  org-use-fast-todo-selection t
  org-use-property-inheritance t
@@ -231,6 +240,9 @@
             (org-agenda-todo-ignore-scheduled 'future)))
      (tags-todo "issue"
                 ((org-agenda-overriding-header "Issues to file")))
+
+     (todo "REVIEW|GIVENFEEDBACK|WAIT4FEEDBACK"
+                ((org-agenda-overriding-header "Code Review")))
      )
 
     (

@@ -473,6 +473,11 @@ should be continued."
    ,(my/agenda-item "w1" "1-on-1 Agenda Item"
                     (org-file "work")
                     "Manager 1-on-1 Meeting Agenda Items")
+   ("wc" "Coding (Work)" entry
+    (file+olp+datetree ,(org-file "work_log"))
+    "* %U - %^{Coding Task} :coding:\n  %?"
+    :clock-in t
+    :clock-resume t)
    ("wl" "Work Log" entry
     (file+olp+datetree ,(org-file "work_log"))
     "* %U - %^{Activity}\n  %?"
@@ -486,6 +491,11 @@ should be continued."
     "* %U - %^{Meeting} Meeting :meeting:\n  %?"
     :clock-in t
     :clock-resume t)
+   ("wn" "Work Break" entry
+    (file+olp+datetree ,(org-file "work_log"))
+    "* %U - %^{Activity} :non_work:\n"
+    :clock-in t
+    :clock-resume t)
    ("wt" "Work Talk" entry
     (file+datetree ,(org-file "work_log"))
     "* %U - Talk with %^{With} about %^{About} :meeting:\n  %?"
@@ -496,9 +506,9 @@ should be continued."
     "* %U - Code Review of %^{PR} :code_review:\n  %?"
     :clock-in t
     :clock-resume t)
-   ("wp" "End of Day Work Review" entry
+   ("wp" "Work Planning" entry
     (file+datetree ,(org-file "work_log"))
-    "* %U - End of Day Review :review:\n  %?"
+    "* %U - %^{Plan} :plan:\n  %?"
     :clock-in t
     :clock-resume t)
    ,(my/agenda-item "wr" "Team Retrospective Agenda Item"

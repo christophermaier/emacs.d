@@ -1,5 +1,5 @@
 ;; TODO: Consider activating this for all programming modes
-(require-package 'hl-sexp)
+;;(require-package 'hl-sexp)
 
 ;; Stolen from Steve Purcell
 (defun sanityinc/maybe-set-bundled-elisp-readonly ()
@@ -12,7 +12,8 @@
 
 (defun cwmaier/setup-lisp ()
   (enable-paredit-mode)
-  (hl-sexp-mode 1))
+  ;;(hl-sexp-mode 1)
+  )
 
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook))

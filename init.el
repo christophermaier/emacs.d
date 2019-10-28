@@ -26,7 +26,7 @@
 (eval-when-compile
  (require 'use-package))
 (setq use-package-always-ensure t)
-(require 'diminish) ;; if using :diminish
+(use-package diminish) ;; if using :diminish
 (require 'bind-key) ;; if using any :bind variant
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -117,8 +117,9 @@
 (use-package helm-projectile
   :after (projectile helm))
 
-;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; Unsure why I need these now?
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Some key commands:
 ;; C-c p p -> switch project
@@ -216,6 +217,9 @@
 ;; (require 'init-spelling)
 ;; (require 'init-eshell)
 (require 'init-org)
+(use-package helm-org
+  :after (helm))
+;; TODO Look into various org add-ons
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -232,9 +236,11 @@
 (use-package lsp-ui
   :pin melpa-stable
   :hook (lsp-mode . lsp-ui-mode))
-(use-package lsp-ui-flycheck
-  :after (lsp flymake)
-  :custom (lsp-ui-flycheck-enable t))
+
+;; where did this go?
+;; (use-package lsp-ui-flycheck
+;;   :after (lsp flymake)
+;;   :custom (lsp-ui-flycheck-enable t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -275,6 +281,25 @@
 (use-package gnuplot
   :if (executable-find "gnuplot"))
 
+;; Hrmm... need to associate powershell-mode with ps1, not powershell
+;; (use-package powershell
+;;   :mode "\\.ps1\\'")
+
+(use-package dockerfile-mode)
+(use-package docker-compose-mode)
+
+;; TODO ensure markdown engine is present on PATH
+;; TODO Create a hydra for this; there are a lot of commands
+(use-package markdown-mode
+  :mode "\\.md\\'")
+
+(use-package bats-mode
+  :mode "\\.bats\\'")
+
+;; TODO look into origami and lsp-origami
+
+
+
 ;; Stolen from Steve Purcell
 (global-set-key (kbd "C-h K") 'find-function-on-key)
 
@@ -289,7 +314,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
+    (bats-mode docker-compose-mode dockerfile-mode powershell powershell-mode helm-org lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

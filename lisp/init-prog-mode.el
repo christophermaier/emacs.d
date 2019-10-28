@@ -15,13 +15,13 @@
 
 ;; Column Markers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require-package 'column-marker)
-(defun cwmaier/mark-columns ()
-  (interactive)
-  (column-marker-1 72)
-  (column-marker-2 80)
-  (column-marker-3 120))
-(add-hook 'prog-mode-hook 'cwmaier/mark-columns)
+;; (require-package 'column-marker)
+;; (defun cwmaier/mark-columns ()
+;;   (interactive)
+;;   (column-marker-1 72)
+;;   (column-marker-2 80)
+;;   (column-marker-3 120))
+;; (add-hook 'prog-mode-hook 'cwmaier/mark-columns)
 
 ;; highlight-symbol
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

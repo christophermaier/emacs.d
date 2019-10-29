@@ -275,15 +275,14 @@
   ("M-r" lsp-restart-workspace)
   ("S" lsp-shutdown-workspace))
 
-
 (use-package protobuf-mode
   :mode "\\.proto\\'")
+
 (use-package gnuplot
   :if (executable-find "gnuplot"))
 
-;; Hrmm... need to associate powershell-mode with ps1, not powershell
-;; (use-package powershell
-;;   :mode "\\.ps1\\'")
+(use-package powershell
+  :mode ("\\.ps1\\'" . powershell-mode))
 
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
@@ -296,8 +295,19 @@
 (use-package bats-mode
   :mode "\\.bats\\'")
 
-;; TODO look into origami and lsp-origami
-
+(use-package origami
+  :config
+  (global-origami-mode)
+  (defhydra folding-with-origami-mode (global-map "C-c f")
+  ("h" origami-close-node-recursively "Hide")
+  ("o" origami-open-node-recursively  "Open")
+  ("t" origami-toggle-all-nodes  "Toggle buffer")
+  ("n" origami-next-fold "Next")
+  ("p" origami-previous-fold "Previous"))
+  :after (hydra))
+;; (use-package lsp-origami
+;;   :after (lsp-mode origami)
+;;   :hook (origami-mode . lsp-origami-mode))
 
 
 ;; Stolen from Steve Purcell
@@ -314,7 +324,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (bats-mode docker-compose-mode dockerfile-mode powershell powershell-mode helm-org lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
+    (powershell lsp-origami origami lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

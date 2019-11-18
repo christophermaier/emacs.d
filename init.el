@@ -173,6 +173,7 @@
   :mode "\\.rs\\'"
   :custom
   (rust-format-on-save t)
+  (rust-rustfmt-bin "/home/maier/.rustup/toolchains/nightly-2019-10-15-x86_64-unknown-linux-gnu/bin/rustfmt")
   :bind
   (:map rust-mode-map
         ([tab] . company-indent-or-complete-common)))

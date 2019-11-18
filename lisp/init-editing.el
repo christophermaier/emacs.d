@@ -18,6 +18,7 @@
 ;; Ido
 ;; (mainly for org-switchb, since I'm using Helm pretty extensively)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ido)
 (ido-mode 1)
 (setq ido-everywhere t
       ido-enable-flex-matching t)
@@ -80,6 +81,7 @@
 (add-hook 'makefile-mode-hook
           (lambda () (whitespace-mode t)))
 
+(require 'whitespace)
 ;; http://xahlee.org/emacs/whitespace-mode.html
 (setq
  whitespace-display-mappings

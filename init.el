@@ -79,6 +79,9 @@
 
 (require 'init-editing)
 
+(use-package multiple-cursors
+  :bind ("C-S-c C-S-c" . mc/edit-lines))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package helm
@@ -333,7 +336,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (powershell lsp-origami origami lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
+    (multiple-cursors powershell lsp-origami origami lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

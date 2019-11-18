@@ -80,7 +80,8 @@
 (require 'init-editing)
 
 (use-package multiple-cursors
-  :bind ("C-S-c C-S-c" . mc/edit-lines))
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

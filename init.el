@@ -219,10 +219,36 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun my/snippet-mode-hook ()
+  "Don't add newlines to the end of snippets, since that cause
+them to get inserted in the snippet's expansion."
+  (setq-local require-final-newline nil))
+
 (use-package yasnippet
   :mode "\\.yasnippet\\'"
   :diminish yas-minor-mode
-  :config (yas-global-mode 1))
+  :config (yas-global-mode 1)
+  :hook (snippet-mode . my/snippet-mode-hook))
+
+;; https://emacs.stackexchange.com/a/7909
+(defun aya-open-line ()
+  "Call `open-line', unless there are abbrevs or snippets at point.
+In that case expand them.  If there's a snippet expansion in progress,
+move to the next field. Call `open-line' if nothing else applies."
+  (interactive)
+  (cond ((expand-abbrev))
+
+        ((yas--snippets-at-point)
+         (yas-next-field-or-maybe-expand))
+
+        ((ignore-errors
+           (yas-expand)))
+
+        (t
+         (open-line 1))))
+(global-set-key "\C-o" 'aya-open-line)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yaml-mode)
 (use-package terraform-mode)

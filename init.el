@@ -68,7 +68,13 @@
 
 (use-package fullframe)
 
-(require 'init-exec-path)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config
+  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE"))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
+
 (require 'init-frames)
 (require 'init-windows)
 (require 'init-editing)

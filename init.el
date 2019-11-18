@@ -255,6 +255,10 @@
 ;;   :after (lsp flymake)
 ;;   :custom (lsp-ui-flycheck-enable t))
 
+;; Bash LSP Server
+;; (need to get npm set up with asdf)
+;; npm i -g bash-language-server
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hydra

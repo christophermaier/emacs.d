@@ -121,14 +121,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package projectile
+  :bind-keymap ("C-c p" . projectile-command-map)
   :custom (projectile-use-git-grep t)
   :config (projectile-global-mode))
 (use-package helm-projectile
   :after (projectile helm))
-
-;; Unsure why I need these now?
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Some key commands:
 ;; C-c p p -> switch project

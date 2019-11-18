@@ -299,10 +299,14 @@
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
 
-;; TODO ensure markdown engine is present on PATH
 ;; TODO Create a hydra for this; there are a lot of commands
 (use-package markdown-mode
-  :mode "\\.md\\'")
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown")
+  :hook (markdown-mode . auto-fill-mode))
 
 (use-package bats-mode
   :mode "\\.bats\\'")

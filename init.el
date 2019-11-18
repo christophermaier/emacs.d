@@ -92,7 +92,10 @@
          ("C-x m" . helm-bookmarks)
          ("C-c m" . helm-bookmarks)
          :map helm-map
-         ("[tab]" . helm-execute-persistent-action)
+         ;; This makes helm completion behave a bit more like normal
+         ;; Emacs completion, particularly in the context of
+         ;; helm-find-files
+         ("<tab>" . helm-execute-persistent-action)
          ("C-z" . helm-select-action)))
 (use-package helm-swoop
   ;; Yup, overriding isearch-forward

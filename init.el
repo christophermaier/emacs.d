@@ -214,7 +214,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'init-yasnippet)
+(use-package yasnippet
+  :mode "\\.yasnippet\\'"
+  :diminish yas-minor-mode
+  :config (yas-global-mode 1))
 
 (use-package yaml-mode)
 (use-package terraform-mode)

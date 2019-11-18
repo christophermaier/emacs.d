@@ -76,7 +76,7 @@
   (exec-path-from-shell-initialize))
 
 (require 'init-frames)
-(require 'init-windows)
+
 (require 'init-editing)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -337,7 +337,11 @@ move to the next field. Call `open-line' if nothing else applies."
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown")
+  ;; TODO Find a better markdown engine on Linux that knows about GFM
+  :init (setq markdown-command
+              (if (memq window-system '(mac ns))
+                  "multimarkdown"
+                "markdown"))
   :hook (markdown-mode . auto-fill-mode))
 
 (use-package bats-mode

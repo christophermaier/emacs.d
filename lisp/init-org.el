@@ -442,6 +442,10 @@ should be continued."
     :clock-in t
     :clock-resume t)
 
+   ("d" "Delivery" entry
+    (file ,(org-file "deliveries"))
+    "* TODO Expect delivery of %^{Item}")
+
    ("g" "Guitar Practice" entry
     (file+datetree ,(org-file "projects/music"))
     "* %U - Guitar Practice"

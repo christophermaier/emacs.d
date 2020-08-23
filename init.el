@@ -287,7 +287,10 @@ move to the next field. Call `open-line' if nothing else applies."
   :custom (lsp-prefer-flymake nil))
 (use-package lsp-ui
   :pin melpa-stable
-  :hook (lsp-mode . lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
 ;; where did this go?
 ;; (use-package lsp-ui-flycheck

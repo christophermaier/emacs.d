@@ -29,6 +29,21 @@
 (use-package diminish) ;; if using :diminish
 (require 'bind-key) ;; if using any :bind variant
 
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config
+  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE"))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
+
+(use-package use-package-ensure-system-package
+  :custom
+  (system-packages-package-manager 'nix)
+  (system-packages-use-sudo nil))
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; todo remove this soon
@@ -36,10 +51,8 @@
 
 (use-package hc-zenburn-theme)
 
-;; Consider
-;; https://github.com/jwiegley/use-package/tree/1d5ffb2e0d1427066ced58febbba68c1328bf001#use-package-ensure-system-package
-;; to install direnv if it's not there already
 (use-package direnv
+  :ensure-system-package direnv
   :config
   (direnv-mode))
 
@@ -68,12 +81,6 @@
 
 (use-package fullframe)
 
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :config
-  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE"))
-    (add-to-list 'exec-path-from-shell-variables var))
-  (exec-path-from-shell-initialize))
 
 (require 'init-frames)
 
@@ -251,8 +258,11 @@ move to the next field. Call `open-line' if nothing else applies."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yaml-mode)
+
 (use-package terraform-mode)
-(use-package graphviz-dot-mode)
+
+(use-package graphviz-dot-mode
+  :ensure-system-package (dot . graphviz))
 
 ;; (require 'init-spelling)
 ;; (require 'init-eshell)
@@ -323,25 +333,23 @@ move to the next field. Call `open-line' if nothing else applies."
   :mode "\\.proto\\'")
 
 (use-package gnuplot
-  :if (executable-find "gnuplot"))
+  :ensure-system-package gnuplot)
 
 (use-package powershell
-  :mode ("\\.ps1\\'" . powershell-mode))
+  :mode ("\\.ps1\\'" . powershell-mode)
+  :ensure-system-package (pwsh . powershell))
 
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
 
 ;; TODO Create a hydra for this; there are a lot of commands
 (use-package markdown-mode
+  :ensure-system-package multimarkdown
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  ;; TODO Find a better markdown engine on Linux that knows about GFM
-  :init (setq markdown-command
-              (if (memq window-system '(mac ns))
-                  "multimarkdown"
-                "markdown"))
+  :init (setq markdown-command "multimarkdown")
   :hook (markdown-mode . auto-fill-mode))
 
 (use-package bats-mode
@@ -385,7 +393,7 @@ move to the next field. Call `open-line' if nothing else applies."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (systemd geiser multiple-cursors powershell lsp-origami origami lsp-ui-flycheck hydra flycheck-golangci-lint go-projectile company-go rust-mode direnv-mode use-package haskell-process haskell-interactive-mode tide flycheck-color-mode-line protobuf-mode toml-mode gnuplot terraform-mode helm-c-yasnippet yasnippet cider clojure-mode hl-sexp paredit-everywhere paredit ruby-tools ruby-mode highlight-symbol column-marker rainbow-delimiters git-gutter-fringe github-browse-file helm-projectile helm-descbinds helm-swoop helm-ls-git helm exec-path-from-shell fullframe diminish))))
+    (helm-org nix-mode processing-mode typescript-mode js2-mode use-package-ensure-system-package systemd use-package terraform-mode rust-mode ruby-tools rainbow-delimiters protobuf-mode powershell paredit-everywhere origami multiple-cursors magit lsp-ui hydra hl-sexp highlight-symbol helm-swoop helm-projectile helm-ls-git helm-flycheck helm-descbinds helm-c-yasnippet hc-zenburn-theme haskell-mode graphviz-dot-mode go-projectile gnuplot github-browse-file git-gutter-fringe geiser fullframe flycheck-rust flycheck-golangci-lint exec-path-from-shell erlang dockerfile-mode docker-compose-mode direnv diminish company-go column-marker cider bats-mode alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

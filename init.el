@@ -270,6 +270,9 @@ move to the next field. Call `open-line' if nothing else applies."
   :after (helm))
 ;; TODO Look into various org add-ons
 
+(use-package typescript-mode
+  :mode "\\.ts\\'")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; https://github.com/emacs-lsp/lsp-mode/issues/517

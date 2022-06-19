@@ -37,9 +37,10 @@
   (exec-path-from-shell-initialize))
 
 (use-package use-package-ensure-system-package
-  :custom
-  (system-packages-package-manager 'nix)
-  (system-packages-use-sudo nil))
+  ;; :custom
+  ;; (system-packages-package-manager 'nix)
+  ;; (system-packages-use-sudo nil)
+  )
 
 (use-package nix-mode
   :mode "\\.nix\\'")

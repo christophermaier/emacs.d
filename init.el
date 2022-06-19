@@ -58,6 +58,12 @@
   :config
   (direnv-mode))
 
+(use-package fish-mode
+  :init
+  (add-hook 'fish-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'fish_indent-before-save))))
+
 (use-package flycheck
   ;; pull from melpa in order to get a version that's got support for `go vet`
   ;; See https://github.com/flycheck/flycheck/pull/1548

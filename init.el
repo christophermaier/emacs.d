@@ -208,6 +208,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package lsp-pyright)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package erlang
   :mode "\\.erl\\'")
 
@@ -300,6 +304,7 @@ move to the next field. Call `open-line' if nothing else applies."
   :pin melpa-stable
   :hook ((go-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
          (sh-mode . lsp-deferred))
   :commands (lsp lsp-deferred)
   :custom (lsp-prefer-flymake nil))

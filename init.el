@@ -49,7 +49,9 @@
 ;; todo remove this soon
 (require 'init-package)
 
-(use-package hc-zenburn-theme)
+(use-package hc-zenburn-theme
+  :config
+  (load-theme 'hc-zenburn t))
 
 (use-package direnv
   :ensure-system-package direnv

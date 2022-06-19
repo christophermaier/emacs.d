@@ -26,6 +26,15 @@
 (eval-when-compile
  (require 'use-package))
 (setq use-package-always-ensure t)
+
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results nil)
+  (setq auto-package-update-interval 7)
+  (setq auto-package-update-show-preview t)
+  (auto-package-update-maybe))
+
 (use-package diminish) ;; if using :diminish
 (require 'bind-key) ;; if using any :bind variant
 
